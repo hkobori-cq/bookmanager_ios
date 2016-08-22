@@ -152,3 +152,10 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+
+#CocoaPod
+Pods/*
+BookManager.xcworkspace/
+Podfile
+Podfile.lock
+Pods/
