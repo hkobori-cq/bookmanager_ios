@@ -1,22 +1,25 @@
 //
-//  DetailViewController.m
+//  BookEditController.m
 //  BookManager
 //
 //  Created by 小堀輝 on 2016/08/22.
 //  Copyright © 2016年 hikaru kobori. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "BookEditController.h"
 
-@interface DetailViewController ()
+@interface BookEditController ()
+@property (weak, nonatomic) IBOutlet UILabel *rowNumber;
 
 @end
 
-@implementation DetailViewController
+@implementation BookEditController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    self.rowNumber.text = [ud valueForKey:@"num"];
 }
 
 - (void)didReceiveMemoryWarning {

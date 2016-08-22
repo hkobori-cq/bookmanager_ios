@@ -1,50 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0AM-Tl-qGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="A1U-ci-sfm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CNc-Lv-mRY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="l5R-Mi-tOb"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="v5l-wT-geh"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="9bh-yT-lfJ">
-                        <barButtonItem key="rightBarButtonItem" title="追加" style="plain" id="fF5-04-DFt" customClass="showAddView">
-                            <connections>
-                                <action selector="show_add_view:" destination="BYZ-38-t0r" id="dqr-dy-y8N"/>
-                                <segue destination="K6Y-4x-bMu" kind="show" id="1U6-WD-iWA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="tableView" destination="CNc-Lv-mRY" id="U3D-79-CPL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="177.5" y="299.5"/>
-        </scene>
         <!--Add View Controller-->
         <scene sceneID="RM3-6T-RLo">
             <objects>
@@ -62,48 +22,96 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3c-uB-wUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="734.5" y="299.5"/>
+            <point key="canvasLocation" x="1238.5" y="374.5"/>
         </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="Jch-W4-QQp">
+        <!--書籍一覧-->
+        <scene sceneID="4ge-6l-h6L">
             <objects>
-                <viewController id="v0g-GS-540" customClass="DetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ILJ-kC-MDV"/>
-                        <viewControllerLayoutGuide type="bottom" id="xV8-Xm-Vhk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SIl-KU-K3v">
+                <tableViewController id="4hu-oB-8M9" customClass="BookListController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UPG-l5-YFw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="dAr-mR-REO"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bCo-gr-dxS">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bCo-gr-dxS" id="r7d-G8-W7u">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4hu-oB-8M9" id="s4F-TG-RzD"/>
+                            <outlet property="delegate" destination="4hu-oB-8M9" id="JXi-72-dKT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="書籍一覧" id="qyh-X9-hLl">
+                        <barButtonItem key="rightBarButtonItem" title="追加" style="plain" id="P2I-QE-ibe">
+                            <connections>
+                                <segue destination="K6Y-4x-bMu" kind="show" id="S1P-Q4-aCT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0wu-vy-nR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <segue destination="JjX-Da-k6j" kind="push" identifier="rowNumber" id="39U-pR-emL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1rw-iB-n5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="734.5" y="1148.5"/>
+            <point key="canvasLocation" x="672.5" y="1128.5"/>
+        </scene>
+        <!--書籍編集-->
+        <scene sceneID="NPV-UX-JXA">
+            <objects>
+                <viewController id="JjX-Da-k6j" customClass="BookEditController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rse-iN-dl9"/>
+                        <viewControllerLayoutGuide type="bottom" id="JcH-wP-jgF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ab0-a6-lPg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt1-LQ-4gh">
+                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="書籍編集" id="7N1-54-7cj"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="rowNumber" destination="Lt1-LQ-4gh" id="ciq-Xe-Eik"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T1Q-8P-G0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1238.5" y="1128.5"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Jdg-z9-0tm">
+        <scene sceneID="fYr-MZ-DN7">
             <objects>
-                <navigationController toolbarHidden="NO" id="0AM-Tl-qGg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A1U-ci-sfm" sceneMemberID="viewController">
+                    <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fJ2-B1-J3D">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zUC-uK-tQ0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="y0s-Ac-CfU">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
+                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="LyW-l6-Nzh"/>
+                        <segue destination="4hu-oB-8M9" kind="relationship" relationship="rootViewController" id="leK-Jg-ziA"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eRl-Tv-SqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hDz-4a-3bl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-425.5" y="299.5"/>
+            <point key="canvasLocation" x="168" y="1124"/>
         </scene>
     </scenes>
 </document>

@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  BookListController.h
 //  BookManager
 //
 //  Created by 小堀輝 on 2016/08/22.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
+@interface BookListController : UITableViewController
 
 @end
