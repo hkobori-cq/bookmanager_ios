@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FBD435F0D07B4C88CEA7844 /* libPods-BookManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DDE34AA0ECC6BDEDB6907B /* libPods-BookManagerTests.a */; };
-		423CFE10690777AFBC6909A1 /* libPods-BookManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9ECCC24B77938B1798AE4F /* libPods-BookManager.a */; };
+		62D7CC65560351E8884C8FBE /* Pods_BookManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4934CD9C747E8F43F867E4D /* Pods_BookManager.framework */; };
 		7E5672C71D6ADDDC00EA9987 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672C61D6ADDDC00EA9987 /* main.m */; };
 		7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672C91D6ADDDC00EA9987 /* AppDelegate.m */; };
 		7E5672CD1D6ADDDC00EA9987 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672CC1D6ADDDC00EA9987 /* ViewController.m */; };
@@ -17,6 +17,9 @@
 		7E5672D51D6ADDDC00EA9987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E5672D31D6ADDDC00EA9987 /* LaunchScreen.storyboard */; };
 		7E5672E01D6ADDDC00EA9987 /* BookManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672DF1D6ADDDC00EA9987 /* BookManagerTests.m */; };
 		7E5672EB1D6ADDDC00EA9987 /* BookManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672EA1D6ADDDC00EA9987 /* BookManagerUITests.m */; };
+		7E5672FA1D6AF08500EA9987 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672F91D6AF08500EA9987 /* AddViewController.m */; };
+		7E5672FD1D6AF88900EA9987 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672FC1D6AF88900EA9987 /* DetailViewController.m */; };
+		7E5673021D6AFD7D00EA9987 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5673001D6AFD7D00EA9987 /* ViewController.xib */; };
 		E0C587424F3C6160343E9C7C /* libPods-BookManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 097958753BF920BFBD43B439 /* libPods-BookManagerUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -58,10 +61,15 @@
 		7E5672E61D6ADDDC00EA9987 /* BookManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5672EA1D6ADDDC00EA9987 /* BookManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookManagerUITests.m; sourceTree = "<group>"; };
 		7E5672EC1D6ADDDC00EA9987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E5672F81D6AF08500EA9987 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		7E5672F91D6AF08500EA9987 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		7E5672FB1D6AF88900EA9987 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		7E5672FC1D6AF88900EA9987 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		7E5673001D6AFD7D00EA9987 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		A11A25B85E6DBA3FC9ECA7C6 /* Pods-BookManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManager/Pods-BookManager.release.xcconfig"; sourceTree = "<group>"; };
 		B8CDBB2FE847FCA1D9063897 /* Pods-BookManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerTests/Pods-BookManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3C1C6BA5296CDBF59FCE530 /* Pods-BookManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerUITests/Pods-BookManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
-		ED9ECCC24B77938B1798AE4F /* libPods-BookManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BookManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4934CD9C747E8F43F867E4D /* Pods_BookManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21BECCE19FB656A76312413 /* Pods-BookManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookManager/Pods-BookManager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				423CFE10690777AFBC6909A1 /* libPods-BookManager.a in Frameworks */,
+				62D7CC65560351E8884C8FBE /* Pods_BookManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,9 +104,9 @@
 		30ACF2081F94E80ED0F51E37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ED9ECCC24B77938B1798AE4F /* libPods-BookManager.a */,
 				67DDE34AA0ECC6BDEDB6907B /* libPods-BookManagerTests.a */,
 				097958753BF920BFBD43B439 /* libPods-BookManagerUITests.a */,
+				E4934CD9C747E8F43F867E4D /* Pods_BookManager.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,6 +141,11 @@
 				7E5672CB1D6ADDDC00EA9987 /* ViewController.h */,
 				7E5672CC1D6ADDDC00EA9987 /* ViewController.m */,
 				7E5672CE1D6ADDDC00EA9987 /* Main.storyboard */,
+				7E5673001D6AFD7D00EA9987 /* ViewController.xib */,
+				7E5672FB1D6AF88900EA9987 /* DetailViewController.h */,
+				7E5672FC1D6AF88900EA9987 /* DetailViewController.m */,
+				7E5672F81D6AF08500EA9987 /* AddViewController.h */,
+				7E5672F91D6AF08500EA9987 /* AddViewController.m */,
 				7E5672D11D6ADDDC00EA9987 /* Assets.xcassets */,
 				7E5672D31D6ADDDC00EA9987 /* LaunchScreen.storyboard */,
 				7E5672D61D6ADDDC00EA9987 /* Info.plist */,
@@ -187,12 +200,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E5672EF1D6ADDDC00EA9987 /* Build configuration list for PBXNativeTarget "BookManager" */;
 			buildPhases = (
+				FFC976598D1F24B27770252C /* Check Pods Manifest.lock */,
 				83747C735D030A6F17B839FB /* 📦 Check Pods Manifest.lock */,
 				7E5672BE1D6ADDDC00EA9987 /* Sources */,
 				7E5672BF1D6ADDDC00EA9987 /* Frameworks */,
 				7E5672C01D6ADDDC00EA9987 /* Resources */,
 				BA70E9115BEE03E301E5EE29 /* 📦 Embed Pods Frameworks */,
 				831A57B06ED8277CCB124446 /* 📦 Copy Pods Resources */,
+				6DFD2E94DBA980D60C7A8F41 /* Embed Pods Frameworks */,
+				000E856665B8792EE518E3B1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,6 +313,7 @@
 				7E5672D51D6ADDDC00EA9987 /* LaunchScreen.storyboard in Resources */,
 				7E5672D21D6ADDDC00EA9987 /* Assets.xcassets in Resources */,
 				7E5672D01D6ADDDC00EA9987 /* Main.storyboard in Resources */,
+				7E5673021D6AFD7D00EA9987 /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +334,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		000E856665B8792EE518E3B1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BookManager/Pods-BookManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		115CF2F1F5380B717119ED7E /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -360,6 +392,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6DFD2E94DBA980D60C7A8F41 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BookManager/Pods-BookManager-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F5C24652C71E0AC81BF8E5D /* 📦 Copy Pods Resources */ = {
@@ -437,6 +484,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BookManagerTests/Pods-BookManagerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FFC976598D1F24B27770252C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -444,8 +506,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E5672FD1D6AF88900EA9987 /* DetailViewController.m in Sources */,
 				7E5672CD1D6ADDDC00EA9987 /* ViewController.m in Sources */,
 				7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */,
+				7E5672FA1D6AF08500EA9987 /* AddViewController.m in Sources */,
 				7E5672C71D6ADDDC00EA9987 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
