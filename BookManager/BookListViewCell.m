@@ -17,14 +17,16 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-    self.BookTitleLabel.text = @"パーフェクトPHP";
-    self.BookFeeLabel.text = @"3600円 + 税";
-    self.DateLabel.text = @"2014/04/03";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-
+    [manager GET:@"https://qiita.com/api/v1/users/anneau" parameters:nil progress:nil success:^(NSURLSessionTask *task,id responseObject){
+        NSLog(@"%@",responseObject);
+        self.BookTitleLabel.text = [responseObject objectForKey:@"name"];
+//        self.BookImageView.image = [responseObject objectForKey:@"profile_image_url"];
+        self.BookFeeLabel.text = [responseObject objectForKey:@"github"];
+        self.DateLabel.text = [responseObject objectForKey:@"url"];
+    } failure:^(NSURLSessionTask *operation,NSError *error) {
+       NSLog(@"Error: %@",error);
+    }];
 }
 
 @end
