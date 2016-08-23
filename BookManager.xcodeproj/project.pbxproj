@@ -22,6 +22,8 @@
 		7E5673151D6BDB9500EA9987 /* BookListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673131D6BDB9500EA9987 /* BookListViewCell.m */; };
 		7E5673161D6BDB9500EA9987 /* BookListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5673141D6BDB9500EA9987 /* BookListViewCell.xib */; };
 		7E5673191D6BE7EC00EA9987 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673181D6BE7EC00EA9987 /* AddViewController.m */; };
+		7E56731C1D6BFC0E00EA9987 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56731B1D6BFC0E00EA9987 /* SettingsViewController.m */; };
+		7E56731F1D6BFCA000EA9987 /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56731E1D6BFCA000EA9987 /* AccountSettingsViewController.m */; };
 		E0C587424F3C6160343E9C7C /* libPods-BookManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 097958753BF920BFBD43B439 /* libPods-BookManagerUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -61,17 +63,21 @@
 		7E5672E61D6ADDDC00EA9987 /* BookManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5672EA1D6ADDDC00EA9987 /* BookManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookManagerUITests.m; sourceTree = "<group>"; };
 		7E5672EC1D6ADDDC00EA9987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E5673031D6B2EE400EA9987 /* BookEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookEditController.h; sourceTree = "<group>"; };
 		7E5673041D6B2EE400EA9987 /* BookEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookEditController.m; sourceTree = "<group>"; };
-		7E5673061D6B2F0600EA9987 /* BookListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListController.h; sourceTree = "<group>"; };
 		7E5673071D6B2F0600EA9987 /* BookListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListController.m; sourceTree = "<group>"; };
-		7E56730C1D6B364400EA9987 /* CreateBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBookController.h; sourceTree = "<group>"; };
 		7E56730D1D6B364400EA9987 /* CreateBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateBookController.m; sourceTree = "<group>"; };
 		7E5673121D6BDB9500EA9987 /* BookListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListViewCell.h; sourceTree = "<group>"; };
 		7E5673131D6BDB9500EA9987 /* BookListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListViewCell.m; sourceTree = "<group>"; };
 		7E5673141D6BDB9500EA9987 /* BookListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookListViewCell.xib; sourceTree = "<group>"; };
-		7E5673171D6BE7EC00EA9987 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		7E5673181D6BE7EC00EA9987 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		7E56731A1D6BFC0E00EA9987 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = ../SettingsViewController.h; sourceTree = "<group>"; };
+		7E56731B1D6BFC0E00EA9987 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		7E56731D1D6BFCA000EA9987 /* AccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountSettingsViewController.h; path = ../AccountSettingsViewController.h; sourceTree = "<group>"; };
+		7E56731E1D6BFCA000EA9987 /* AccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
+		943C399C22671A51FB06E932 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		943C39A7D85C86460266B9E7 /* CreateBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBookController.h; sourceTree = "<group>"; };
+		943C3AE9E0F0FE3C846AD4FC /* BookListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListController.h; sourceTree = "<group>"; };
+		943C3BC9489FAFC1EA841FBE /* BookEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookEditController.h; sourceTree = "<group>"; };
 		A11A25B85E6DBA3FC9ECA7C6 /* Pods-BookManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManager/Pods-BookManager.release.xcconfig"; sourceTree = "<group>"; };
 		B8CDBB2FE847FCA1D9063897 /* Pods-BookManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerTests/Pods-BookManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3C1C6BA5296CDBF59FCE530 /* Pods-BookManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerUITests/Pods-BookManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,16 +200,28 @@
 		943C32B6F26AC99B90DF6267 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7E5673031D6B2EE400EA9987 /* BookEditController.h */,
 				7E5673041D6B2EE400EA9987 /* BookEditController.m */,
-				7E5673061D6B2F0600EA9987 /* BookListController.h */,
 				7E5673071D6B2F0600EA9987 /* BookListController.m */,
-				7E56730C1D6B364400EA9987 /* CreateBookController.h */,
 				7E56730D1D6B364400EA9987 /* CreateBookController.m */,
-				7E5673171D6BE7EC00EA9987 /* AddViewController.h */,
 				7E5673181D6BE7EC00EA9987 /* AddViewController.m */,
+				7E56731B1D6BFC0E00EA9987 /* SettingsViewController.m */,
+				7E56731E1D6BFCA000EA9987 /* AccountSettingsViewController.m */,
+				943C38FE464912B5AF2C75B6 /* headers */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		943C38FE464912B5AF2C75B6 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				7E56731D1D6BFCA000EA9987 /* AccountSettingsViewController.h */,
+				7E56731A1D6BFC0E00EA9987 /* SettingsViewController.h */,
+				943C399C22671A51FB06E932 /* AddViewController.h */,
+				943C3BC9489FAFC1EA841FBE /* BookEditController.h */,
+				943C3AE9E0F0FE3C846AD4FC /* BookListController.h */,
+				943C39A7D85C86460266B9E7 /* CreateBookController.h */,
+			);
+			path = headers;
 			sourceTree = "<group>";
 		};
 		972681164AE49DD5ACB71404 /* Pods */ = {
@@ -535,10 +553,12 @@
 				7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */,
 				7E5672C71D6ADDDC00EA9987 /* main.m in Sources */,
 				7E56730E1D6B364400EA9987 /* CreateBookController.m in Sources */,
+				7E56731C1D6BFC0E00EA9987 /* SettingsViewController.m in Sources */,
 				7E5673191D6BE7EC00EA9987 /* AddViewController.m in Sources */,
 				7E5673151D6BDB9500EA9987 /* BookListViewCell.m in Sources */,
 				7E5673091D6B2F0600EA9987 /* BookListController.m in Sources */,
 				7E5673051D6B2EE400EA9987 /* BookEditController.m in Sources */,
+				7E56731F1D6BFCA000EA9987 /* AccountSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

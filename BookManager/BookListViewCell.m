@@ -7,7 +7,7 @@
 //
 
 #import "BookListViewCell.h"
-
+#import <AFNetworking/AFNetworking.h>
 @implementation BookListViewCell
 
 - (void)awakeFromNib {
@@ -22,6 +22,9 @@
     self.BookTitleLabel.text = @"パーフェクトPHP";
     self.BookFeeLabel.text = @"3600円 + 税";
     self.DateLabel.text = @"2014/04/03";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+
 }
 
 @end
