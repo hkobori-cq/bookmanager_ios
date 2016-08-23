@@ -7,15 +7,21 @@
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManagerUITests/BookManagerUITests.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManagerUITests/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/BookListViewCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/AppDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookListController.xib" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookEditController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookListController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookEditController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AddViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/CreateBookController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookListController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookListController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookEditController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AddViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/CreateBookController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookEditController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/BookListViewCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/main.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Assets.xcassets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/BookListViewCell.xib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/AppDelegate.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/LaunchScreen.storyboard" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/Main.storyboard" isTestSource="false" />

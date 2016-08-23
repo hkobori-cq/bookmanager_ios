@@ -18,7 +18,10 @@
 		7E5672EB1D6ADDDC00EA9987 /* BookManagerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672EA1D6ADDDC00EA9987 /* BookManagerUITests.m */; };
 		7E5673051D6B2EE400EA9987 /* BookEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673041D6B2EE400EA9987 /* BookEditController.m */; };
 		7E5673091D6B2F0600EA9987 /* BookListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673071D6B2F0600EA9987 /* BookListController.m */; };
-		7E56730A1D6B2F0600EA9987 /* BookListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5673081D6B2F0600EA9987 /* BookListController.xib */; };
+		7E56730E1D6B364400EA9987 /* CreateBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56730D1D6B364400EA9987 /* CreateBookController.m */; };
+		7E5673151D6BDB9500EA9987 /* BookListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673131D6BDB9500EA9987 /* BookListViewCell.m */; };
+		7E5673161D6BDB9500EA9987 /* BookListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5673141D6BDB9500EA9987 /* BookListViewCell.xib */; };
+		7E5673191D6BE7EC00EA9987 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5673181D6BE7EC00EA9987 /* AddViewController.m */; };
 		E0C587424F3C6160343E9C7C /* libPods-BookManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 097958753BF920BFBD43B439 /* libPods-BookManagerUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +65,13 @@
 		7E5673041D6B2EE400EA9987 /* BookEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookEditController.m; sourceTree = "<group>"; };
 		7E5673061D6B2F0600EA9987 /* BookListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListController.h; sourceTree = "<group>"; };
 		7E5673071D6B2F0600EA9987 /* BookListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListController.m; sourceTree = "<group>"; };
-		7E5673081D6B2F0600EA9987 /* BookListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookListController.xib; path = Controllers/BookListController.xib; sourceTree = "<group>"; };
+		7E56730C1D6B364400EA9987 /* CreateBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBookController.h; sourceTree = "<group>"; };
+		7E56730D1D6B364400EA9987 /* CreateBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateBookController.m; sourceTree = "<group>"; };
+		7E5673121D6BDB9500EA9987 /* BookListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListViewCell.h; sourceTree = "<group>"; };
+		7E5673131D6BDB9500EA9987 /* BookListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListViewCell.m; sourceTree = "<group>"; };
+		7E5673141D6BDB9500EA9987 /* BookListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookListViewCell.xib; sourceTree = "<group>"; };
+		7E5673171D6BE7EC00EA9987 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		7E5673181D6BE7EC00EA9987 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
 		A11A25B85E6DBA3FC9ECA7C6 /* Pods-BookManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManager/Pods-BookManager.release.xcconfig"; sourceTree = "<group>"; };
 		B8CDBB2FE847FCA1D9063897 /* Pods-BookManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerTests/Pods-BookManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3C1C6BA5296CDBF59FCE530 /* Pods-BookManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerUITests/Pods-BookManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,7 +184,9 @@
 		7E56730B1D6B2F2D00EA9987 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7E5673081D6B2F0600EA9987 /* BookListController.xib */,
+				7E5673121D6BDB9500EA9987 /* BookListViewCell.h */,
+				7E5673131D6BDB9500EA9987 /* BookListViewCell.m */,
+				7E5673141D6BDB9500EA9987 /* BookListViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -187,6 +198,10 @@
 				7E5673041D6B2EE400EA9987 /* BookEditController.m */,
 				7E5673061D6B2F0600EA9987 /* BookListController.h */,
 				7E5673071D6B2F0600EA9987 /* BookListController.m */,
+				7E56730C1D6B364400EA9987 /* CreateBookController.h */,
+				7E56730D1D6B364400EA9987 /* CreateBookController.m */,
+				7E5673171D6BE7EC00EA9987 /* AddViewController.h */,
+				7E5673181D6BE7EC00EA9987 /* AddViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,8 +338,8 @@
 			files = (
 				7E5672D51D6ADDDC00EA9987 /* LaunchScreen.storyboard in Resources */,
 				7E5672D21D6ADDDC00EA9987 /* Assets.xcassets in Resources */,
-				7E56730A1D6B2F0600EA9987 /* BookListController.xib in Resources */,
 				7E5672D01D6ADDDC00EA9987 /* Main.storyboard in Resources */,
+				7E5673161D6BDB9500EA9987 /* BookListViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +534,9 @@
 			files = (
 				7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */,
 				7E5672C71D6ADDDC00EA9987 /* main.m in Sources */,
+				7E56730E1D6B364400EA9987 /* CreateBookController.m in Sources */,
+				7E5673191D6BE7EC00EA9987 /* AddViewController.m in Sources */,
+				7E5673151D6BDB9500EA9987 /* BookListViewCell.m in Sources */,
 				7E5673091D6B2F0600EA9987 /* BookListController.m in Sources */,
 				7E5673051D6B2EE400EA9987 /* BookEditController.m in Sources */,
 			);
