@@ -10,6 +10,11 @@
 
 @interface BookEditController ()
 @property (weak, nonatomic) IBOutlet UILabel *rowNumber;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *addImageButton;
+@property (weak, nonatomic) IBOutlet UITextField *bookNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *bookFeeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 
 @end
 
@@ -19,12 +24,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    self.rowNumber.text = [ud valueForKey:@"num"];
+//    self.rowNumber.text = [ud valueForKey:@"num"];
+    self.bookNameTextField.text = [ud valueForKey:@"num"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)addImageButton:(id)sender {
 }
 
 /*

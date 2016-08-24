@@ -17,15 +17,22 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+    NSString *url = @"http://app.com/book/get";
+
+    NSDictionary *param = [[NSDictionary alloc]init];
+    param = @{@"page":@"0-10"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"https://qiita.com/api/v1/users/anneau" parameters:nil progress:nil success:^(NSURLSessionTask *task,id responseObject){
-        NSLog(@"%@",responseObject);
-        self.BookTitleLabel.text = [responseObject objectForKey:@"name"];
-//        self.BookImageView.image = [responseObject objectForKey:@"profile_image_url"];
-        self.BookFeeLabel.text = [responseObject objectForKey:@"github"];
-        self.DateLabel.text = [responseObject objectForKey:@"url"];
-    } failure:^(NSURLSessionTask *operation,NSError *error) {
-       NSLog(@"Error: %@",error);
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",nil];
+    [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *array = [responseObject objectForKey:@"result"];
+        NSLog(@"%@",array);
+        self.BookTitleLabel.text = [array[1] objectForKey:@"name"];
+        self.DateLabel.text = [array[1] objectForKey:@"purchase_date"];
+        NSInteger num = [array[1] objectForKey:@"price"];
+        self.BookFeeLabel.text = [NSString stringWithFormat:@"%@",num];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error: %@", error);
     }];
 }
 
