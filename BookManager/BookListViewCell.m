@@ -7,7 +7,7 @@
 //
 
 #import "BookListViewCell.h"
-#import <AFNetworking/AFNetworking.h>
+
 @implementation BookListViewCell
 
 - (void)awakeFromNib {
@@ -17,23 +17,12 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    NSString *url = @"http://app.com/book/get";
-
-    NSDictionary *param = [[NSDictionary alloc]init];
-    param = @{@"page":@"0-10"};
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",nil];
-    [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSArray *array = [responseObject objectForKey:@"result"];
-        NSLog(@"%@",array);
-        self.BookTitleLabel.text = [array[1] objectForKey:@"name"];
-        self.DateLabel.text = [array[1] objectForKey:@"purchase_date"];
-        NSInteger num = [array[1] objectForKey:@"price"];
-        self.BookFeeLabel.text = [NSString stringWithFormat:@"%@",num];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
 }
 
 @end
+
+
+//cell.BookTitleLabel.text = [array[0] objectForKey:@"name"];
+//cell.DateLabel.text = [array[0] objectForKey:@"purchase_date"];
+//NSInteger num = [array[0] objectForKey:@"price"];
+//cell.BookFeeLabel.text = [NSString stringWithFormat:@"%@",num];

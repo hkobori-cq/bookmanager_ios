@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BookListController : UITableViewController
+@property (strong, nonatomic) NSArray *list;
+@property (strong, nonatomic) NSMutableArray *titleList;
+@property (strong, nonatomic) NSMutableArray *priceList;
+@property (strong, nonatomic) NSMutableArray *dateList;
 
 @end
