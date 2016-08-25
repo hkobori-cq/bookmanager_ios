@@ -33,8 +33,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
-    [afNetworkingModel makeAFNetworkingRequest];
+    NSString *url = @"http://app.com/book/get";
+    NSDictionary *param = @{@"page":@"0-3"};
+    [afNetworkingModel makeAFNetworkingRequest:url:param];
     afNetworkingModel.delegate = self;
+
 }
 
 #pragma mark - Table view data source
@@ -63,7 +66,6 @@
     [output_format setDateFormat:@"yyyy/MM/dd"];;
     cell.DateLabel.text = [output_format stringFromDate:date];
     return cell;
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

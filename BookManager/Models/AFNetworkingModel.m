@@ -12,10 +12,9 @@
 
 
 
-- (void)makeAFNetworkingRequest
+- (void)makeAFNetworkingRequest:(NSString *)url:(NSDictionary *)param
 {
-    NSString *url = @"http://app.com/book/get";
-    NSDictionary *param = @{@"page":@"0-3"};
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"application/json"];

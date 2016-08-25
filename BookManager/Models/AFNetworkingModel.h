@@ -16,5 +16,5 @@
 @end
 @interface AFNetworkingModel : NSObject
 @property (nonatomic, weak) id<AFnetworkingDelegate> delegate;
-- (void)makeAFNetworkingRequest;
+- (void)makeAFNetworkingRequest:(NSString *)url:(NSDictionary *)param;
 @end

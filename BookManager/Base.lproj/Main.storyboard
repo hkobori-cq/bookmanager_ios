@@ -28,6 +28,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEc-Rq-iut">
                                 <rect key="frame" x="220" y="151" width="99" height="57"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="addImageButton:" destination="K6Y-4x-bMu" eventType="touchUpInside" id="hwq-RA-zM1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="書籍名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJR-DD-6C3">
                                 <rect key="frame" x="40" y="286" width="39" height="16"/>
@@ -91,10 +94,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="書籍追加" id="9Uf-Df-oJu">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="szg-pu-W3V"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="szg-pu-W3V">
+                            <connections>
+                                <action selector="saveDataButton:" destination="K6Y-4x-bMu" id="dW2-YS-EeD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="bookNameBox" destination="9Mx-So-wQe" id="Pnu-B2-KPe"/>
+                        <outlet property="dateBox" destination="vpw-c7-tky" id="gyv-D6-L21"/>
+                        <outlet property="imageView" destination="BWc-TK-gph" id="TVN-mt-zxc"/>
+                        <outlet property="priceBox" destination="bAt-qM-vSd" id="Qaj-cE-gYl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3c-uB-wUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
