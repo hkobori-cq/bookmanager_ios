@@ -24,17 +24,6 @@
         if ([self.delegate respondsToSelector:@selector(didSuccess:)]){
             [self.delegate didSuccess:APIArray];
         }
-        //    NSArray *APIArray = response;
-//    NSMutableArray *IDArray = [NSMutableArray array];
-//
-//    for (NSUInteger i = 0; i < APIArray.count; i++) {
-//        [IDArray addObject:[APIArray[i] objectForKey:@"id"]];
-//        [self.ImageArray addObject:[APIArray[i] objectForKey:@"image_url"]];
-//        [self.TitleArray addObject:[APIArray[i] objectForKey:@"name"]];
-//        [self.PriceArray addObject:[APIArray[i] objectForKey:@"price"]];
-//        [self.DateArray addObject:[APIArray[i] objectForKey:@"purchase_date"]];
-//    }
-
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if ([self.delegate respondsToSelector:@selector(didFailure:)]){

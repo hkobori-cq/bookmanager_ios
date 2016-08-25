@@ -10,7 +10,7 @@
 #import "BookListViewCell.h"
 
 
-@interface BookListController () <AFnetworkingDelegate>{
+@interface BookListController () <UITableViewDataSource, UITableViewDelegate,AFnetworkingDelegate>{
 }
 @end
 
@@ -19,13 +19,9 @@
 - (void)viewDidLoad {
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
-    [afNetworkingModel makeAFNetworkingRequest];
-    afNetworkingModel.delegate = self;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +32,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
+    AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
+    [afNetworkingModel makeAFNetworkingRequest];
+    afNetworkingModel.delegate = self;
 }
 
 #pragma mark - Table view data source
@@ -52,10 +50,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.BookTitleLabel.text = self.titleList[indexPath.row];
-    cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[indexPath.row]];
-    cell.DateLabel.text = self.dateList[indexPath.row];
-
+    cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
+    cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
+    cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
+    cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
+    NSString *time = self.dateList[(NSUInteger)indexPath.row];
+    NSDateFormatter *Date = [[NSDateFormatter alloc] init];
+    [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
+    [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
+    NSDate *date = [Date dateFromString:time];
+    NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
+    [output_format setDateFormat:@"yyyy/MM/dd"];;
+    cell.DateLabel.text = [output_format stringFromDate:date];
     return cell;
 
 }
@@ -63,8 +69,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120.0;
 }
+
 - (void)didSuccess:(NSArray *)response {
-    NSLog(@"success");
     NSArray *APIArray = response;
     NSMutableArray *IDArray = [NSMutableArray array];
     NSMutableArray *ImageArray = [NSMutableArray array];
@@ -72,7 +78,7 @@
     NSMutableArray *PriceArray = [NSMutableArray array];
     NSMutableArray *DateArray = [NSMutableArray array];
 
-    for (int i = 0; i < APIArray.count; i++) {
+    for (NSUInteger i = 0; i < APIArray.count; i++) {
         [IDArray addObject:[APIArray[i] objectForKey:@"id"]];
         [ImageArray addObject:[APIArray[i] objectForKey:@"image_url"]];
         [TitleArray addObject:[APIArray[i] objectForKey:@"name"]];
@@ -82,7 +88,6 @@
     self.titleList = TitleArray;
     self.priceList = PriceArray;
     self.dateList = DateArray;
-    NSLog(@"%@",self.titleList[1]);
     [self.tableView reloadData];
 }
 
