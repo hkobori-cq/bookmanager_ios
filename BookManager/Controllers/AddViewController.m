@@ -29,6 +29,21 @@
     self.dateBox.delegate = self;
     self.bookNameBox.delegate = self;
     self.priceBox.delegate = self;
+    UIToolbar *pickerToolBar = [[UIToolbar alloc] init];
+    pickerToolBar.barStyle = UIBarStyleDefault;
+    pickerToolBar.translucent = YES;
+    pickerToolBar.tintColor = nil;
+    [pickerToolBar sizeToFit];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完了" style:UIBarButtonItemStyleDone target:self action:@selector(pickerDoneClicked)];
+    UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray *array = @[spacer1,spacer2,doneButton];
+    [pickerToolBar setItems:array];
+    self.dateBox.inputAccessoryView = pickerToolBar;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +100,10 @@
     [self.bookNameBox resignFirstResponder];
     [self.priceBox resignFirstResponder];
     return YES;
+}
+
+- (void)pickerDoneClicked {
+    [self.dateBox resignFirstResponder];
 }
 
 
