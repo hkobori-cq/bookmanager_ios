@@ -9,7 +9,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController ()<AFnetworkingDelegate,UITextFieldDelegate>
+@interface AddViewController ()<AFnetworkingDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property (weak, nonatomic) IBOutlet UITextField *priceBox;
@@ -105,6 +105,28 @@
 - (void)pickerDoneClicked {
     [self.dateBox resignFirstResponder];
 }
+- (IBAction)imageUploadButton:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [imagePickerController setAllowsEditing:YES];
+        [imagePickerController setDelegate:self];
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info {
+    UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    if (image){
+        [self.imageView setImage:image];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 @end

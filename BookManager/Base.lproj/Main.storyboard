@@ -29,7 +29,7 @@
                                 <rect key="frame" x="220" y="151" width="99" height="57"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="addImageButton:" destination="K6Y-4x-bMu" eventType="touchUpInside" id="hwq-RA-zM1"/>
+                                    <action selector="imageUploadButton:" destination="K6Y-4x-bMu" eventType="touchUpInside" id="03N-Bu-7AG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="書籍名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJR-DD-6C3">
