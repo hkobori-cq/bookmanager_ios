@@ -9,7 +9,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController ()<AFnetworkingDelegate>
+@interface AddViewController ()<AFnetworkingDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property (weak, nonatomic) IBOutlet UITextField *priceBox;
@@ -22,6 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    self.dateBox.inputView = datePicker;
+    self.dateBox.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +35,7 @@
 }
 
 - (void)didSuccess:(NSArray *)response {
+    NSLog(@"success");
 }
 
 - (void)didFailure:(NSError *)error {
@@ -50,14 +56,28 @@
 - (IBAction)saveDataButton:(id)sender {
     AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
     NSString *url = @"http://app.com/book/regist";
-    NSDictionary *param = @{
+    NSDictionary *param;
+    param = @{
             @"image_url":@"hoge",
             @"name":self.bookNameBox.text,
             @"price":self.priceBox.text,
             @"purchase_date":self.dateBox.text
     };
+    NSLog(@"%@",param);
     [afNetworkingModel makeAFNetworkingRequest:url:param];
     afNetworkingModel.delegate = self;
 }
+- (IBAction)onSingleTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
+
+- (void)updateTextField:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd";
+    UIDatePicker *picker = (UIDatePicker *)sender;
+    self.dateBox.text = [dateFormatter stringFromDate:picker.date];
+
+}
+
 
 @end

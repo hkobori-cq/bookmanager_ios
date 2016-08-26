@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
@@ -46,7 +45,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,6 +55,7 @@
     [self.indicator startAnimating];
     static NSString *CellIdentifier = @"Cell";
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.currentIndexPath = indexPath;
     dispatch_queue_t main = dispatch_get_main_queue();
     dispatch_queue_t sub = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(sub,^{
@@ -64,21 +64,21 @@
         NSDictionary *param = @{@"page":@"0-100"};
         [afNetworkingModel makeAFNetworkingRequest:url:param];
         afNetworkingModel.delegate = self;
-                dispatch_async(main,^{
-                    cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
-                    cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
-                    cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
-                    cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
-                    NSString *time = self.dateList[(NSUInteger)indexPath.row];
-                    NSDateFormatter *Date = [[NSDateFormatter alloc] init];
-                    [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
-                    [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
-                    NSDate *date = [Date dateFromString:time];
-                    NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
-                    [output_format setDateFormat:@"yyyy/MM/dd"];;
-                    cell.DateLabel.text = [output_format stringFromDate:date];
-                    [self.tableView reloadData];
-                });
+        dispatch_async(main,^{
+            cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
+            cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
+            cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
+            cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
+            NSString *time = self.dateList[(NSUInteger)indexPath.row];
+            NSDateFormatter *Date = [[NSDateFormatter alloc] init];
+            [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
+            [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
+            NSDate *date = [Date dateFromString:time];
+            NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
+            [output_format setDateFormat:@"yyyy/MM/dd"];;
+            cell.DateLabel.text = [output_format stringFromDate:date];
+            [self.tableView reloadData];
+        });
     });
     return cell;
 }
@@ -110,6 +110,7 @@
 - (void)didFailure:(NSError *)error {
     NSLog(@"error");
 }
+
 
 
 /*

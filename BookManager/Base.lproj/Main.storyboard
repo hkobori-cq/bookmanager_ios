@@ -76,6 +76,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9Mx-So-wQe" firstAttribute="leading" secondItem="wPR-Ph-81z" secondAttribute="leading" constant="40" id="1sM-aD-BPm"/>
                             <constraint firstItem="BWc-TK-gph" firstAttribute="top" secondItem="WdC-2q-vVS" secondAttribute="bottom" constant="50" id="7g6-gC-SXs"/>
@@ -92,6 +93,9 @@
                             <constraint firstItem="ucF-Bz-dwA" firstAttribute="top" secondItem="bAt-qM-vSd" secondAttribute="bottom" constant="10" id="uon-DA-8as"/>
                             <constraint firstItem="vpw-c7-tky" firstAttribute="top" secondItem="ucF-Bz-dwA" secondAttribute="bottom" constant="5" id="zBP-un-aCb"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="HXN-I4-a2g" appends="YES" id="xab-LI-hKJ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="書籍追加" id="9Uf-Df-oJu">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="szg-pu-W3V">
@@ -110,6 +114,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3c-uB-wUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="HXN-I4-a2g">
+                    <connections>
+                        <action selector="onSingleTap:" destination="K6Y-4x-bMu" id="Ib3-eZ-FFq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2862.5" y="370.5"/>
         </scene>

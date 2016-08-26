@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *BookFeeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *DateLabel;
 @property (weak, nonatomic) IBOutlet UIView *nextLabel;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 
 @end

@@ -17,8 +17,10 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"application/json"];
+    NSLog(@"%@",param);
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *APIArray = [responseObject objectForKey:@"result"];
+        NSLog(@"%@",APIArray);
         if ([self.delegate respondsToSelector:@selector(didSuccess:)]){
             [self.delegate didSuccess:APIArray];
         }

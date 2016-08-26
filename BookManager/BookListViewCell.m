@@ -6,9 +6,11 @@
 //  Copyright © 2016年 hikaru kobori. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "BookListViewCell.h"
-
+static char kCurrentIndexPathKey;
 @implementation BookListViewCell
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,6 +21,13 @@
     [super setSelected:selected animated:animated];
 }
 
+- (NSIndexPath *)currentIndexPath {
+    return objc_getAssociatedObject(self,&kCurrentIndexPathKey);
+}
+
+- (void)setCurrentIndexPath:(NSIndexPath *)currentIndexPath {
+    objc_setAssociatedObject(self,&kCurrentIndexPathKey,currentIndexPath,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 @end
 
 
