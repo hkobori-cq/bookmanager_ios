@@ -27,6 +27,8 @@
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     self.dateBox.inputView = datePicker;
     self.dateBox.delegate = self;
+    self.bookNameBox.delegate = self;
+    self.priceBox.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,6 +79,12 @@
     UIDatePicker *picker = (UIDatePicker *)sender;
     self.dateBox.text = [dateFormatter stringFromDate:picker.date];
 
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)targetTextField {
+    [self.bookNameBox resignFirstResponder];
+    [self.priceBox resignFirstResponder];
+    return YES;
 }
 
 
