@@ -14,7 +14,6 @@
 
 - (void)makeAFNetworkingRequest:(NSString *)url:(NSDictionary *)param
 {
-
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"application/json"];

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BookListController : UITableViewController
-@property (strong, nonatomic) NSArray *list;
+@interface BookListController : UITableViewController<AFnetworkingDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *titleList;
 @property (strong, nonatomic) NSMutableArray *priceList;
 @property (strong, nonatomic) NSMutableArray *dateList;
+@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 
 @end

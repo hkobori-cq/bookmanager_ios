@@ -10,33 +10,32 @@
 #import "BookListViewCell.h"
 
 
-@interface BookListController () <UITableViewDataSource, UITableViewDelegate,AFnetworkingDelegate>{
-}
+@interface BookListController ()
 @end
 
 @implementation BookListController
 
 - (void)viewDidLoad {
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    [super viewDidLoad];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
-    NSString *url = @"http://app.com/book/get";
-    NSDictionary *param = @{@"page":@"0-3"};
-    [afNetworkingModel makeAFNetworkingRequest:url:param];
-    afNetworkingModel.delegate = self;
+
+    [super viewWillAppear:animated];
+
 
 }
 
@@ -50,21 +49,37 @@
     return 3;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
-    cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
-    cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
-    cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
-    NSString *time = self.dateList[(NSUInteger)indexPath.row];
-    NSDateFormatter *Date = [[NSDateFormatter alloc] init];
-    [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
-    [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
-    NSDate *date = [Date dateFromString:time];
-    NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
-    [output_format setDateFormat:@"yyyy/MM/dd"];;
-    cell.DateLabel.text = [output_format stringFromDate:date];
+    self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.indicator setColor:[UIColor darkGrayColor]];
+    [self.indicator setHidesWhenStopped:YES];
+    [self.indicator startAnimating];
+    static NSString *CellIdentifier = @"Cell";
+    BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    dispatch_queue_t main = dispatch_get_main_queue();
+    dispatch_queue_t sub = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(sub,^{
+        AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
+        NSString *url = @"http://app.com/book/get";
+        NSDictionary *param = @{@"page":@"0-100"};
+        [afNetworkingModel makeAFNetworkingRequest:url:param];
+        afNetworkingModel.delegate = self;
+                dispatch_async(main,^{
+                    cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
+                    cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
+                    cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
+                    cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
+                    NSString *time = self.dateList[(NSUInteger)indexPath.row];
+                    NSDateFormatter *Date = [[NSDateFormatter alloc] init];
+                    [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
+                    [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
+                    NSDate *date = [Date dateFromString:time];
+                    NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
+                    [output_format setDateFormat:@"yyyy/MM/dd"];;
+                    cell.DateLabel.text = [output_format stringFromDate:date];
+                    [self.tableView reloadData];
+                });
+    });
     return cell;
 }
 
@@ -90,9 +105,8 @@
     self.titleList = TitleArray;
     self.priceList = PriceArray;
     self.dateList = DateArray;
-    [self.tableView reloadData];
+    [self.indicator stopAnimating];
 }
-
 - (void)didFailure:(NSError *)error {
     NSLog(@"error");
 }
@@ -124,13 +138,13 @@
 }
 */
 
-/*
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
 
 
 #pragma mark - Table view delegate
