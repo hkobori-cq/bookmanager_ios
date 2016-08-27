@@ -1,10 +1,3 @@
-//
-//  BookListController.m
-//  BookManager
-//
-//  Created by 小堀輝 on 2016/08/22.
-//  Copyright © 2016年 hikaru kobori. All rights reserved.
-//
 #import "AFNetworkingModel.h"
 #import "BookListController.h"
 #import "BookListViewCell.h"
@@ -21,22 +14,14 @@
     self.tableView.dataSource = self;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    //カスタムセルを呼び出す
     [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
-
-
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-
-    [super viewWillAppear:animated];
-
-
-}
 
 #pragma mark - Table view data source
 
@@ -49,27 +34,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [self.indicator setColor:[UIColor darkGrayColor]];
-    [self.indicator setHidesWhenStopped:YES];
-    [self.indicator startAnimating];
     static NSString *CellIdentifier = @"Cell";
+    //カスタムセルを生成
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.currentIndexPath = indexPath;
+    //UI変更用にメインスレッドを生成
     dispatch_queue_t main = dispatch_get_main_queue();
-    dispatch_queue_t sub = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(sub,^{
+    //非同期通信のためのサブスレッドを生成
+    dispatch_queue_t sub = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //サブスレッドで非同期通信を開始
+    dispatch_async(sub, ^{
+        //AFNetworkingModelを生成
         AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
         NSString *url = @"http://app.com/book/get";
-        NSDictionary *param = @{@"page":@"0-100"};
-        [afNetworkingModel makeAFNetworkingRequest:url:param];
+        NSDictionary *param = @{@"page" : @"0-100"};
+        [afNetworkingModel makeAFNetworkingRequest:url :param];
         afNetworkingModel.delegate = self;
-        dispatch_async(main,^{
-            cell.BookTitleLabel.text = self.titleList[(NSUInteger)indexPath.row];
-            cell.BookFeeLabel.text = [NSString stringWithFormat:@"%d",self.priceList[(NSUInteger)indexPath.row]];
+        //メインスレッドでtableViewのUIを変更
+        dispatch_async(main, ^{
+            cell.BookTitleLabel.text = self.titleList[(NSUInteger) indexPath.row];
+            cell.BookFeeLabel.text = [NSString stringWithFormat:@"%@", self.priceList[(NSUInteger) indexPath.row]];
             cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
-            cell.DateLabel.text = self.dateList[(NSUInteger)indexPath.row];
-            NSString *time = self.dateList[(NSUInteger)indexPath.row];
+            //DateLabelの書式設定
+            NSString *time = self.dateList[(NSUInteger) indexPath.row];
             NSDateFormatter *Date = [[NSDateFormatter alloc] init];
             [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
             [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
@@ -87,6 +73,9 @@
     return 120.0;
 }
 
+/**
+ * AFNetworkingModelが成功したときのメソッド
+ */
 - (void)didSuccess:(NSArray *)response {
     NSArray *APIArray = response;
     NSMutableArray *IDArray = [NSMutableArray array];
@@ -105,8 +94,11 @@
     self.titleList = TitleArray;
     self.priceList = PriceArray;
     self.dateList = DateArray;
-    [self.indicator stopAnimating];
 }
+
+/**
+ * AFNetworkingModelが失敗した時のメソッド
+ */
 - (void)didFailure:(NSError *)error {
     NSLog(@"error");
 }
@@ -147,15 +139,15 @@
 }
 
 
-
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:[NSString stringWithFormat:@"%d",indexPath.row] forKey:@"num"];
+    [ud setValue:[NSString stringWithFormat:@"%d", indexPath.row] forKey:@"num"];
     [self performSegueWithIdentifier:@"rowNumber" sender:self];
 }
+
 
 /*
 #pragma mark - Navigation

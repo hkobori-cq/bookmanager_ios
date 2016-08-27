@@ -1,11 +1,3 @@
-//
-//  AccountSettingsViewController.m
-//  BookManager
-//
-//  Created by 小堀輝 on 2016/08/23.
-//  Copyright © 2016年 hikaru kobori. All rights reserved.
-//
-
 #import "AccountSettingsViewController.h"
 
 @interface AccountSettingsViewController ()
@@ -35,9 +27,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+/**
+ * SettingsViewControllerに戻るボタン
+ */
 - (IBAction)returnButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+/**
+ * データベースに保存
+ */
 - (IBAction)saveButton:(id)sender {
 }
 

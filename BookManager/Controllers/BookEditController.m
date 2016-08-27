@@ -1,20 +1,11 @@
-//
-//  BookEditController.m
-//  BookManager
-//
-//  Created by 小堀輝 on 2016/08/22.
-//  Copyright © 2016年 hikaru kobori. All rights reserved.
-//
-
 #import "BookEditController.h"
 
 @interface BookEditController ()
-@property (weak, nonatomic) IBOutlet UILabel *rowNumber;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIButton *addImageButton;
-@property (weak, nonatomic) IBOutlet UITextField *bookNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *bookFeeTextField;
-@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UIButton *addImageButton;
+@property(weak, nonatomic) IBOutlet UITextField *bookNameTextField;
+@property(weak, nonatomic) IBOutlet UITextField *bookFeeTextField;
+@property(weak, nonatomic) IBOutlet UITextField *dateTextField;
 
 @end
 
@@ -22,16 +13,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-//    self.rowNumber.text = [ud valueForKey:@"num"];
-    self.bookNameTextField.text = [ud valueForKey:@"num"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/**
+ * 画像を取り替えるのためのボタンアクション
+ */
 - (IBAction)addImageButton:(id)sender {
 }
 

@@ -1,27 +1,19 @@
-//
-//  AddViewController.m
-//  BookManager
-//
-//  Created by 小堀輝 on 2016/08/23.
-//  Copyright © 2016年 hikaru kobori. All rights reserved.
-//
-
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController ()<AFnetworkingDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextField *bookNameBox;
-@property (weak, nonatomic) IBOutlet UITextField *priceBox;
-@property (weak, nonatomic) IBOutlet UITextField *dateBox;
-
+@interface AddViewController () <AFnetworkingDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
+@property(weak, nonatomic) IBOutlet UITextField *priceBox;
+@property(weak, nonatomic) IBOutlet UITextField *dateBox;
 @end
 
 @implementation AddViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    //日付入力のためのpickerを生成
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
@@ -29,35 +21,28 @@
     self.dateBox.delegate = self;
     self.bookNameBox.delegate = self;
     self.priceBox.delegate = self;
+    //pickerに閉じるボタンをつけるためにtoolバーを設置
     UIToolbar *pickerToolBar = [[UIToolbar alloc] init];
     pickerToolBar.barStyle = UIBarStyleDefault;
     pickerToolBar.translucent = YES;
     pickerToolBar.tintColor = nil;
     [pickerToolBar sizeToFit];
+    //閉じるボタン生成
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完了" style:UIBarButtonItemStyleDone target:self action:@selector(pickerDoneClicked)];
     UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray *array = @[spacer1,spacer2,doneButton];
+    NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
     self.dateBox.inputAccessoryView = pickerToolBar;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)didSuccess:(NSArray *)response {
-    NSLog(@"success");
-}
 
-- (void)didFailure:(NSError *)error {
-    NSLog(@"error");
-}
 
 /*
 #pragma mark - Navigation
@@ -68,45 +53,83 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)addImageButton:(id)sender {
-}
+/**
+ * データをデータベースに保存するボタンアクション
+ */
 - (IBAction)saveDataButton:(id)sender {
+    //AFNetworkingModelを生成
     AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
     NSString *url = @"http://app.com/book/regist";
-    NSDictionary *param;
-    param = @{
-            @"image_url":@"hoge",
-            @"name":self.bookNameBox.text,
-            @"price":self.priceBox.text,
-            @"purchase_date":self.dateBox.text
+    NSDictionary *params;
+    params = @{
+            @"image_url" : @"hoge",
+            @"name" : self.bookNameBox.text,
+            @"price" : self.priceBox.text,
+            @"purchase_date" : self.dateBox.text
     };
-    NSLog(@"%@",param);
-    [afNetworkingModel makeAFNetworkingRequest:url:param];
+    [afNetworkingModel makeAFNetworkingRequestHTML:url :params];
     afNetworkingModel.delegate = self;
 }
+
+/**
+ * AFNetworkingModelでPOSTが成功したとき
+ * @return NSArray response
+ */
+- (void)didSuccess:(NSArray *)response {
+    NSLog(@"success");
+}
+
+/**
+ * AFNetworkingModelでPOSTが失敗した時
+ * @return NSError error
+ */
+- (void)didFailure:(NSError *)error {
+    NSLog(@"error");
+}
+
+/**
+ * keyboard及びpickerが出ている時別の場所をタップした時の動作
+ */
 - (IBAction)onSingleTap:(UITapGestureRecognizer *)sender {
+    //keyboardやpickerを隠す
     [self.view endEditing:YES];
 }
 
+/**
+ * pickerで選んだ際、フォーマットを変更してtextFieldに入れるメソッド
+ */
 - (void)updateTextField:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy/MM/dd";
-    UIDatePicker *picker = (UIDatePicker *)sender;
+    UIDatePicker *picker = (UIDatePicker *) sender;
     self.dateBox.text = [dateFormatter stringFromDate:picker.date];
-
 }
 
+/**
+ * textFiledでReTurnボタンを押した時の処理
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)targetTextField {
+    //keyboardを隠す
     [self.bookNameBox resignFirstResponder];
     [self.priceBox resignFirstResponder];
     return YES;
 }
 
+/**
+ * pickerの上部に設置した完了ボタンを押した時の動作
+ */
 - (void)pickerDoneClicked {
+    //pickerを閉じる
     [self.dateBox resignFirstResponder];
 }
+
+/**
+ * 画像を追加するボタンの処理
+ */
 - (IBAction)imageUploadButton:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+    //ImagePickerが使えるかどうかの判定
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        //ImagePickerを生成
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         [imagePickerController setAllowsEditing:YES];
@@ -115,18 +138,26 @@
     }
 }
 
+/**
+ * 画像が選択された時に呼ばれるデリケードメソッド
+ * 選ばれた画像をimageViewに登録
+ * @param NSDictionary info
+ */
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info {
-    UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    if (image){
+    UIImage *image = (UIImage *) info[@"UIImagePickerControllerOriginalImage"];
+    if (image) {
         [self.imageView setImage:image];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ * 選択された画像がキャンセルされた時に呼ばれるデリケードメソッド
+ */
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    //モーダルビューを取り除く
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 
 @end
