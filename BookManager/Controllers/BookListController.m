@@ -10,6 +10,11 @@
     NSMutableArray *priceContents;
     NSMutableArray *dateContents;
     NSMutableArray *idNumArray;
+    NSString *name;
+    NSString *image;
+    NSString *price;
+    NSString *date;
+    NSInteger *id;
 }
 
 @property (nonatomic) NSInteger count;
@@ -156,9 +161,13 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AddViewController *addViewController = [[AddViewController alloc] init];
-    [addViewController editBookData:nameContents[indexPath.row] :imageContents[indexPath.row] :priceContents[indexPath.row] :dateContents[indexPath.row] :[idNumArray[indexPath.row] integerValue]];
-    [self performSegueWithIdentifier:@"rowNumber" sender:self];
+    name = nameContents[indexPath.row];
+    image = imageContents[indexPath.row];
+    price = imageContents[indexPath.row];
+    date = dateContents[indexPath.row];
+    AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
+    [addViewController editBookData:name :image :price :date];
+    [self.navigationController pushViewController:addViewController animated:YES];
 }
 
 

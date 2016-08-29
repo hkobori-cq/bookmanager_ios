@@ -18,8 +18,8 @@
 @property (nonatomic) NSString *idStr;
 
 @property (strong, nonatomic) AFNetworkingModel *afNetworkingModel;
-@end
 
+@end
 @implementation AddViewController
 
 - (void)viewDidLoad {
@@ -48,6 +48,7 @@
     self.dateBox.inputAccessoryView = pickerToolBar;
     self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     self.afNetworkingModel.addDelegate = self;
+    self.bookNameBox.text = self.name;
 }
 
 
@@ -180,13 +181,11 @@
 - (void)addBookData {
 }
 
-- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger)id {
+- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date {
     self.name = name;
     self.image = image;
     self.price = price;
     self.date = date;
-    self.idStr = [NSString stringWithFormat:@"%d",id];
-    NSLog(@"%@",self.name);
 }
 
 @end

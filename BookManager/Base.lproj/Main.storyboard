@@ -9,7 +9,7 @@
         <!--書籍追加-->
         <scene sceneID="RM3-6T-RLo">
             <objects>
-                <viewController id="K6Y-4x-bMu" customClass="AddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddViewController" id="K6Y-4x-bMu" customClass="AddViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WdC-2q-vVS"/>
                         <viewControllerLayoutGuide type="bottom" id="kRk-FA-gBG"/>
@@ -155,9 +155,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <segue destination="K6Y-4x-bMu" kind="push" identifier="rowNumber" id="yFl-9T-tGZ"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rw-iB-n5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -325,7 +322,4 @@
             <point key="canvasLocation" x="2871.5" y="347.5"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="yFl-9T-tGZ"/>
-    </inferredMetricsTieBreakers>
 </document>
