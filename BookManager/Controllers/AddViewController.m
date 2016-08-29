@@ -49,6 +49,8 @@
     self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     self.afNetworkingModel.addDelegate = self;
     self.bookNameBox.text = self.name;
+    self.priceBox.text = self.price;
+    self.dateBox.text = self.date;
 }
 
 

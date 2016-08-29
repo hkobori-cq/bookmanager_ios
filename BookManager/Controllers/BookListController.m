@@ -163,7 +163,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     name = nameContents[indexPath.row];
     image = imageContents[indexPath.row];
-    price = imageContents[indexPath.row];
+    price = priceContents[indexPath.row];
     date = dateContents[indexPath.row];
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
     [addViewController editBookData:name :image :price :date];
