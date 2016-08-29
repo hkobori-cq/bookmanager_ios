@@ -1,19 +1,23 @@
 #import <Foundation/Foundation.h>
+#import "DataModel.h"
 
-@class AFNetworkingModel;
 
-@protocol AFnetworkingDelegate <NSObject>
-- (void)didSuccess:(NSArray *)response;
-
-- (void)didFailure:(NSError *)error;
-
+@protocol AFNetworkingTableViewDelegate <NSObject>
+- (void)didGetBookData;
+- (void)failedGetData;
+@end
+@protocol AFNetworkingAddDelegate <NSObject>
+- (void)didRegisterOrUpdateBookData:(NSString *)message;
+- (void)fialedGetData;
 @end
 
+
 @interface AFNetworkingModel : NSObject
-@property(nonatomic, weak) id <AFnetworkingDelegate> delegate;
+@property (strong, nonatomic) NSMutableDictionary *bookDataDictionary;
+@property (strong, nonatomic) NSString *action;
+@property (weak, nonatomic) id <AFNetworkingTableViewDelegate> tableDelegate;
+@property (weak, nonatomic) id <AFNetworkingAddDelegate> addDelegate;
 
-
-- (void)makeAFNetworkingRequest:(NSString *)url :(NSDictionary *)param;
-
-- (void)makeAFNetworkingRequestHTML:(NSString *)url :(NSDictionary *)param;
+- (void)startAPIConnection:(NSDictionary *)param;
+- (id)actionName:(NSString *)typeOfAction;
 @end

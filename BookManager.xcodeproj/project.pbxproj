@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		65745FBEC11D1915E930F3AE /* libPods-BookManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEE5D219AC3023196CE30ECA /* libPods-BookManager.a */; };
+		7E21BB4A1D72AEF6005CBA6A /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21BB491D72AEF6005CBA6A /* DataModel.m */; };
+		7E21BB501D73CB25005CBA6A /* APIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E21BB4F1D73CB25005CBA6A /* APIModel.m */; };
 		7E5672C71D6ADDDC00EA9987 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672C61D6ADDDC00EA9987 /* main.m */; };
 		7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5672C91D6ADDDC00EA9987 /* AppDelegate.m */; };
 		7E5672D01D6ADDDC00EA9987 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E5672CE1D6ADDDC00EA9987 /* Main.storyboard */; };
@@ -52,6 +54,10 @@
 		633F6BE5D6851DA7201DDBB1 /* Pods-BookManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookManagerTests/Pods-BookManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		64861B13862D6E0F359F7DF1 /* Pods-BookManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookManager/Pods-BookManager.release.xcconfig"; sourceTree = "<group>"; };
 		762E7E0AF29FA8FA7FFB15BD /* libPods-BookManagerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BookManagerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E21BB481D72AEF6005CBA6A /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		7E21BB491D72AEF6005CBA6A /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		7E21BB4E1D73CB25005CBA6A /* APIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIModel.h; sourceTree = "<group>"; };
+		7E21BB4F1D73CB25005CBA6A /* APIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIModel.m; sourceTree = "<group>"; };
 		7E5672C21D6ADDDC00EA9987 /* BookManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5672C61D6ADDDC00EA9987 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7E5672C81D6ADDDC00EA9987 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -222,6 +228,10 @@
 			children = (
 				7E68D7FB1D6E74F1005B8804 /* AFNetworkingModel.h */,
 				7E68D7FC1D6E74F1005B8804 /* AFNetworkingModel.m */,
+				7E21BB481D72AEF6005CBA6A /* DataModel.h */,
+				7E21BB491D72AEF6005CBA6A /* DataModel.m */,
+				7E21BB4E1D73CB25005CBA6A /* APIModel.h */,
+				7E21BB4F1D73CB25005CBA6A /* APIModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -651,6 +661,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E5672CA1D6ADDDC00EA9987 /* AppDelegate.m in Sources */,
+				7E21BB4A1D72AEF6005CBA6A /* DataModel.m in Sources */,
 				7E5672C71D6ADDDC00EA9987 /* main.m in Sources */,
 				7E68D7FD1D6E74F1005B8804 /* AFNetworkingModel.m in Sources */,
 				7E56731C1D6BFC0E00EA9987 /* SettingsViewController.m in Sources */,
@@ -659,6 +670,7 @@
 				7E5673051D6B2EE400EA9987 /* BookEditController.m in Sources */,
 				7E56731F1D6BFCA000EA9987 /* AccountSettingsViewController.m in Sources */,
 				943C33DF618D5469BCC1CEC7 /* BookListViewCell.m in Sources */,
+				7E21BB501D73CB25005CBA6A /* APIModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

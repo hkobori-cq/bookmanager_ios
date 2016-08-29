@@ -3,23 +3,37 @@
 #import "BookListViewCell.h"
 
 
-@interface BookListController ()
+@interface BookListController () <AFNetworkingTableViewDelegate>{
+    NSMutableArray *nameContents;
+    NSMutableArray *imageContents;
+    NSMutableArray *priceContents;
+    NSMutableArray *dateContents;
+    NSMutableArray *idNumArray;
+}
+
+@property (nonatomic, strong) AFNetworkingModel *afNetworkingModel;
+
 @end
 
 @implementation BookListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     //カスタムセルを呼び出す
     [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"getBook"];
+    self.afNetworkingModel.tableDelegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSDictionary *param = @{@"page" : @"0-10"};
+    [self.afNetworkingModel startAPIConnection:param];
 }
 
 
@@ -37,35 +51,34 @@
     static NSString *CellIdentifier = @"Cell";
     //カスタムセルを生成
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    //UI変更用にメインスレッドを生成
-    dispatch_queue_t main = dispatch_get_main_queue();
-    //非同期通信のためのサブスレッドを生成
-    dispatch_queue_t sub = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //サブスレッドで非同期通信を開始
-    dispatch_async(sub, ^{
-        //AFNetworkingModelを生成
-        AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
-        NSString *url = @"http://app.com/book/get";
-        NSDictionary *param = @{@"page" : @"0-100"};
-        [afNetworkingModel makeAFNetworkingRequest:url :param];
-        afNetworkingModel.delegate = self;
-        //メインスレッドでtableViewのUIを変更
-        dispatch_async(main, ^{
-            cell.BookTitleLabel.text = self.titleList[(NSUInteger) indexPath.row];
-            cell.BookFeeLabel.text = [NSString stringWithFormat:@"%@", self.priceList[(NSUInteger) indexPath.row]];
-            cell.BookImageView.image = [UIImage imageNamed:@"sample.jpg"];
-            //DateLabelの書式設定
-            NSString *time = self.dateList[(NSUInteger) indexPath.row];
-            NSDateFormatter *Date = [[NSDateFormatter alloc] init];
-            [Date setDateFormat:@"EEE, dd MM yyy HH:mm:ss Z"];
-            [Date setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"JP"]];
-            NSDate *date = [Date dateFromString:time];
-            NSDateFormatter *output_format = [[NSDateFormatter alloc] init];
-            [output_format setDateFormat:@"yyyy/MM/dd"];;
-            cell.DateLabel.text = [output_format stringFromDate:date];
-            [self.tableView reloadData];
-        });
-    });
+    cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@",nameContents[indexPath.row]];
+    cell.BookFeeLabel.text = priceContents[indexPath.row];
+    if (dateContents[indexPath.row]) {
+        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[indexPath.row]];
+        [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
+        [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length-3, 3)];
+        NSLog(@"%@", changeDateStr);
+
+        NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
+        [fmt setDateFormat:@"dd MMM yyyy HH:mm:ss"];
+        [fmt setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        NSDate *changeDate = [fmt dateFromString:changeDateStr];
+        NSLog(@"%@", changeDate);
+
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSUInteger flags;
+        NSDateComponents *comps;
+
+        // 年・月・日を取得
+        flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+        comps = [calendar components:flags fromDate:changeDate];
+
+        NSInteger year  = comps.year;
+        NSInteger month = comps.month;
+        NSInteger day   = comps.day;
+
+        cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)year, (long)month, (long)day];
+    }
     return cell;
 }
 
@@ -76,33 +89,31 @@
 /**
  * AFNetworkingModelが成功したときのメソッド
  */
-- (void)didSuccess:(NSArray *)response {
-    NSArray *APIArray = response;
-    NSMutableArray *IDArray = [NSMutableArray array];
-    NSMutableArray *ImageArray = [NSMutableArray array];
-    NSMutableArray *TitleArray = [NSMutableArray array];
-    NSMutableArray *PriceArray = [NSMutableArray array];
-    NSMutableArray *DateArray = [NSMutableArray array];
-
-    for (NSUInteger i = 0; i < APIArray.count; i++) {
-        [IDArray addObject:[APIArray[i] objectForKey:@"id"]];
-        [ImageArray addObject:[APIArray[i] objectForKey:@"image_url"]];
-        [TitleArray addObject:[APIArray[i] objectForKey:@"name"]];
-        [PriceArray addObject:[APIArray[i] objectForKey:@"price"]];
-        [DateArray addObject:[APIArray[i] objectForKey:@"purchase_date"]];
-    }
-    self.titleList = TitleArray;
-    self.priceList = PriceArray;
-    self.dateList = DateArray;
+- (void)didGetBookData {
+    nameContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"name"]];
+    imageContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"image"]];
+    priceContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"price"]];
+    dateContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"purchase_date"]];
+    idNumArray = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"id"]];
+    [self.tableView reloadData];
 }
-
 /**
  * AFNetworkingModelが失敗した時のメソッド
  */
-- (void)didFailure:(NSError *)error {
-    NSLog(@"error");
+- (void)failedGetData {
 }
 
+/**
+ * 配列がnilになったときはnilにNoDataを入れて返す
+ */
+- (id)CheckNil:(NSMutableArray *)array {
+    for (int i=0;i < array.count;i++){
+        if ([array[i] isEqual:[NSNull null]]){
+            array[i] = @"NoData";
+        }
+    }
+    return array;
+}
 
 
 /*

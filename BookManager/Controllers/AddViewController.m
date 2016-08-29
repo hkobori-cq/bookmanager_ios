@@ -1,11 +1,15 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <AFnetworkingDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface AddViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;
 @property(weak, nonatomic) IBOutlet UITextField *dateBox;
+
+@property (nonatomic) NSInteger year;
+@property (nonatomic) NSInteger month;
+@property (nonatomic) NSInteger day;
 @end
 
 @implementation AddViewController
@@ -63,12 +67,12 @@
     NSDictionary *params;
     params = @{
             @"image_url" : @"hoge",
-            @"name" : self.bookNameBox.text,
+            @"name" : [NSString stringWithFormat:@"%@",self.bookNameBox.text],
             @"price" : self.priceBox.text,
-            @"purchase_date" : self.dateBox.text
+            @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", self.year, self.month, self.day]
     };
-    [afNetworkingModel makeAFNetworkingRequestHTML:url :params];
-    afNetworkingModel.delegate = self;
+//    [afNetworkingModel makeAFNetworkingRequestHTML:url :params];
+//    afNetworkingModel.delegate = self;
 }
 
 /**
@@ -84,7 +88,7 @@
  * @return NSError error
  */
 - (void)didFailure:(NSError *)error {
-    NSLog(@"error");
+    NSLog(@"%@",error);
 }
 
 /**
@@ -100,9 +104,20 @@
  */
 - (void)updateTextField:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy/MM/dd";
-    UIDatePicker *picker = (UIDatePicker *) sender;
-    self.dateBox.text = [dateFormatter stringFromDate:picker.date];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger flags;
+    NSDateComponents *components;
+
+    flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    components = [calendar components:flags fromDate:self.bookDate];
+    self.year = components.year;
+    self.month = components.month;
+    self.day = components.day;
+
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long)_year, (long)_month, (long)_day];
 }
 
 /**
