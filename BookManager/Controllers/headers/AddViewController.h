@@ -2,6 +2,6 @@
 
 @interface AddViewController : UIViewController
 
-@property(nonatomic, strong) NSDate *bookDate;
-
+- (void)addBookData;
+- (void)editBookData:(NSString *)name:(NSString *)image:(NSString *)price:(NSString *)date:(NSInteger)id;
 @end

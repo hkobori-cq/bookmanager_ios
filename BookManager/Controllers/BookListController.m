@@ -1,6 +1,7 @@
 #import "AFNetworkingModel.h"
 #import "BookListController.h"
 #import "BookListViewCell.h"
+#import "AddViewController.h"
 
 
 @interface BookListController () <AFNetworkingTableViewDelegate>{
@@ -10,6 +11,8 @@
     NSMutableArray *dateContents;
     NSMutableArray *idNumArray;
 }
+
+@property (nonatomic) NSInteger count;
 
 @property (nonatomic, strong) AFNetworkingModel *afNetworkingModel;
 
@@ -44,7 +47,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,6 +96,7 @@
     priceContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"price"]];
     dateContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"purchase_date"]];
     idNumArray = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"id"]];
+    self.count = nameContents.count;
     [self.tableView reloadData];
 }
 /**
@@ -152,8 +156,8 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setValue:[NSString stringWithFormat:@"%d", indexPath.row] forKey:@"num"];
+    AddViewController *addViewController = [[AddViewController alloc] init];
+    [addViewController editBookData:nameContents[indexPath.row] :imageContents[indexPath.row] :priceContents[indexPath.row] :dateContents[indexPath.row] :[idNumArray[indexPath.row] integerValue]];
     [self performSegueWithIdentifier:@"rowNumber" sender:self];
 }
 

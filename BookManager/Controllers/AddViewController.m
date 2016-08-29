@@ -11,6 +11,12 @@
 @property (nonatomic) NSInteger month;
 @property (nonatomic) NSInteger day;
 
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *image;
+@property (nonatomic) NSString *price;
+@property (nonatomic) NSString *date;
+@property (nonatomic) NSString *idStr;
+
 @property (strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 @end
 
@@ -168,6 +174,19 @@
 
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)addBookData {
+}
+
+- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger)id {
+    self.name = name;
+    self.image = image;
+    self.price = price;
+    self.date = date;
+    self.idStr = [NSString stringWithFormat:@"%d",id];
+    NSLog(@"%@",self.name);
 }
 
 @end
