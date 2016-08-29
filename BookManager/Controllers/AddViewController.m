@@ -1,7 +1,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface AddViewController () <AFNetworkingAddDelegate,UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;
@@ -10,6 +10,8 @@
 @property (nonatomic) NSInteger year;
 @property (nonatomic) NSInteger month;
 @property (nonatomic) NSInteger day;
+
+@property (weak, nonatomic) AFNetworkingModel *afNetworkingModel;
 @end
 
 @implementation AddViewController
@@ -20,7 +22,7 @@
     //日付入力のためのpickerを生成
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
-    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    [datePicker addTarget:self action:@selector(datePickerAction:) forControlEvents:UIControlEventValueChanged];
     self.dateBox.inputView = datePicker;
     self.dateBox.delegate = self;
     self.bookNameBox.delegate = self;
@@ -46,6 +48,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ * pickerで選んだ際、フォーマットを変更してtextFieldに入れるメソッド
+ */
+- (void)datePickerAction: (id)sender {
+    UIDatePicker *picker = (UIDatePicker *)sender;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:picker.date];
+
+    self.year = components.year;
+    self.month = components.month;
+    self.day = components.day;
+
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日",(long)self.year,(long)self.month,(long)self.month];
+
+}
+
 
 
 /*
@@ -61,36 +82,26 @@
  * データをデータベースに保存するボタンアクション
  */
 - (IBAction)saveDataButton:(id)sender {
+    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     //AFNetworkingModelを生成
-    AFNetworkingModel *afNetworkingModel = [[AFNetworkingModel alloc] init];
-    NSString *url = @"http://app.com/book/regist";
-    NSDictionary *params;
-    params = @{
+    NSDictionary *param;
+    param = @{
             @"image_url" : @"hoge",
             @"name" : [NSString stringWithFormat:@"%@",self.bookNameBox.text],
             @"price" : self.priceBox.text,
             @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", self.year, self.month, self.day]
     };
-//    [afNetworkingModel makeAFNetworkingRequestHTML:url :params];
-//    afNetworkingModel.delegate = self;
+    [self.afNetworkingModel startAPIConnection:param];
+    self.afNetworkingModel.addDelegate = self;
 }
 
-/**
- * AFNetworkingModelでPOSTが成功したとき
- * @return NSArray response
- */
-- (void)didSuccess:(NSArray *)response {
-    NSLog(@"success");
+- (void)didAddOrUpdateBookData:(NSString *)message {
+    NSLog(@"ok");
 }
 
-/**
- * AFNetworkingModelでPOSTが失敗した時
- * @return NSError error
- */
-- (void)didFailure:(NSError *)error {
-    NSLog(@"%@",error);
-}
+- (void)failedUploadData {
 
+}
 /**
  * keyboard及びpickerが出ている時別の場所をタップした時の動作
  */
@@ -99,26 +110,7 @@
     [self.view endEditing:YES];
 }
 
-/**
- * pickerで選んだ際、フォーマットを変更してtextFieldに入れるメソッド
- */
-- (void)updateTextField:(id)sender {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
 
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger flags;
-    NSDateComponents *components;
-
-    flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    components = [calendar components:flags fromDate:self.bookDate];
-    self.year = components.year;
-    self.month = components.month;
-    self.day = components.day;
-
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long)_year, (long)_month, (long)_day];
-}
 
 /**
  * textFiledでReTurnボタンを押した時の処理
@@ -174,5 +166,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)backButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

@@ -37,7 +37,6 @@
         [self.dateArray addObject:date];
         [self.idArray addObject:idNumber];
     }
-    NSLog(@"%@",self.nameArray);
 
     NSMutableDictionary *bookDictionary = [NSMutableDictionary dictionary];
     [bookDictionary setObject:self.nameArray forKey:@"name"];

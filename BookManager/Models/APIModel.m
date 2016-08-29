@@ -14,7 +14,7 @@
 - (void)apiConnection:(NSString *)url:(NSDictionary *)param:(NSString *)typeOfAction {
     //マネージャーを生成
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    if ([typeOfAction isEqual:@"bookRegist"]){
+    if ([typeOfAction isEqual:@"addBook"]){
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     //レスポンスのコンテンツタイプをjsonに設定
@@ -26,7 +26,7 @@
         }
 
     }     failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didFailure:)]) {
+        if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didFailure)]) {
             [self.afNetworkingAPIControllerDelegate didFailure];
         }
     }];

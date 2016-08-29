@@ -98,6 +98,11 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="書籍追加" id="9Uf-Df-oJu">
+                        <barButtonItem key="leftBarButtonItem" title="戻る" id="Ssb-Ng-NtE">
+                            <connections>
+                                <action selector="backButton:" destination="K6Y-4x-bMu" id="u7Q-uP-gV4"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="szg-pu-W3V">
                             <connections>
                                 <action selector="saveDataButton:" destination="K6Y-4x-bMu" id="dW2-YS-EeD"/>
@@ -120,7 +125,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2862.5" y="370.5"/>
+            <point key="canvasLocation" x="3674.5" y="370.5"/>
         </scene>
         <!--書籍一覧-->
         <scene sceneID="4ge-6l-h6L">
@@ -135,7 +140,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bCo-gr-dxS" id="r7d-G8-W7u">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -145,7 +150,7 @@
                         <barButtonItem key="backBarButtonItem" title="閉じる" id="Vri-VN-yYp"/>
                         <barButtonItem key="rightBarButtonItem" title="追加" style="plain" id="P2I-QE-ibe">
                             <connections>
-                                <segue destination="K6Y-4x-bMu" kind="show" id="S1P-Q4-aCT"/>
+                                <segue destination="kNz-KL-KZZ" kind="modal" id="Uyi-UG-gwt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -679,6 +684,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3a-qS-B8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2862.5" y="1981.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7hD-K1-DsZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kNz-KL-KZZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="sxB-n1-zwl"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GY7-jq-CQ7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="K6Y-4x-bMu" kind="relationship" relationship="rootViewController" id="x4P-tz-Wbm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kI1-4r-OpV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2871.5" y="347.5"/>
         </scene>
     </scenes>
 </document>

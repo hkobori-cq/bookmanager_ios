@@ -57,13 +57,11 @@
         NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
         [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length-3, 3)];
-        NSLog(@"%@", changeDateStr);
 
         NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
         [fmt setDateFormat:@"dd MMM yyyy HH:mm:ss"];
         [fmt setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         NSDate *changeDate = [fmt dateFromString:changeDateStr];
-        NSLog(@"%@", changeDate);
 
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSUInteger flags;

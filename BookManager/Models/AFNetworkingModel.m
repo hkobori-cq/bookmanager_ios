@@ -21,6 +21,8 @@
     self.apiModel.afNetworkingAPIControllerDelegate = self;
     if ([self.action isEqual:@"getBook"]) {
         [self.apiModel apiConnection:@"http://app.com/book/get":param:self.action];
+    } else if ([self.action isEqual:@"addBook"]){
+        [self.apiModel apiConnection:@"http://app.com/book/regist" :param :self.action];
     }
 }
 
@@ -31,13 +33,21 @@
         if ([self.tableDelegate respondsToSelector:@selector(didGetBookData)]) {
             [self.tableDelegate didGetBookData];
         }
+    }else if ([self.action isEqual:@"addBook"]){
+        if ([self.addDelegate respondsToSelector:@selector(didAddOrUpdateBookData:)]){
+            [self.addDelegate didAddOrUpdateBookData:@"書籍登録完了"];
+        }
     }
 }
 
 - (void)didFailure {
-    if ([self.action isEqual:@"bookGet"]){
+    if ([self.action isEqual:@"getBook"]){
         if ([self.tableDelegate respondsToSelector:@selector(failedGetData)]){
             [self.tableDelegate failedGetData];
+        }
+    }else if([self.action isEqual:@"addBook"]){
+        if ([self.addDelegate respondsToSelector:@selector(failedUploadData)]){
+            [self.addDelegate failedUploadData];
         }
     }
 }

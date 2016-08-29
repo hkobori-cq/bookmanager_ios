@@ -7,8 +7,8 @@
 - (void)failedGetData;
 @end
 @protocol AFNetworkingAddDelegate <NSObject>
-- (void)didRegisterOrUpdateBookData:(NSString *)message;
-- (void)fialedGetData;
+- (void)didAddOrUpdateBookData:(NSString *)message;
+- (void)failedUploadData;
 @end
 
 
