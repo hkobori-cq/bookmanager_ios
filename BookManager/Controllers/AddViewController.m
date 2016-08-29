@@ -1,7 +1,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <AFNetworkingAddDelegate,UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface AddViewController () <AFNetworkingAddDelegate,UITextFieldDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;
@@ -11,7 +11,7 @@
 @property (nonatomic) NSInteger month;
 @property (nonatomic) NSInteger day;
 
-@property (weak, nonatomic) AFNetworkingModel *afNetworkingModel;
+@property (strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 @end
 
 @implementation AddViewController
@@ -40,6 +40,8 @@
     NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
     self.dateBox.inputAccessoryView = pickerToolBar;
+    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
+    self.afNetworkingModel.addDelegate = self;
 }
 
 
@@ -82,7 +84,6 @@
  * データをデータベースに保存するボタンアクション
  */
 - (IBAction)saveDataButton:(id)sender {
-    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     //AFNetworkingModelを生成
     NSDictionary *param;
     param = @{
@@ -92,11 +93,10 @@
             @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", self.year, self.month, self.day]
     };
     [self.afNetworkingModel startAPIConnection:param];
-    self.afNetworkingModel.addDelegate = self;
+
 }
 
 - (void)didAddOrUpdateBookData:(NSString *)message {
-    NSLog(@"ok");
 }
 
 - (void)failedUploadData {

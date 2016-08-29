@@ -14,11 +14,13 @@
 - (void)apiConnection:(NSString *)url:(NSDictionary *)param:(NSString *)typeOfAction {
     //マネージャーを生成
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    if ([typeOfAction isEqual:@"getBook"]){
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    }
     if ([typeOfAction isEqual:@"addBook"]){
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     }
-    //レスポンスのコンテンツタイプをjsonに設定
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     //POSTをサーバーに非同期で送り、成功した時と失敗した時でdelegatedで通知
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didAPIConnection:)]) {

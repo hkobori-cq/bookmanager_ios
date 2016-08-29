@@ -150,7 +150,7 @@
                         <barButtonItem key="backBarButtonItem" title="閉じる" id="Vri-VN-yYp"/>
                         <barButtonItem key="rightBarButtonItem" title="追加" style="plain" id="P2I-QE-ibe">
                             <connections>
-                                <segue destination="kNz-KL-KZZ" kind="modal" id="Uyi-UG-gwt"/>
+                                <segue destination="kNz-KL-KZZ" kind="modal" id="iZV-bf-o2m"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
