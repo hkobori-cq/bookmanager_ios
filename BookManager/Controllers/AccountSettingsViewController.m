@@ -1,13 +1,13 @@
 #import "AccountSettingsViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AccountSettingsViewController () <UITextFieldDelegate,AFNetworkingUserRegisterDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *mailBox;
-@property (weak, nonatomic) IBOutlet UITextField *passwordBox;
-@property (weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@interface AccountSettingsViewController () <UITextFieldDelegate, AFNetworkingUserRegisterDelegate>
+@property(weak, nonatomic) IBOutlet UITextField *mailBox;
+@property(weak, nonatomic) IBOutlet UITextField *passwordBox;
+@property(weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
+@property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (strong, nonatomic) AFNetworkingModel *afnetowkingModel;
+@property(strong, nonatomic) AFNetworkingModel *afnetowkingModel;
 @end
 
 @implementation AccountSettingsViewController
@@ -54,9 +54,9 @@
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification {
-    NSDictionary *info  = [notification userInfo];
+    NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height/3);
+    CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height / 3);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
@@ -93,13 +93,13 @@
  * データベースに保存
  */
 - (IBAction)saveButton:(id)sender {
-    if ([self.mailBox.text isEqual:@""]){
+    if ([self.mailBox.text isEqual:@""]) {
         [self makeAlert:@"メールアドレスを入力してください"];
-    }else if ([self.passwordBox.text isEqual:@""]){
+    } else if ([self.passwordBox.text isEqual:@""]) {
         [self makeAlert:@"パスワードを入力してください"];
-    }else if (self.passwordBox.text != self.passwordConfirmBox.text){
+    } else if (self.passwordBox.text != self.passwordConfirmBox.text) {
         [self makeAlert:@"パスワードが一致しません"];
-    }else {
+    } else {
         NSDictionary *param;
         param = @{
                 @"mail_address" : self.mailBox.text,
@@ -111,7 +111,7 @@
 }
 
 - (void)makeAlert:(NSString *)alertMessage {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
 }
 @end

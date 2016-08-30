@@ -2,12 +2,11 @@
 #import "AFNetworkingModel.h"
 
 @interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextField *bookNameBox;
-@property (weak, nonatomic) IBOutlet UITextField *priceBox;
-@property (weak, nonatomic) IBOutlet UITextField *dateBox;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@property(weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
+@property(weak, nonatomic) IBOutlet UITextField *priceBox;
+@property(weak, nonatomic) IBOutlet UITextField *dateBox;
+@property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @property(nonatomic) NSInteger year;
@@ -21,7 +20,7 @@
 @property(nonatomic) NSString *idStr;
 
 @property(assign, nonatomic) BOOL flag;
-@property (nonatomic) NSDate *changeDate;
+@property(nonatomic) NSDate *changeDate;
 
 @property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 
@@ -31,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //日付入力のためのpickerを生成
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
@@ -60,7 +59,7 @@
     }
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
-    if (self.flag){
+    if (self.flag) {
         self.bookNameBox.text = self.name;
         self.priceBox.text = self.price;
         self.dateBox.text = [self changeDateFormatFromString:self.date];
@@ -83,9 +82,9 @@
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification {
-    NSDictionary *info  = [notification userInfo];
+    NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height/2);
+    CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height / 2);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
@@ -125,8 +124,8 @@
  */
 - (id)changeDateFormatFromString:(NSString *)date {
     NSMutableString *string = [[NSMutableString alloc] initWithString:date];
-    [string deleteCharactersInRange:NSMakeRange(0,4)];
-    [string deleteCharactersInRange:NSMakeRange(string.length-3,3)];
+    [string deleteCharactersInRange:NSMakeRange(0, 4)];
+    [string deleteCharactersInRange:NSMakeRange(string.length - 3, 3)];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -140,7 +139,7 @@
     NSInteger month = components.month;
     NSInteger day = components.day;
 
-    return  [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
 }
 
 /*

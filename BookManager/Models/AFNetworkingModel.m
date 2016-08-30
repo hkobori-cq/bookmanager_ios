@@ -28,7 +28,7 @@
         [self.apiModel apiConnection:@"http://app.com/book/regist" :param :self.action];
     } else if ([self.action isEqual:@"editBook"]) {
         [self.apiModel apiConnection:@"http://app.com/book/update" :param :self.action];
-    } else if ([self.action isEqual:@"userRegister"]){
+    } else if ([self.action isEqual:@"userRegister"]) {
         [self.apiModel apiConnection:@"http://app.com/account/register" :param :self.action];
     }
 }
@@ -48,8 +48,8 @@
         if ([self.addDelegate respondsToSelector:@selector(didAddOrUpdateBookData:)]) {
             [self.addDelegate didAddOrUpdateBookData:@"書籍編集完了"];
         }
-    } else if ([self.action isEqual:@"userRegister"]){
-        if ([self.userRegisterDelegate respondsToSelector:@selector(didUserRegister)]){
+    } else if ([self.action isEqual:@"userRegister"]) {
+        if ([self.userRegisterDelegate respondsToSelector:@selector(didUserRegister)]) {
             [self.userRegisterDelegate didUserRegister];
         }
     }
@@ -68,8 +68,8 @@
         if ([self.addDelegate respondsToSelector:@selector(failedUploadData)]) {
             [self.addDelegate failedUploadData];
         }
-    } else if ([self.action isEqual:@"userRegister"]){
-        if ([self.userRegisterDelegate respondsToSelector:@selector(failedUserRegister)]){
+    } else if ([self.action isEqual:@"userRegister"]) {
+        if ([self.userRegisterDelegate respondsToSelector:@selector(failedUserRegister)]) {
             [self.userRegisterDelegate failedUserRegister];
         }
     }
