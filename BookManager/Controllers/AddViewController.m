@@ -2,10 +2,13 @@
 #import "AFNetworkingModel.h"
 
 @interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate>
-@property(weak, nonatomic) IBOutlet UIImageView *imageView;
-@property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
-@property(weak, nonatomic) IBOutlet UITextField *priceBox;
-@property(weak, nonatomic) IBOutlet UITextField *dateBox;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextField *bookNameBox;
+@property (weak, nonatomic) IBOutlet UITextField *priceBox;
+@property (weak, nonatomic) IBOutlet UITextField *dateBox;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+
 
 @property(nonatomic) NSInteger year;
 @property(nonatomic) NSInteger month;
@@ -62,10 +65,30 @@
     self.dateBox.text = [self changeDateFormatFromString:self.date];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasHidden:)
+                                                 name:UIKeyboardDidHideNotification object:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    NSDictionary *info  = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height/2);
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
+}
+
+- (void)keyboardWasHidden:(NSNotification *)notification {
+    [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
 }
 
 /**
