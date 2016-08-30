@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManagerUITests/BookManagerUITests.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManagerUITests/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Assets.xcassets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Images/sample.jpg" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/AppDelegate.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Views/BookListViewCell.h" isTestSource="false" />
@@ -18,22 +19,19 @@
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Models/DataModel.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Models/APIModel.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Models/APIModel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/LaunchScreen.storyboard" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/Main.storyboard" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Assets.xcassets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/main.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/AppDelegate.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AccountSettingsViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AccountSettingsViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookListController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/SettingsViewController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/BookEditController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/headers/AddViewController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/headers/BookEditController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/headers/BookListController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/SettingsViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/headers/AddViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/headers/BookListController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AccountSettingsViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BookManager/Controllers/AddViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/AppDelegate.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/LaunchScreen.storyboard" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BookManager/Base.lproj/Main.storyboard" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-BookManager/Pods-BookManager-acknowledgements.markdown" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-BookManager/Pods-BookManager.release.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-BookManager/Pods-BookManager-resources.sh" isTestSource="false" />

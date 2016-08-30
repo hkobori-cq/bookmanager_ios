@@ -275,6 +275,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="sfb-Db-Ex6" firstAttribute="top" secondItem="s97-cD-47k" secondAttribute="top" constant="88" id="7ix-iu-5lw"/>
                                     <constraint firstItem="pv3-cw-ipS" firstAttribute="leading" secondItem="s97-cD-47k" secondAttribute="leading" id="9x1-OF-fnE"/>
@@ -293,6 +294,9 @@
                                     <constraint firstItem="KGz-tS-zdQ" firstAttribute="top" secondItem="a0Q-Qg-NGf" secondAttribute="bottom" constant="10" id="zTp-9F-Sx1"/>
                                     <constraint firstItem="amz-Um-HcH" firstAttribute="leading" secondItem="s97-cD-47k" secondAttribute="leading" constant="40" id="zZ2-Hg-XRT"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aEi-IB-hEN" appends="YES" id="JZo-5E-EPI"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,9 +326,15 @@
                         <outlet property="mailBox" destination="QlW-sP-A4f" id="GW6-ex-F0r"/>
                         <outlet property="passwordBox" destination="KGz-tS-zdQ" id="RIl-tR-P1Z"/>
                         <outlet property="passwordConfirmBox" destination="r6r-Ew-noB" id="MeV-2J-7Eo"/>
+                        <outlet property="scrollView" destination="s97-cD-47k" id="XZY-c6-AZ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gW-5G-8ZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aEi-IB-hEN">
+                    <connections>
+                        <action selector="onSingleTap:" destination="6wN-ei-FCb" id="Hg9-Uc-egT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3449.5" y="1981.5"/>
         </scene>
