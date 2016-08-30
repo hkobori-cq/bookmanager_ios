@@ -65,10 +65,11 @@
 }
 
 - (void)didUserRegister {
-    NSLog(@"成功している");
+    [self makeAlert:@"成功しました"];
 }
 
 - (void)failedUserRegister {
+    [self makeAlert:@"失敗しました"];
 }
 
 
@@ -98,6 +99,11 @@
             @"password" : self.passwordBox
     };
     [self.afnetowkingModel startAPIConnection:param];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)makeAlert:(NSString *)alertMessage {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    [alertView show];
+}
 @end

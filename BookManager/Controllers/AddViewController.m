@@ -279,6 +279,9 @@
     self.date = date;
 }
 
+/**
+ * 書籍追加のときのメソッド
+ */
 - (void)addBookData {
     self.flag = NO;
 }
