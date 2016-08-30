@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //日付入力のためのpickerを生成
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
@@ -60,9 +60,11 @@
     }
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
-    self.bookNameBox.text = self.name;
-    self.priceBox.text = self.price;
-    self.dateBox.text = [self changeDateFormatFromString:self.date];
+    if (self.flag){
+        self.bookNameBox.text = self.name;
+        self.priceBox.text = self.price;
+        self.dateBox.text = [self changeDateFormatFromString:self.date];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

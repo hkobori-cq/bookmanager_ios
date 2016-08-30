@@ -1,10 +1,14 @@
 #import "AccountSettingsViewController.h"
 
 @interface AccountSettingsViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *mailBox;
+@property (weak, nonatomic) IBOutlet UITextField *passwordBox;
+@property (weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
 
 @end
 
 @implementation AccountSettingsViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
