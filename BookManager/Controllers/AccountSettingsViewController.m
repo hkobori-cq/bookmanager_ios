@@ -93,13 +93,21 @@
  * データベースに保存
  */
 - (IBAction)saveButton:(id)sender {
-    NSDictionary *param;
-    param = @{
-            @"mail_address" : self.mailBox,
-            @"password" : self.passwordBox
-    };
-    [self.afnetowkingModel startAPIConnection:param];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.mailBox.text isEqual:@""]){
+        [self makeAlert:@"メールアドレスを入力してください"];
+    }else if ([self.passwordBox.text isEqual:@""]){
+        [self makeAlert:@"パスワードを入力してください"];
+    }else if (self.passwordBox.text != self.passwordConfirmBox.text){
+        [self makeAlert:@"パスワードが一致しません"];
+    }else {
+        NSDictionary *param;
+        param = @{
+                @"mail_address" : self.mailBox,
+                @"password" : self.passwordBox
+        };
+        [self.afnetowkingModel startAPIConnection:param];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)makeAlert:(NSString *)alertMessage {
