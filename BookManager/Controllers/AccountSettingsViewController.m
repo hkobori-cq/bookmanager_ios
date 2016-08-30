@@ -102,8 +102,8 @@
     }else {
         NSDictionary *param;
         param = @{
-                @"mail_address" : self.mailBox,
-                @"password" : self.passwordBox
+                @"mail_address" : self.mailBox.text,
+                @"password" : self.passwordBox.text
         };
         [self.afnetowkingModel startAPIConnection:param];
         [self dismissViewControllerAnimated:YES completion:nil];
