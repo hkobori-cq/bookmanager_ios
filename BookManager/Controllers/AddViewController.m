@@ -155,27 +155,33 @@
  * データをデータベースに保存するボタンアクション
  */
 - (IBAction)saveDataButton:(id)sender {
-    //AFNetworkingModelを生成
-    NSDictionary *param;
-    if (self.flag) {
-        param = @{
-                @"id" : self.idStr,
-                @"image_url" : @"hoge",
-                @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
-                @"price" : self.priceBox.text,
-                @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
-        };
+    if ([self.bookNameBox.text isEqual:@""]){
+        [self makeAlert:@"本の名前を入力してください"];
+    } else if ([self.priceBox.text isEqual:@""]){
+        [self makeAlert:@"本の価格を入力してください"];
+    }else if ([self.dateBox.text isEqual:@""]){
+        [self makeAlert:@"購入日を入力してください"];
     } else {
-        param = @{
-                @"image_url" : @"hoge",
-                @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
-                @"price" : self.priceBox.text,
-                @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
-        };
+        NSDictionary *param;
+        if (self.flag) {
+            param = @{
+                    @"id" : self.idStr,
+                    @"image_url" : @"hoge",
+                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
+                    @"price" : self.priceBox.text,
+                    @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+            };
+        } else {
+            param = @{
+                    @"image_url" : @"hoge",
+                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
+                    @"price" : self.priceBox.text,
+                    @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+            };
+        }
+
+        [self.afNetworkingModel startAPIConnection:param];
     }
-
-    [self.afNetworkingModel startAPIConnection:param];
-
 }
 
 /**
@@ -183,11 +189,15 @@
  * @param NSString message (Addの時は追加完了しました Editの時は編集完了しました)
  */
 - (void)didAddOrUpdateBookData:(NSString *)message {
-    NSLog(@"%@", message);
+    [self makeAlert:message];
 }
 
 - (void)failedUploadData {
-
+    if (self.flag){
+        [self makeAlert:@"書籍編集に失敗しました"];
+    }else {
+        [self makeAlert:@"書籍追加に失敗しました"];
+    }
 }
 
 /**
@@ -283,6 +293,15 @@
  */
 - (void)addBookData {
     self.flag = NO;
+}
+
+/**
+ * 警告表示のメソッド
+ * @param NSString alertMessage
+ */
+- (void)makeAlert:(NSString *)alertMessage {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    [alertView show];
 }
 
 @end

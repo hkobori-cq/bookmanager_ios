@@ -61,6 +61,9 @@
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
     cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
+    UIImage *imageData = [UIImage imageNamed:@"sample.jpg"];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.image = imageData;
     if (dateContents[(NSUInteger) indexPath.row]) {
         NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
