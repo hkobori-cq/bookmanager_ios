@@ -4,7 +4,7 @@
 #import "AddViewController.h"
 
 
-@interface BookListController () <AFNetworkingTableViewDelegate>{
+@interface BookListController () <AFNetworkingTableViewDelegate> {
     NSMutableArray *nameContents;
     NSMutableArray *imageContents;
     NSMutableArray *priceContents;
@@ -14,12 +14,12 @@
     NSString *image;
     NSString *price;
     NSString *date;
-    NSInteger *id;
+    NSInteger *idNum;
 }
 
-@property (nonatomic) NSInteger count;
+@property(nonatomic) NSInteger count;
 
-@property (nonatomic, strong) AFNetworkingModel *afNetworkingModel;
+@property(nonatomic, strong) AFNetworkingModel *afNetworkingModel;
 
 @end
 
@@ -59,14 +59,14 @@
     static NSString *CellIdentifier = @"Cell";
     //カスタムセルを生成
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@",nameContents[indexPath.row]];
-    cell.BookFeeLabel.text = priceContents[indexPath.row];
-    if (dateContents[indexPath.row]) {
-        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[indexPath.row]];
+    cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger)indexPath.row]];
+    cell.BookFeeLabel.text = priceContents[(NSUInteger)indexPath.row];
+    if (dateContents[(NSUInteger)indexPath.row]) {
+        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger)indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
-        [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length-3, 3)];
+        [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length - 3, 3)];
 
-        NSDateFormatter *fmt = [[NSDateFormatter alloc]init];
+        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
         [fmt setDateFormat:@"dd MMM yyyy HH:mm:ss"];
         [fmt setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         NSDate *changeDate = [fmt dateFromString:changeDateStr];
@@ -79,11 +79,11 @@
         flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
         comps = [calendar components:flags fromDate:changeDate];
 
-        NSInteger year  = comps.year;
+        NSInteger year = comps.year;
         NSInteger month = comps.month;
-        NSInteger day   = comps.day;
+        NSInteger day = comps.day;
 
-        cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)year, (long)month, (long)day];
+        cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
     }
     return cell;
 }
@@ -104,6 +104,7 @@
     self.count = nameContents.count;
     [self.tableView reloadData];
 }
+
 /**
  * AFNetworkingModelが失敗した時のメソッド
  */
@@ -114,8 +115,8 @@
  * 配列がnilになったときはnilにNoDataを入れて返す
  */
 - (id)CheckNil:(NSMutableArray *)array {
-    for (int i=0;i < array.count;i++){
-        if ([array[i] isEqual:[NSNull null]]){
+    for (NSUInteger i = 0; i < array.count; i++) {
+        if ([array[i] isEqual:[NSNull null]]) {
             array[i] = @"NoData";
         }
     }
@@ -157,17 +158,25 @@
 }
 
 
+
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    name = nameContents[indexPath.row];
-    image = imageContents[indexPath.row];
-    price = priceContents[indexPath.row];
-    date = dateContents[indexPath.row];
+    idNum = [idNumArray[indexPath.row] integerValue];
+    name = nameContents[(NSUInteger)indexPath.row];
+    image = imageContents[(NSUInteger)indexPath.row];
+    price = priceContents[(NSUInteger)indexPath.row];
+    date = dateContents[(NSUInteger)indexPath.row];
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
-    [addViewController editBookData:name :image :price :date];
+    [addViewController editBookData:name :image :price :date :idNum];
     [self.navigationController pushViewController:addViewController animated:YES];
+}
+- (IBAction)moveAddViewControllerButton:(id)sender {
+    AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
+    [addViewController addBookData];
+    UINavigationController *addNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddNavigationController"];
+    [self presentViewController:addNavigationController animated:YES completion:nil];
 }
 
 

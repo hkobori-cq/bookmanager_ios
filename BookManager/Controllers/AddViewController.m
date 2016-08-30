@@ -1,25 +1,28 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <AFNetworkingAddDelegate,UITextFieldDelegate>
+@interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;
 @property(weak, nonatomic) IBOutlet UITextField *dateBox;
 
-@property (nonatomic) NSInteger year;
-@property (nonatomic) NSInteger month;
-@property (nonatomic) NSInteger day;
+@property(nonatomic) NSInteger year;
+@property(nonatomic) NSInteger month;
+@property(nonatomic) NSInteger day;
 
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *image;
-@property (nonatomic) NSString *price;
-@property (nonatomic) NSString *date;
-@property (nonatomic) NSString *idStr;
+@property(nonatomic) NSString *name;
+@property(nonatomic) NSString *image;
+@property(nonatomic) NSString *price;
+@property(nonatomic) NSString *date;
+@property(nonatomic) NSString *idStr;
 
-@property (strong, nonatomic) AFNetworkingModel *afNetworkingModel;
+@property (assign, nonatomic) BOOL flag;
+
+@property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 
 @end
+
 @implementation AddViewController
 
 - (void)viewDidLoad {
@@ -46,8 +49,13 @@
     NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
     self.dateBox.inputAccessoryView = pickerToolBar;
-    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
+    if (self.flag){
+        self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"editBook"];
+    }else{
+        self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
+    }
     self.afNetworkingModel.addDelegate = self;
+    //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
     self.bookNameBox.text = self.name;
     self.priceBox.text = self.price;
     self.dateBox.text = self.date;
@@ -62,19 +70,19 @@
 /**
  * pickerで選んだ際、フォーマットを変更してtextFieldに入れるメソッド
  */
-- (void)datePickerAction: (id)sender {
-    UIDatePicker *picker = (UIDatePicker *)sender;
+- (void)datePickerAction:(id)sender {
+    UIDatePicker *picker = (UIDatePicker *) sender;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components: NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:picker.date];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:picker.date];
 
     self.year = components.year;
     self.month = components.month;
     self.day = components.day;
 
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日",(long)self.year,(long)self.month,(long)self.month];
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long) self.year, (long) self.month, (long) self.month];
 
 }
 
@@ -95,22 +103,35 @@
 - (IBAction)saveDataButton:(id)sender {
     //AFNetworkingModelを生成
     NSDictionary *param;
-    param = @{
-            @"image_url" : @"hoge",
-            @"name" : [NSString stringWithFormat:@"%@",self.bookNameBox.text],
-            @"price" : self.priceBox.text,
-            @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", self.year, self.month, self.day]
-    };
+    if (self.flag){
+        param = @{
+                @"id" : self.idStr,
+                @"image_url" : @"hoge",
+                @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
+                @"price" : self.priceBox.text,
+                @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+        };
+    }else {
+        param = @{
+                @"image_url" : @"hoge",
+                @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
+                @"price" : self.priceBox.text,
+                @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+        };
+    }
+
     [self.afNetworkingModel startAPIConnection:param];
 
 }
 
 - (void)didAddOrUpdateBookData:(NSString *)message {
+    NSLog(@"%@",message);
 }
 
 - (void)failedUploadData {
 
 }
+
 /**
  * keyboard及びpickerが出ている時別の場所をタップした時の動作
  */
@@ -118,7 +139,6 @@
     //keyboardやpickerを隠す
     [self.view endEditing:YES];
 }
-
 
 
 /**
@@ -180,14 +200,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)addBookData {
-}
 
-- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date {
+- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum{
+    self.idStr = [NSString stringWithFormat:@"%ld",(long)idNum];
     self.name = name;
     self.image = image;
     self.price = price;
     self.date = date;
+    self.flag = YES;
+}
+
+- (void)addBookData {
+    self.flag = NO;
 }
 
 @end

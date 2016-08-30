@@ -11,23 +11,25 @@
 
 @implementation APIModel
 
-- (void)apiConnection:(NSString *)url:(NSDictionary *)param:(NSString *)typeOfAction {
+- (void)apiConnection:(NSString *)url :(NSDictionary *)param :(NSString *)typeOfAction {
     //マネージャーを生成
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    if ([typeOfAction isEqual:@"getBook"]){
+    if ([typeOfAction isEqual:@"getBook"]) {
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     }
-    if ([typeOfAction isEqual:@"addBook"]){
+    if ([typeOfAction isEqual:@"addBook"] || [typeOfAction isEqual:@"editBook"]) {
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     }
     //POSTをサーバーに非同期で送り、成功した時と失敗した時でdelegatedで通知
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"success");
         if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didAPIConnection:)]) {
             [self.afNetworkingAPIControllerDelegate didAPIConnection:responseObject];
         }
 
     }     failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
         if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didFailure)]) {
             [self.afNetworkingAPIControllerDelegate didFailure];
         }
