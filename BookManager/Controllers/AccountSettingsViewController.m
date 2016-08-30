@@ -1,11 +1,13 @@
 #import "AccountSettingsViewController.h"
+#import "AFNetworkingModel.h"
 
-@interface AccountSettingsViewController () <UITextFieldDelegate>
+@interface AccountSettingsViewController () <UITextFieldDelegate,AFNetworkingUserRegisterDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *mailBox;
 @property (weak, nonatomic) IBOutlet UITextField *passwordBox;
 @property (weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (strong, nonatomic) AFNetworkingModel *afnetowkingModel;
 @end
 
 @implementation AccountSettingsViewController
@@ -19,6 +21,8 @@
     self.mailBox.delegate = self;
     self.passwordBox.delegate = self;
     self.passwordConfirmBox.delegate = self;
+    self.afnetowkingModel = [[AFNetworkingModel alloc] actionName:@"userRegister"];
+    self.afnetowkingModel.userRegisterDelegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -60,6 +64,13 @@
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
 }
 
+- (void)didUserRegister {
+    NSLog(@"成功している");
+}
+
+- (void)failedUserRegister {
+}
+
 
 /*
 #pragma mark - Navigation
@@ -81,6 +92,12 @@
  * データベースに保存
  */
 - (IBAction)saveButton:(id)sender {
+    NSDictionary *param;
+    param = @{
+            @"mail_address" : self.mailBox,
+            @"password" : self.passwordBox
+    };
+    [self.afnetowkingModel startAPIConnection:param];
 }
 
 @end
