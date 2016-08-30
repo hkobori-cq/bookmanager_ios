@@ -29,7 +29,7 @@
         }
 
     }     failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@",error);
+        NSLog(@"%@", error);
         if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didFailure)]) {
             [self.afNetworkingAPIControllerDelegate didFailure];
         }

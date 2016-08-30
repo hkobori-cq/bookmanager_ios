@@ -59,10 +59,10 @@
     static NSString *CellIdentifier = @"Cell";
     //カスタムセルを生成
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger)indexPath.row]];
-    cell.BookFeeLabel.text = priceContents[(NSUInteger)indexPath.row];
-    if (dateContents[(NSUInteger)indexPath.row]) {
-        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger)indexPath.row]];
+    cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
+    cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
+    if (dateContents[(NSUInteger) indexPath.row]) {
+        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
         [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length - 3, 3)];
 
@@ -158,20 +158,20 @@
 }
 
 
-
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     idNum = [idNumArray[indexPath.row] integerValue];
-    name = nameContents[(NSUInteger)indexPath.row];
-    image = imageContents[(NSUInteger)indexPath.row];
-    price = priceContents[(NSUInteger)indexPath.row];
-    date = dateContents[(NSUInteger)indexPath.row];
+    name = nameContents[(NSUInteger) indexPath.row];
+    image = imageContents[(NSUInteger) indexPath.row];
+    price = priceContents[(NSUInteger) indexPath.row];
+    date = dateContents[(NSUInteger) indexPath.row];
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
     [addViewController editBookData:name :image :price :date :idNum];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
+
 - (IBAction)moveAddViewControllerButton:(id)sender {
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
     [addViewController addBookData];

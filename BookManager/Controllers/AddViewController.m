@@ -17,7 +17,8 @@
 @property(nonatomic) NSString *date;
 @property(nonatomic) NSString *idStr;
 
-@property (assign, nonatomic) BOOL flag;
+@property(assign, nonatomic) BOOL flag;
+@property (nonatomic) NSDate *changeDate;
 
 @property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 
@@ -49,16 +50,16 @@
     NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
     self.dateBox.inputAccessoryView = pickerToolBar;
-    if (self.flag){
+    if (self.flag) {
         self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"editBook"];
-    }else{
+    } else {
         self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     }
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
     self.bookNameBox.text = self.name;
     self.priceBox.text = self.price;
-    self.dateBox.text = self.date;
+    self.dateBox.text = [self changeDateFormatFromString:self.date];
 }
 
 
@@ -72,21 +73,50 @@
  */
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
+    self.changeDate = picker.date;
+    [self changeDateFormat:self.changeDate];
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long) self.year, (long) self.month, (long) self.date];
+}
+
+/**
+ * pickerの日付の型を変更するメソッド
+ * @param NSDate date
+ */
+- (void)changeDateFormat:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterLongStyle];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:picker.date];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
 
     self.year = components.year;
     self.month = components.month;
     self.day = components.day;
-
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long) self.year, (long) self.month, (long) self.month];
-
 }
 
+/**
+ * tableViewから持ってきた(String型)データを変換するメソッド
+ * @param NSString date
+ */
+- (id)changeDateFormatFromString:(NSString *)date {
+    NSMutableString *string = [[NSMutableString alloc] initWithString:date];
+    [string deleteCharactersInRange:NSMakeRange(0,4)];
+    [string deleteCharactersInRange:NSMakeRange(string.length-3,3)];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDate *changeDate = [formatter dateFromString:string];
 
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *components = [calendar components:flags fromDate:changeDate];
+
+    NSInteger year = components.year;
+    NSInteger month = components.month;
+    NSInteger day = components.day;
+
+    return  [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
+}
 
 /*
 #pragma mark - Navigation
@@ -103,7 +133,7 @@
 - (IBAction)saveDataButton:(id)sender {
     //AFNetworkingModelを生成
     NSDictionary *param;
-    if (self.flag){
+    if (self.flag) {
         param = @{
                 @"id" : self.idStr,
                 @"image_url" : @"hoge",
@@ -111,7 +141,7 @@
                 @"price" : self.priceBox.text,
                 @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
         };
-    }else {
+    } else {
         param = @{
                 @"image_url" : @"hoge",
                 @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
@@ -124,8 +154,12 @@
 
 }
 
+/**
+ * API通信に成功した時のメソッド
+ * @param NSString message (Addの時は追加完了しました Editの時は編集完了しました)
+ */
 - (void)didAddOrUpdateBookData:(NSString *)message {
-    NSLog(@"%@",message);
+    NSLog(@"%@", message);
 }
 
 - (void)failedUploadData {
@@ -195,19 +229,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ * 戻るボタンを押した時のメソッド
+ */
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum{
-    self.idStr = [NSString stringWithFormat:@"%ld",(long)idNum];
+/**
+ * tableViewからデータを受け取るためのデリケードメソッド
+ * @param NSString name
+ * @param NSString image
+ * @param NSString price
+ * @param NSString date
+ * @param NSInteger idNum
+ */
+- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum {
+    self.idStr = [NSString stringWithFormat:@"%ld", (long) idNum];
     self.name = name;
     self.image = image;
     self.price = price;
-    self.date = date;
     self.flag = YES;
+    self.date = date;
 }
 
 - (void)addBookData {

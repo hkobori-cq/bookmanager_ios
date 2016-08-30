@@ -15,7 +15,6 @@
 @end
 
 
-
 @interface AFNetworkingModel : NSObject
 @property(strong, nonatomic) NSMutableDictionary *bookDataDictionary;
 @property(strong, nonatomic) NSString *action;
