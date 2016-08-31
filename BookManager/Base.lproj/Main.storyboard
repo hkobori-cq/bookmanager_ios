@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fzf-OG-eV2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hJ8-DJ-fKp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -150,7 +150,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3593.5" y="1128.5"/>
+            <point key="canvasLocation" x="3497.5" y="1144.5"/>
         </scene>
         <!--書籍一覧-->
         <scene sceneID="4ge-6l-h6L">
@@ -183,7 +183,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rw-iB-n5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108.5" y="1128.5"/>
+            <point key="canvasLocation" x="2806.5" y="1135.5"/>
         </scene>
         <!--設定-->
         <scene sceneID="Fkv-pN-PV8">
@@ -337,7 +337,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3449.5" y="1981.5"/>
+            <point key="canvasLocation" x="2273.5" y="2965.5"/>
         </scene>
         <!--書籍一覧-->
         <scene sceneID="fYr-MZ-DN7">
@@ -362,7 +362,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDz-4a-3bl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2465.5" y="1128.5"/>
+            <point key="canvasLocation" x="2240.5" y="1135.5"/>
         </scene>
         <!--ログイン-->
         <scene sceneID="lbj-Tk-HUt">
@@ -419,6 +419,7 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="P3v-c7-3yJ" firstAttribute="centerY" secondItem="xxM-fS-5T8" secondAttribute="centerY" id="2lW-QU-Bfe"/>
                                             <constraint firstItem="P3v-c7-3yJ" firstAttribute="centerX" secondItem="xxM-fS-5T8" secondAttribute="centerX" id="7dr-fs-yPj"/>
@@ -431,6 +432,9 @@
                                             <constraint firstItem="WBJ-2y-oUb" firstAttribute="top" secondItem="gVw-Bb-4BX" secondAttribute="bottom" constant="10" id="w0X-H6-5uO"/>
                                             <constraint firstItem="gVw-Bb-4BX" firstAttribute="top" secondItem="FxH-iS-h7z" secondAttribute="bottom" constant="10" id="zk7-Md-aJX"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="UUM-LO-zla" appends="YES" id="81r-ir-bya"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -465,8 +469,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gB-jB-EC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UUM-LO-zla">
+                    <connections>
+                        <action selector="onSingleTap:" destination="o4q-hh-kmn" id="Qsc-Fy-O0G"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1046.5" y="1138.5"/>
+            <point key="canvasLocation" x="462.5" y="1641.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ap7-u5-xUH">
@@ -485,7 +494,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YMF-Vj-cUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1765.5" y="1127.5"/>
+            <point key="canvasLocation" x="1645.5" y="1135.5"/>
         </scene>
         <!--設定-->
         <scene sceneID="dk2-HG-EsO">
@@ -509,7 +518,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wvM-o2-kms">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iK3-8M-O5i" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AccountSettingsController" automaticallyAdjustsScrollViewInsets="NO" id="iK3-8M-O5i" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VQp-5y-ORM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -522,7 +531,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3a-qS-B8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862.5" y="1981.5"/>
+            <point key="canvasLocation" x="1678.5" y="2973.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HnQ-tE-UWi">
@@ -541,7 +550,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNy-xs-rN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2557.5" y="337.5"/>
+            <point key="canvasLocation" x="3497.5" y="241.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D2z-nX-bCk">
@@ -560,7 +569,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPt-Eg-Jyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234" y="1138"/>
+            <point key="canvasLocation" x="-262.5" y="1641.5"/>
         </scene>
     </scenes>
 </document>

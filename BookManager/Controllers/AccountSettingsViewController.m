@@ -7,7 +7,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property(strong, nonatomic) AFNetworkingModel *afnetowkingModel;
+@property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 @end
 
 @implementation AccountSettingsViewController
@@ -21,8 +21,8 @@
     self.mailBox.delegate = self;
     self.passwordBox.delegate = self;
     self.passwordConfirmBox.delegate = self;
-    self.afnetowkingModel = [[AFNetworkingModel alloc] actionName:@"userRegister"];
-    self.afnetowkingModel.userRegisterDelegate = self;
+    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"userRegister"];
+    self.afNetworkingModel.userRegisterDelegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -105,7 +105,7 @@
                 @"mail_address" : self.mailBox.text,
                 @"password" : self.passwordBox.text
         };
-        [self.afnetowkingModel startAPIConnection:param];
+        [self.afNetworkingModel startAPIConnection:param];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

@@ -20,6 +20,12 @@
 - (void)failedUserRegister;
 @end
 
+@protocol AFNetworkingUserLoginDelegate <NSObject>
+- (void)didUserLogin;
+
+- (void)failedUserLogin;
+@end
+
 
 @interface AFNetworkingModel : NSObject
 @property(strong, nonatomic) NSMutableDictionary *bookDataDictionary;
@@ -27,6 +33,7 @@
 @property(weak, nonatomic) id <AFNetworkingTableViewDelegate> tableDelegate;
 @property(weak, nonatomic) id <AFNetworkingAddDelegate> addDelegate;
 @property(weak, nonatomic) id <AFNetworkingUserRegisterDelegate> userRegisterDelegate;
+@property(weak, nonatomic) id <AFNetworkingUserLoginDelegate> userLoginDelegate;
 
 - (void)startAPIConnection:(NSDictionary *)param;
 

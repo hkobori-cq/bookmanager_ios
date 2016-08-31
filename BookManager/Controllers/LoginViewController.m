@@ -7,11 +7,13 @@
 //
 
 #import "LoginViewController.h"
+#import "AFNetworkingModel.h"
 
-@interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *mailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@interface LoginViewController () <UITextFieldDelegate, AFNetworkingUserLoginDelegate>
+@property(weak, nonatomic) IBOutlet UITextField *mailTextField;
+@property(weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
+@property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 @end
 
 @implementation LoginViewController
@@ -19,15 +21,58 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"userLogin"];
+    self.afNetworkingModel.userLoginDelegate = self;
+    self.mailTextField.delegate = self;
+    self.passwordTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)loginButton:(id)sender {
+    if ([self.mailTextField.text isEqual:@""]) {
+        [self makeAlert:@"メールアドレスを入力してください"];
+    } else if ([self.passwordTextField.text isEqual:@""]) {
+        [self makeAlert:@"パスワードを入力してください"];
+    } else {
+        NSDictionary *param;
+        param = @{
+                @"mail_address" : self.mailTextField.text,
+                @"password" : self.passwordTextField.text
+        };
+        [self.afNetworkingModel startAPIConnection:param];
+    }
 }
+
 - (IBAction)addUserButton:(id)sender {
+    UINavigationController *accountSettingsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"AccountSettingsController"];
+    [self presentViewController:accountSettingsController animated:YES completion:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.mailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    return YES;
+}
+
+- (void)didUserLogin {
+    [self makeAlert:@"ログインに成功しました"];
+}
+
+- (void)failedUserLogin {
+    [self makeAlert:@"ログインに失敗しました"];
+}
+
+- (IBAction)onSingleTap:(UITapGestureRecognizer *)sender {
+    [self.view endEditing:YES];
+}
+
+- (void)makeAlert:(NSString *)alertMessage {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alertView show];
 }
 
 /*

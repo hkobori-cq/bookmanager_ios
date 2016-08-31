@@ -155,11 +155,11 @@
  * データをデータベースに保存するボタンアクション
  */
 - (IBAction)saveDataButton:(id)sender {
-    if ([self.bookNameBox.text isEqual:@""]){
+    if ([self.bookNameBox.text isEqual:@""]) {
         [self makeAlert:@"本の名前を入力してください"];
-    } else if ([self.priceBox.text isEqual:@""]){
+    } else if ([self.priceBox.text isEqual:@""]) {
         [self makeAlert:@"本の価格を入力してください"];
-    }else if ([self.dateBox.text isEqual:@""]){
+    } else if ([self.dateBox.text isEqual:@""]) {
         [self makeAlert:@"購入日を入力してください"];
     } else {
         NSDictionary *param;
@@ -193,9 +193,9 @@
 }
 
 - (void)failedUploadData {
-    if (self.flag){
+    if (self.flag) {
         [self makeAlert:@"書籍編集に失敗しました"];
-    }else {
+    } else {
         [self makeAlert:@"書籍追加に失敗しました"];
     }
 }
@@ -300,7 +300,7 @@
  * @param NSString alertMessage
  */
 - (void)makeAlert:(NSString *)alertMessage {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
 }
 

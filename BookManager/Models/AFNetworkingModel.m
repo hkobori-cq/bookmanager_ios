@@ -30,6 +30,8 @@
         [self.apiModel apiConnection:@"http://app.com/book/update" :param :self.action];
     } else if ([self.action isEqual:@"userRegister"]) {
         [self.apiModel apiConnection:@"http://app.com/account/register" :param :self.action];
+    } else if ([self.action isEqual:@"userLogin"]) {
+        [self.apiModel apiConnection:@"http://app.com/account/login" :param :self.action];
     }
 }
 
@@ -52,6 +54,10 @@
         if ([self.userRegisterDelegate respondsToSelector:@selector(didUserRegister)]) {
             [self.userRegisterDelegate didUserRegister];
         }
+    } else if ([self.action isEqual:@"userLogin"]) {
+        if ([self.userLoginDelegate respondsToSelector:@selector(didUserLogin)]) {
+            [self.userLoginDelegate didUserLogin];
+        }
     }
 }
 
@@ -71,6 +77,10 @@
     } else if ([self.action isEqual:@"userRegister"]) {
         if ([self.userRegisterDelegate respondsToSelector:@selector(failedUserRegister)]) {
             [self.userRegisterDelegate failedUserRegister];
+        }
+    } else if ([self.action isEqual:@"userLogin"]) {
+        if ([self.userLoginDelegate respondsToSelector:@selector(failedUserLogin)]) {
+            [self.userLoginDelegate failedUserLogin];
         }
     }
 }

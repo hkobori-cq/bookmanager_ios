@@ -17,7 +17,7 @@
     if ([typeOfAction isEqual:@"getBook"]) {
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     }
-    if ([typeOfAction isEqual:@"addBook"] || [typeOfAction isEqual:@"editBook"] || [typeOfAction isEqual:@"userRegister"]) {
+    if ([typeOfAction isEqual:@"addBook"] || [typeOfAction isEqual:@"editBook"] || [typeOfAction isEqual:@"userRegister"] || [typeOfAction isEqual:@"userLogin"]) {
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     }
