@@ -7,4 +7,5 @@
 @property(weak, nonatomic) IBOutlet UILabel *DateLabel;
 @property(weak, nonatomic) IBOutlet UIView *nextLabel;
 
++ (CGFloat)rowHeight;
 @end

@@ -62,9 +62,16 @@
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
     cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
-    UIImage *imageData = [UIImage imageNamed:@"sample.jpg"];
-    cell.imageView.image = imageData;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    UIImageView *cellImage = [[UIImageView alloc] init];
+    cellImage.image = [UIImage imageNamed:imageContents[(NSUInteger)indexPath.row]];
+    if (cellImage.image.size.height == 0){
+        UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
+        UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
+        sampleImageView.frame = CGRectMake(0,0,100,100);
+        [cell.BookImageView addSubview:sampleImageView];
+    }else {
+        [cell.BookImageView addSubview:cellImage];
+    }
     if (dateContents[(NSUInteger) indexPath.row]) {
         NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
@@ -93,7 +100,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120.0;
+    return [BookListViewCell rowHeight];
 }
 
 /**

@@ -21,13 +21,13 @@
      * 初めてアプリを起動したときはAccountSettingsViewControllerをひらき、二回目以降はログインViewが開くように設定
      */
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *loginViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginViewController"];
         [self.window setRootViewController:loginViewController];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *accountSettingsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AccountSettingsController"];
         [self.window setRootViewController:accountSettingsController];
     }

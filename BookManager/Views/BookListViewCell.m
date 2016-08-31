@@ -14,4 +14,8 @@
     [super setSelected:selected animated:animated];
 }
 
++ (CGFloat)rowHeight {
+    return 150.0f;
+}
+
 @end
