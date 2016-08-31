@@ -77,6 +77,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ * キーボードが出てきたときのデリケードメソッド
+ */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
@@ -84,6 +87,9 @@
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
+/**
+ * キーボードが隠れたときのデリケードメソッド
+ */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
 }
@@ -138,15 +144,6 @@
     return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 /**
  * データをデータベースに保存するボタンアクション
  */

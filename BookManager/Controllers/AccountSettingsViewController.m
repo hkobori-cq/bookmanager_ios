@@ -46,6 +46,9 @@
     [self.view endEditing:YES];
 }
 
+/**
+ * キーボードのリターンキーを押したときのデリケードメソッド
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.mailBox resignFirstResponder];
     [self.passwordBox resignFirstResponder];
@@ -53,6 +56,9 @@
     return YES;
 }
 
+/**
+ * キーボードが出てきたときのデリケードメソッド
+ */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
@@ -60,30 +66,29 @@
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
+/**
+ * キーボードが隠れたときのデリケードメソッド
+ */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
 }
 
+/**
+ * ユーザー登録が成功したときのデリケードメソッド
+ */
 - (void)didUserRegister {
     [self makeAlert:@"成功しました"];
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
+/**
+ * ユーザー登録が失敗したときのデリケードメソッド
+ */
 - (void)failedUserRegister {
     [self makeAlert:@"失敗しました"];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 /**
  * SettingsViewControllerに戻るボタン
  */
@@ -112,6 +117,10 @@
     }
 }
 
+/**
+ * Alert表示のメソッド
+ * @param NSString alertMessage
+ */
 - (void)makeAlert:(NSString *)alertMessage {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
