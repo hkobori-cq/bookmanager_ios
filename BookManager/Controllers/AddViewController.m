@@ -1,7 +1,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;
@@ -100,11 +100,12 @@
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
     self.changeDate = picker.date;
-    NSLog(@"%@",picker.date);
+    NSLog(@"%@", picker.date);
     [self changeDateFormat:self.changeDate];
-    NSLog(@"%@",self.changeDate);
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)self.year, (long)self.month, (long)self.day];
+    NSLog(@"%@", self.changeDate);
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.year, (long) self.month, (long) self.day];
 }
+
 
 /**
  * pickerの日付の型を変更するメソッド
@@ -143,7 +144,7 @@
     NSInteger month = components.month;
     NSInteger day = components.day;
 
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)year, (long)month, (long)day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
 }
 
 /**
@@ -164,14 +165,14 @@
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long)self.year, (long)self.month, (long)self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.year, (long) self.month, (long) self.day]
             };
         } else {
             param = @{
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long)self.year, (long)self.month, (long)self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.year, (long) self.month, (long) self.day]
             };
         }
 
@@ -185,6 +186,8 @@
  */
 - (void)didAddOrUpdateBookData:(NSString *)message {
     [self makeAlert:message];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)failedUploadData {

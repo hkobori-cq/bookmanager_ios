@@ -29,13 +29,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLV-J0-rJ0">
-                        <rect key="frame" x="187" y="24" width="27" height="12"/>
+                        <rect key="frame" x="237" y="24" width="27" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGu-Yz-z7c">
-                        <rect key="frame" x="187" y="113" width="27" height="12"/>
+                        <rect key="frame" x="237" y="113" width="27" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -58,8 +58,8 @@
                     <constraint firstItem="XLV-J0-rJ0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="VgM-w7-bxq"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fv3-XN-fYE" secondAttribute="bottom" constant="17" id="cMK-if-r40"/>
                     <constraint firstItem="SUg-BY-itG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jJ7-wv-53B"/>
-                    <constraint firstItem="VGu-Yz-z7c" firstAttribute="leading" secondItem="SUg-BY-itG" secondAttribute="trailing" constant="50" id="kLN-C3-Y3q"/>
-                    <constraint firstItem="XLV-J0-rJ0" firstAttribute="leading" secondItem="SUg-BY-itG" secondAttribute="trailing" constant="50" id="ns6-mI-H2F"/>
+                    <constraint firstItem="VGu-Yz-z7c" firstAttribute="leading" secondItem="SUg-BY-itG" secondAttribute="trailing" constant="100" id="kLN-C3-Y3q"/>
+                    <constraint firstItem="XLV-J0-rJ0" firstAttribute="leading" secondItem="SUg-BY-itG" secondAttribute="trailing" constant="100" id="ns6-mI-H2F"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
