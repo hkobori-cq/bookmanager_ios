@@ -103,7 +103,7 @@
     NSLog(@"%@",picker.date);
     [self changeDateFormat:self.changeDate];
     NSLog(@"%@",self.changeDate);
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long)self.year, (long)self.month, (long)self.day];
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)self.year, (long)self.month, (long)self.day];
 }
 
 /**
