@@ -100,8 +100,10 @@
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
     self.changeDate = picker.date;
+    NSLog(@"%@",picker.date);
     [self changeDateFormat:self.changeDate];
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long) self.year, (long) self.month, (long) self.date];
+    NSLog(@"%@",self.changeDate);
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年 %ld月 %ld日", (long)self.year, (long)self.month, (long)self.day];
 }
 
 /**
@@ -141,7 +143,7 @@
     NSInteger month = components.month;
     NSInteger day = components.day;
 
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long)year, (long)month, (long)day];
 }
 
 /**
@@ -162,14 +164,14 @@
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long)self.year, (long)self.month, (long)self.day]
             };
         } else {
             param = @{
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%d-%d-%d", self.year, self.month, self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long)self.year, (long)self.month, (long)self.day]
             };
         }
 
