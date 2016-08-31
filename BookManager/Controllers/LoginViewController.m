@@ -47,11 +47,6 @@
     }
 }
 
-- (IBAction)addUserButton:(id)sender {
-    UINavigationController *accountSettingsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"AccountSettingsController"];
-    [self presentViewController:accountSettingsController animated:YES completion:nil];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.mailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
@@ -60,6 +55,8 @@
 
 - (void)didUserLogin {
     [self makeAlert:@"ログインに成功しました"];
+    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
+    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
 - (void)failedUserLogin {

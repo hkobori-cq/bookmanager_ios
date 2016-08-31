@@ -455,13 +455,7 @@
                             <constraint firstItem="xxM-fS-5T8" firstAttribute="width" secondItem="BMw-AG-vtZ" secondAttribute="width" id="tBc-RS-VVt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ログイン" id="DHR-lK-yLz">
-                        <barButtonItem key="rightBarButtonItem" title="新規登録" id="TSC-rA-Bpo">
-                            <connections>
-                                <action selector="addUserButton:" destination="o4q-hh-kmn" id="jzD-ET-lHQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="ログイン" id="DHR-lK-yLz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mailTextField" destination="FxH-iS-h7z" id="24z-Af-LLL"/>
@@ -480,7 +474,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Ap7-u5-xUH">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="fzf-OG-eV2" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="topPageViewController" automaticallyAdjustsScrollViewInsets="NO" id="fzf-OG-eV2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="BcZ-YO-Ldf">

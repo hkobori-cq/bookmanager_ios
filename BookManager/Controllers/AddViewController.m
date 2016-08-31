@@ -267,8 +267,8 @@
  * 戻るボタンを押した時のメソッド
  */
 - (IBAction)backButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**

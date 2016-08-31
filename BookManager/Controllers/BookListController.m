@@ -26,20 +26,6 @@
 @implementation BookListController
 
 
-- (void)loadView {
-    [super loadView];
-
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL firstLogin = [userDefaults boolForKey:@"isNotFirstLogin"];
-    if (firstLogin){
-        UINavigationController *loginViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginViewController"];
-        [self presentViewController:loginViewController animated:YES completion:nil];
-    }else {
-        UINavigationController *accountSettingsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"AccountSettingsController"];
-        [self presentViewController:accountSettingsController animated:YES completion:nil];
-        [userDefaults setBool:YES forKey:@"isNotFirstLogin"];
-    }
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];

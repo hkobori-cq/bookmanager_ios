@@ -66,6 +66,8 @@
 
 - (void)didUserRegister {
     [self makeAlert:@"成功しました"];
+    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
+    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
 - (void)failedUserRegister {
