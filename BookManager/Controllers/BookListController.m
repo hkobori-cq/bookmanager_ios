@@ -21,6 +21,7 @@
 
 @property(nonatomic, strong) AFNetworkingModel *afNetworkingModel;
 
+@property(nonatomic) NSInteger currentPage;
 @end
 
 @implementation BookListController
@@ -41,6 +42,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    //初めに10コのデータを用意しておく
     NSDictionary *param = @{@"page" : @"0-10"};
     [self.afNetworkingModel startAPIConnection:param];
 }
@@ -63,15 +65,16 @@
     cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
     cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
     UIImageView *cellImage = [[UIImageView alloc] init];
-    cellImage.image = [UIImage imageNamed:imageContents[(NSUInteger)indexPath.row]];
-    if (cellImage.image.size.height == 0){
+    cellImage.image = [UIImage imageNamed:imageContents[(NSUInteger) indexPath.row]];
+    if (cellImage.image.size.height == 0) {
         UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
         UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
-        sampleImageView.frame = CGRectMake(0,0,100,100);
+        sampleImageView.frame = CGRectMake(0, 0, 100, 100);
         [cell.BookImageView addSubview:sampleImageView];
-    }else {
+    } else {
         [cell.BookImageView addSubview:cellImage];
     }
+    //日付の書式を変更する
     if (dateContents[(NSUInteger) indexPath.row]) {
         NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
         [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
@@ -105,6 +108,7 @@
 
 /**
  * AFNetworkingModelが成功したときのメソッド
+ * データを配列に入れる
  */
 - (void)didGetBookData {
     nameContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"name"]];
@@ -171,7 +175,10 @@
 
 #pragma mark - Table view delegate
 
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
+/**
+ * tableViewのセルをクリックしたときのメソッド
+ * データを編集画面に送り、navigation移動する
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     idNum = [idNumArray[indexPath.row] integerValue];
     name = nameContents[(NSUInteger) indexPath.row];
@@ -183,6 +190,9 @@
     [self.navigationController pushViewController:addViewController animated:YES];
 }
 
+/**
+ * 書籍追加のボタンを押したときの動作
+ */
 - (IBAction)moveAddViewControllerButton:(id)sender {
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
     [addViewController addBookData];
@@ -190,6 +200,28 @@
     [self presentViewController:addNavigationController animated:YES completion:nil];
 }
 
+/**
+ * スクロールしたときに呼び出されるメソッド
+ * AFNetworkingで通信を行う
+ */
+- (void)readMoreData {
+    self.currentPage++;
+    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%d", self.currentPage * 5, self.currentPage * 5 + 5];
+    NSLog(@"%@", currentPageNumber);
+    [self.afNetworkingModel startAPIConnection:@{@"page" : currentPageNumber}];
+}
+
+/**
+ * tableViewがスクロールしたときに呼ばれるデリケードメソッド
+ * スクロールするごとにreadMoreDataが呼ばれ、データを非同期に持ってくる
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+        if (self.count + 1 > self.currentPage * 5) {
+            [self performSelector:@selector(readMoreData)];
+        }
+    }
+}
 
 /*
 #pragma mark - Navigation
