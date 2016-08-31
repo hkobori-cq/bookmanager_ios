@@ -1,7 +1,7 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
 
-@interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate>
+@interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
 @property(weak, nonatomic) IBOutlet UITextField *priceBox;

@@ -14,6 +14,9 @@
     return self;
 }
 
+/**
+ * データを保存するためのメソッド
+ */
 - (id)bookDataStore:(NSDictionary *)responseObject {
     NSDictionary *dictionary = [responseObject valueForKey:@"result"];
     for (NSDictionary *data in dictionary) {
