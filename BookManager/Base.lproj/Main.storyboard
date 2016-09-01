@@ -161,7 +161,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bCo-gr-dxS" customClass="BookListViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookListViewCell" id="bCo-gr-dxS" customClass="BookListViewCell">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bCo-gr-dxS" id="r7d-G8-W7u">
@@ -173,7 +173,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="書籍一覧" id="qyh-X9-hLl">
                         <barButtonItem key="backBarButtonItem" title="閉じる" id="Vri-VN-yYp"/>
-                        <barButtonItem key="rightBarButtonItem" title="追加" style="plain" id="P2I-QE-ibe">
+                        <barButtonItem key="rightBarButtonItem" title="追加" id="P2I-QE-ibe">
                             <connections>
                                 <action selector="moveAddViewControllerButton:" destination="4hu-oB-8M9" id="f9Z-0Y-RPo"/>
                             </connections>
@@ -201,7 +201,7 @@
                                 <rect key="frame" x="135" y="189" width="105" height="30"/>
                                 <state key="normal" title="アカウント設定"/>
                                 <connections>
-                                    <segue destination="iK3-8M-O5i" kind="modal" id="XFs-2u-MI9"/>
+                                    <segue destination="iK3-8M-O5i" kind="show" id="J5c-Ce-mEF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -280,7 +280,7 @@
                                 <constraints>
                                     <constraint firstItem="sfb-Db-Ex6" firstAttribute="top" secondItem="s97-cD-47k" secondAttribute="top" constant="88" id="7ix-iu-5lw"/>
                                     <constraint firstItem="pv3-cw-ipS" firstAttribute="leading" secondItem="s97-cD-47k" secondAttribute="leading" id="9x1-OF-fnE"/>
-                                    <constraint firstAttribute="bottom" secondItem="pv3-cw-ipS" secondAttribute="bottom" id="DN3-qR-XJe"/>
+                                    <constraint firstAttribute="bottom" secondItem="pv3-cw-ipS" secondAttribute="bottom" constant="-64" id="DN3-qR-XJe"/>
                                     <constraint firstItem="QlW-sP-A4f" firstAttribute="leading" secondItem="s97-cD-47k" secondAttribute="leading" constant="40" id="Pm3-FU-Oyl"/>
                                     <constraint firstItem="pv3-cw-ipS" firstAttribute="top" secondItem="s97-cD-47k" secondAttribute="top" id="YUK-Uf-dcF"/>
                                     <constraint firstItem="a0Q-Qg-NGf" firstAttribute="top" secondItem="QlW-sP-A4f" secondAttribute="bottom" constant="10" id="bLN-7R-TZi"/>
@@ -307,7 +307,7 @@
                             <constraint firstItem="s97-cD-47k" firstAttribute="leading" secondItem="TYL-MF-rzo" secondAttribute="leading" id="MZV-1w-eMz"/>
                             <constraint firstItem="pv3-cw-ipS" firstAttribute="width" secondItem="TYL-MF-rzo" secondAttribute="width" id="Rfz-1J-b0R"/>
                             <constraint firstItem="pv3-cw-ipS" firstAttribute="height" secondItem="TYL-MF-rzo" secondAttribute="height" id="coe-tw-clt"/>
-                            <constraint firstItem="Nof-AS-fpY" firstAttribute="top" secondItem="s97-cD-47k" secondAttribute="bottom" id="wI6-Wn-Cko"/>
+                            <constraint firstItem="Nof-AS-fpY" firstAttribute="top" secondItem="s97-cD-47k" secondAttribute="bottom" constant="-49" id="wI6-Wn-Cko"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="アカウント設定" id="x9B-YJ-Mkr">
@@ -337,7 +337,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2273.5" y="2965.5"/>
+            <point key="canvasLocation" x="3517.5" y="1962.5"/>
         </scene>
         <!--書籍一覧-->
         <scene sceneID="fYr-MZ-DN7">
@@ -514,6 +514,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AccountSettingsController" automaticallyAdjustsScrollViewInsets="NO" id="iK3-8M-O5i" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VQp-5y-ORM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -525,7 +526,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3a-qS-B8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1678.5" y="2973.5"/>
+            <point key="canvasLocation" x="2832" y="1929"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HnQ-tE-UWi">

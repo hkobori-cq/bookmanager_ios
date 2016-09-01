@@ -10,11 +10,11 @@
     NSMutableArray *priceContents;
     NSMutableArray *dateContents;
     NSMutableArray *idNumArray;
-    NSString *name;
-    NSString *image;
-    NSString *price;
-    NSString *date;
-    NSInteger *idNum;
+    NSString *selectedName;
+    NSString *selectedImage;
+    NSString *selectedPrice;
+    NSString *selectedDate;
+    NSInteger *selectedIdNum;
 }
 
 @property(nonatomic) NSInteger dataParamCount;
@@ -146,13 +146,13 @@
  * データを編集画面に送り、navigation移動する
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    idNum = (NSInteger *) [idNumArray[(NSUInteger) indexPath.row] integerValue];
-    name = nameContents[(NSUInteger) indexPath.row];
-    image = imageContents[(NSUInteger) indexPath.row];
-    price = priceContents[(NSUInteger) indexPath.row];
-    date = dateContents[(NSUInteger) indexPath.row];
+    selectedIdNum = (NSInteger *) [idNumArray[(NSUInteger) indexPath.row] integerValue];
+    selectedName = nameContents[(NSUInteger) indexPath.row];
+    selectedImage = imageContents[(NSUInteger) indexPath.row];
+    selectedPrice = priceContents[(NSUInteger) indexPath.row];
+    selectedDate = dateContents[(NSUInteger) indexPath.row];
     AddViewController *addViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddViewController"];
-    [addViewController editBookData:name :image :price :date :idNum];
+    [addViewController receiveEditBookData:selectedName :selectedImage :selectedPrice :selectedDate :selectedIdNum];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
 
@@ -172,7 +172,7 @@
  */
 - (void)readMoreData {
     self.currentPage++;
-    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%d", self.currentPage * 5];
+    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%ld", (long)self.currentPage * 5];
     NSLog(@"%@", currentPageNumber);
     [self.afNetworkingModel startAPIConnection:@{@"page" : currentPageNumber}];
 }

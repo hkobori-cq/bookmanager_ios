@@ -4,5 +4,5 @@
 
 - (void)addBookData;
 
-- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum;
+- (void)receiveEditBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum;
 @end

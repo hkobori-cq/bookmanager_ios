@@ -60,6 +60,17 @@
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
     if (self.isEditPage) {
+        UIImageView *receivedImage = [[UIImageView alloc] init];
+        receivedImage.image = [UIImage imageNamed:self.receivedImage];
+        if (receivedImage.image.size.height == 0){
+            UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
+            UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
+            sampleImageView.frame = CGRectMake(0,0,100,100);
+            [self.imageView addSubview:sampleImageView];
+        }else {
+            [self.imageView addSubview:receivedImage];
+        }
+        self.navigationItem.title = @"編集画面";
         self.bookNameBox.text = self.receivedName;
         self.priceBox.text = self.receivedPrice;
         self.dateBox.text = [self changeDateFormatFromString:self.receivedDate];
@@ -270,7 +281,7 @@
  * @param NSString receivedDate
  * @param NSInteger received_idNum
  */
-- (void)editBookData:(NSString *)receivedName :(NSString *)receivedImage :(NSString *)receivedPrice :(NSString *)receivedDate :(NSInteger *)receivedIdNum {
+- (void)receiveEditBookData:(NSString *)receivedName :(NSString *)receivedImage :(NSString *)receivedPrice :(NSString *)receivedDate :(NSInteger *)receivedIdNum {
     self.receivedIdStr = [NSString stringWithFormat:@"%ld", (long) receivedIdNum];
     self.receivedName = receivedName;
     self.receivedImage = receivedImage;
