@@ -15,7 +15,7 @@
 @end
 
 @protocol AFNetworkingUserRegisterDelegate <NSObject>
-- (void)didUserRegister;
+- (void)succeededUserRegister;
 
 - (void)failedUserRegister;
 @end

@@ -318,7 +318,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="BXC-LF-ABP">
                             <connections>
-                                <action selector="saveButton:" destination="6wN-ei-FCb" id="G26-tR-mmM"/>
+                                <action selector="saveDataButton:" destination="6wN-ei-FCb" id="zRm-Bl-2Rd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

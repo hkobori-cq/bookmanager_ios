@@ -15,7 +15,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.mailBox.delegate = self;
@@ -26,12 +25,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasHidden:)
-                                                 name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,14 +35,15 @@
 }
 
 /**
- * keyboardが出ているとき別の場所をタップしたときの動作
+ * 画面をシングルタップしたときの動作
  */
 - (IBAction)onSingleTap:(UITapGestureRecognizer *)sender {
+    //keyboardが出ているときは非表示にする
     [self.view endEditing:YES];
 }
 
 /**
- * キーボードのリターンキーを押したときのデリケードメソッド
+ * キーボードのリターンキーを押したときのデリケードメソッド(自動生成)
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.mailBox resignFirstResponder];
@@ -57,17 +53,17 @@
 }
 
 /**
- * キーボードが出てきたときのデリケードメソッド
+ * キーボードが出てきたときのデリケードメソッド(自動生成)
  */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGSize keyboardSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height / 3);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
 /**
- * キーボードが隠れたときのデリケードメソッド
+ * キーボードが隠れたときのデリケードメソッド(自動生成)
  */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
@@ -76,8 +72,8 @@
 /**
  * ユーザー登録が成功したときのデリケードメソッド
  */
-- (void)didUserRegister {
-    [self makeAlert:@"成功しました"];
+- (void)succeededUserRegister {
+    [self makeAlertView:@"成功しました"];
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
@@ -86,7 +82,7 @@
  * ユーザー登録が失敗したときのデリケードメソッド
  */
 - (void)failedUserRegister {
-    [self makeAlert:@"失敗しました"];
+    [self makeAlertView:@"失敗しました"];
 }
 
 /**
@@ -97,22 +93,22 @@
 }
 
 /**
- * データベースに保存
+ * データベースにユーザー情報を保存
  */
-- (IBAction)saveButton:(id)sender {
+- (IBAction)saveDataButton:(id)sender {
     if ([self.mailBox.text isEqual:@""]) {
-        [self makeAlert:@"メールアドレスを入力してください"];
+        [self makeAlertView:@"メールアドレスを入力してください"];
     } else if ([self.passwordBox.text isEqual:@""]) {
-        [self makeAlert:@"パスワードを入力してください"];
+        [self makeAlertView:@"パスワードを入力してください"];
     } else if (self.passwordBox.text != self.passwordConfirmBox.text) {
-        [self makeAlert:@"パスワードが一致しません"];
+        [self makeAlertView:@"パスワードが一致しません"];
     } else {
-        NSDictionary *param;
-        param = @{
+        NSDictionary *UserDataParam;
+        UserDataParam = @{
                 @"mail_address" : self.mailBox.text,
                 @"password" : self.passwordBox.text
         };
-        [self.afNetworkingModel startAPIConnection:param];
+        [self.afNetworkingModel startAPIConnection:UserDataParam];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -121,7 +117,7 @@
  * Alert表示のメソッド
  * @param NSString alertMessage
  */
-- (void)makeAlert:(NSString *)alertMessage {
+- (void)makeAlertView:(NSString *)alertMessage {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
 }
