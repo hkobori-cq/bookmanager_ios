@@ -3,7 +3,7 @@
 
 
 @protocol AFNetworkingTableViewDelegate <NSObject>
-- (void)didGetBookData;
+- (void)succeededGetBookData;
 
 - (void)failedGetData;
 @end

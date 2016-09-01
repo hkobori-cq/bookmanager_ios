@@ -63,9 +63,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="BookFeeLabel" destination="XLV-J0-rJ0" id="vDV-tu-IFr"/>
+                <outlet property="BookFeeLabel" destination="VGu-Yz-z7c" id="Qpi-4z-IrV"/>
                 <outlet property="BookImageView" destination="SUg-BY-itG" id="inZ-eO-LT5"/>
-                <outlet property="BookTitleLabel" destination="VGu-Yz-z7c" id="QC3-5I-0mI"/>
+                <outlet property="BookTitleLabel" destination="XLV-J0-rJ0" id="683-Ol-AoQ"/>
                 <outlet property="DateLabel" destination="fv3-XN-fYE" id="83a-iU-gQc"/>
                 <outlet property="nextLabel" destination="H2p-sc-9uM" id="u4V-49-jV5"/>
             </connections>

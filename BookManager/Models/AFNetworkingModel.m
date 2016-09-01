@@ -39,8 +39,8 @@
     self.dataModel = [[DataModel alloc] init];
     if ([self.action isEqual:@"getBook"]) {
         self.bookDataDictionary = [self.dataModel bookDataStore:response];
-        if ([self.tableDelegate respondsToSelector:@selector(didGetBookData)]) {
-            [self.tableDelegate didGetBookData];
+        if ([self.tableDelegate respondsToSelector:@selector(succeededGetBookData)]) {
+            [self.tableDelegate succeededGetBookData];
         }
     } else if ([self.action isEqual:@"addBook"]) {
         if ([self.addDelegate respondsToSelector:@selector(succeededAddOrUpdateBookData:)]) {

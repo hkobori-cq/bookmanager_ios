@@ -17,7 +17,7 @@
     NSInteger *idNum;
 }
 
-@property(nonatomic) NSInteger count;
+@property(nonatomic) NSInteger dataParamCount;
 
 @property(nonatomic, strong) AFNetworkingModel *afNetworkingModel;
 
@@ -55,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.count;
+    return self.dataParamCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,38 +64,35 @@
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
     cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
-    UIImageView *cellImage = [[UIImageView alloc] init];
-    cellImage.image = [UIImage imageNamed:imageContents[(NSUInteger) indexPath.row]];
-    if (cellImage.image.size.height == 0) {
+    UIImageView *cellImageView = [[UIImageView alloc] init];
+    cellImageView.image = [UIImage imageNamed:imageContents[(NSUInteger) indexPath.row]];
+    if (cellImageView.image.size.height == 0) {
         UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
         UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
         sampleImageView.frame = CGRectMake(0, 0, 100, 100);
         [cell.BookImageView addSubview:sampleImageView];
     } else {
-        [cell.BookImageView addSubview:cellImage];
+        [cell.BookImageView addSubview:cellImageView];
     }
     //日付の書式を変更する
     if (dateContents[(NSUInteger) indexPath.row]) {
-        NSMutableString *changeDateStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
-        [changeDateStr deleteCharactersInRange:NSMakeRange(0, 4)];
-        [changeDateStr deleteCharactersInRange:NSMakeRange(changeDateStr.length - 3, 3)];
+        NSMutableString *dateDataStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
+        [dateDataStr deleteCharactersInRange:NSMakeRange(0, 4)];
+        [dateDataStr deleteCharactersInRange:NSMakeRange(dateDataStr.length - 3, 3)];
 
-        NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-        [fmt setDateFormat:@"dd MMM yyyy HH:mm:ss"];
-        [fmt setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        NSDate *changeDate = [fmt dateFromString:changeDateStr];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        NSDate *changedDate = [dateFormatter dateFromString:dateDataStr];
 
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSUInteger flags;
-        NSDateComponents *comps;
+        NSDateComponents *calendarComponents;
 
-        // 年・月・日を取得
-        flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-        comps = [calendar components:flags fromDate:changeDate];
+        calendarComponents = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:changedDate];
 
-        NSInteger year = comps.year;
-        NSInteger month = comps.month;
-        NSInteger day = comps.day;
+        NSInteger year = calendarComponents.year;
+        NSInteger month = calendarComponents.month;
+        NSInteger day = calendarComponents.day;
 
         cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
     }
@@ -110,13 +107,13 @@
  * AFNetworkingModelが成功したときのメソッド
  * データを配列に入れる
  */
-- (void)didGetBookData {
+- (void)succeededGetBookData {
     nameContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"name"]];
     imageContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"image"]];
     priceContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"price"]];
     dateContents = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"purchase_date"]];
     idNumArray = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"id"]];
-    self.count = nameContents.count;
+    self.dataParamCount = nameContents.count;
     [self.tableView reloadData];
 }
 
@@ -129,58 +126,27 @@
 /**
  * 配列がnilになったときはnilにNoDataを入れて返す
  */
-- (id)CheckNil:(NSMutableArray *)array {
-    for (NSUInteger i = 0; i < array.count; i++) {
-        if ([array[i] isEqual:[NSNull null]]) {
-            array[i] = @"NoData";
+- (id)CheckNil:(NSMutableArray *)bookDataArray {
+    for (NSUInteger i = 0; i < bookDataArray.count; i++) {
+        if ([bookDataArray[i] isEqual:[NSNull null]]) {
+            bookDataArray[i] = @"NoData";
         }
     }
-    return array;
+    return bookDataArray;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-// Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
 
 
-#pragma mark - Table view delegate
 
 /**
- * tableViewのセルをクリックしたときのメソッド
+ * tableViewのセルをクリックしたときのデリケードメソッド(自動生成)
  * データを編集画面に送り、navigation移動する
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    idNum = [idNumArray[indexPath.row] integerValue];
+    idNum = (NSInteger *) [idNumArray[(NSUInteger) indexPath.row] integerValue];
     name = nameContents[(NSUInteger) indexPath.row];
     image = imageContents[(NSUInteger) indexPath.row];
     price = priceContents[(NSUInteger) indexPath.row];
@@ -206,31 +172,22 @@
  */
 - (void)readMoreData {
     self.currentPage++;
-    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%d", self.currentPage * 5, self.currentPage * 5 + 5];
+    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%d", self.currentPage * 5];
     NSLog(@"%@", currentPageNumber);
     [self.afNetworkingModel startAPIConnection:@{@"page" : currentPageNumber}];
 }
 
 /**
- * tableViewがスクロールしたときに呼ばれるデリケードメソッド
+ * tableViewがスクロールしたときに呼ばれるデリケードメソッド(自動生成)
  * スクロールするごとにreadMoreDataが呼ばれ、データを非同期に持ってくる
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-        if (self.count + 1 > self.currentPage * 5) {
+        if (self.dataParamCount + 1 > self.currentPage * 5) {
             [self performSelector:@selector(readMoreData)];
         }
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
