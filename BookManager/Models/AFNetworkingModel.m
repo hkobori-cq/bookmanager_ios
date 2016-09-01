@@ -17,7 +17,8 @@
 }
 
 - (void)startAPIConnection:(NSDictionary *)receivedParam {
-
+    NSLog(@"%@",self.action);
+    NSLog(@"%@",receivedParam);
     if (self.apiModel == nil) {
         self.apiModel = [APIModel alloc];
     }
@@ -36,6 +37,8 @@
 }
 
 - (void)didAPIConnection:(NSDictionary *)response {
+    NSLog(@"%@",self.action);
+    NSLog(@"%@",response);
     self.dataModel = [[DataModel alloc] init];
     if ([self.action isEqual:@"getBook"]) {
         self.bookDataDictionary = [self.dataModel bookDataStore:response];

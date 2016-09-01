@@ -35,6 +35,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"BookListViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"getBook"];
     self.afNetworkingModel.tableDelegate = self;
+    self.tabBarItem.title = @"書籍一覧";
 }
 
 - (void)didReceiveMemoryWarning {

@@ -15,7 +15,6 @@
     }
     //POSTをサーバーに非同期で送り、成功した時と失敗した時でdelegatedで通知
     [manager POST:url parameters:param progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"success");
         if ([self.afNetworkingAPIControllerDelegate respondsToSelector:@selector(didAPIConnection:)]) {
             [self.afNetworkingAPIControllerDelegate didAPIConnection:responseObject];
         }

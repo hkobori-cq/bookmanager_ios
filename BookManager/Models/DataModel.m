@@ -34,11 +34,11 @@
     }
 
     NSMutableDictionary *bookDictionary = [NSMutableDictionary dictionary];
-    [bookDictionary setObject:self.nameArray forKey:@"name"];
-    [bookDictionary setObject:self.imageArray forKey:@"image"];
-    [bookDictionary setObject:self.priceArray forKey:@"price"];
-    [bookDictionary setObject:self.dateArray forKey:@"purchase_date"];
-    [bookDictionary setObject:self.idArray forKey:@"id"];
+    bookDictionary[@"name"] = self.nameArray;
+    bookDictionary[@"image"] = self.imageArray;
+    bookDictionary[@"price"] = self.priceArray;
+    bookDictionary[@"purchase_date"] = self.dateArray;
+    bookDictionary[@"id"] = self.idArray;
 
     return bookDictionary;
 

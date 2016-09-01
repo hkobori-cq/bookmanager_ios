@@ -74,8 +74,6 @@
  */
 - (void)succeededUserRegister {
     [self makeAlertView:@"成功しました"];
-    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
-    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
 /**
@@ -109,7 +107,6 @@
                 @"password" : self.passwordBox.text
         };
         [self.afNetworkingModel startAPIConnection:UserDataParam];
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -118,7 +115,18 @@
  * @param NSString alertMessage
  */
 - (void)makeAlertView:(NSString *)alertMessage {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if ([alertMessage isEqual:@"成功しました"]){
+            [self otherButtonPushed];
+        }
+    }]];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+
+}
+- (void)otherButtonPushed {
+    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
+    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 @end
