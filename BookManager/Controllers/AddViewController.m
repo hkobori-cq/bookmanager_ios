@@ -13,11 +13,11 @@
 @property(nonatomic) NSInteger current_month;
 @property(nonatomic) NSInteger current_day;
 
-@property(nonatomic) NSString *received_name;
-@property(nonatomic) NSString *received_image;
-@property(nonatomic) NSString *received_price;
-@property(nonatomic) NSString *received_date;
-@property(nonatomic) NSString *received_idStr;
+@property(nonatomic) NSString *receivedName;
+@property(nonatomic) NSString *receivedImage;
+@property(nonatomic) NSString *receivedPrice;
+@property(nonatomic) NSString *receivedDate;
+@property(nonatomic) NSString *receivedIdStr;
 
 @property(assign, nonatomic) BOOL isEditPage;
 
@@ -60,9 +60,9 @@
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
     if (self.isEditPage) {
-        self.bookNameBox.text = self.received_name;
-        self.priceBox.text = self.received_price;
-        self.dateBox.text = [self changeDateFormatFromString:self.received_date];
+        self.bookNameBox.text = self.receivedName;
+        self.priceBox.text = self.receivedPrice;
+        self.dateBox.text = [self changeDateFormatFromString:self.receivedDate];
     }
 }
 
@@ -154,7 +154,7 @@
         NSDictionary *BookDataParam;
         if (self.isEditPage) {
             BookDataParam = @{
-                    @"id" : self.received_idStr,
+                    @"id" : self.receivedIdStr,
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
@@ -177,8 +177,8 @@
  * API通信に成功した時のメソッド
  * @param NSString message (Addの時は追加完了しました Editの時は編集完了しました)
  */
-- (void)succeededAddOrUpdateBookData:(NSString *)received_message {
-    [self makeAlertView:received_message];
+- (void)succeededAddOrUpdateBookData:(NSString *)receivedMessage {
+    [self makeAlertView:receivedMessage];
     [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -264,19 +264,19 @@
 
 /**
  * tableViewからデータを受け取るためのデリケードメソッド
- * @param NSString received_name
- * @param NSString received_image
- * @param NSString received_price
- * @param NSString received_date
+ * @param NSString receivedName
+ * @param NSString receivedImage
+ * @param NSString receivedPrice
+ * @param NSString receivedDate
  * @param NSInteger received_idNum
  */
-- (void)editBookData:(NSString *)received_name :(NSString *)received_image :(NSString *)received_price :(NSString *)received_date :(NSInteger *)received_idNum {
-    self.received_idStr = [NSString stringWithFormat:@"%ld", (long) received_idNum];
-    self.received_name = received_name;
-    self.received_image = received_image;
-    self.received_price = received_price;
+- (void)editBookData:(NSString *)receivedName :(NSString *)receivedImage :(NSString *)receivedPrice :(NSString *)receivedDate :(NSInteger *)receivedIdNum {
+    self.receivedIdStr = [NSString stringWithFormat:@"%ld", (long) receivedIdNum];
+    self.receivedName = receivedName;
+    self.receivedImage = receivedImage;
+    self.receivedPrice = receivedPrice;
     self.isEditPage = YES;
-    self.received_date = received_date;
+    self.receivedDate = receivedDate;
 }
 
 /**

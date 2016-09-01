@@ -16,22 +16,22 @@
     return self;
 }
 
-- (void)startAPIConnection:(NSDictionary *)received_param {
+- (void)startAPIConnection:(NSDictionary *)receivedParam {
 
     if (self.apiModel == nil) {
         self.apiModel = [APIModel alloc];
     }
     self.apiModel.afNetworkingAPIControllerDelegate = self;
     if ([self.action isEqual:@"getBook"]) {
-        [self.apiModel apiConnection:@"http://app.com/book/get" :received_param :self.action];
+        [self.apiModel apiConnection:@"http://app.com/book/get" :receivedParam :self.action];
     } else if ([self.action isEqual:@"addBook"]) {
-        [self.apiModel apiConnection:@"http://app.com/book/regist" :received_param :self.action];
+        [self.apiModel apiConnection:@"http://app.com/book/regist" :receivedParam :self.action];
     } else if ([self.action isEqual:@"editBook"]) {
-        [self.apiModel apiConnection:@"http://app.com/book/update" :received_param :self.action];
+        [self.apiModel apiConnection:@"http://app.com/book/update" :receivedParam :self.action];
     } else if ([self.action isEqual:@"userRegister"]) {
-        [self.apiModel apiConnection:@"http://app.com/account/register" :received_param :self.action];
+        [self.apiModel apiConnection:@"http://app.com/account/register" :receivedParam :self.action];
     } else if ([self.action isEqual:@"userLogin"]) {
-        [self.apiModel apiConnection:@"http://app.com/account/login" :received_param :self.action];
+        [self.apiModel apiConnection:@"http://app.com/account/login" :receivedParam :self.action];
     }
 }
 
