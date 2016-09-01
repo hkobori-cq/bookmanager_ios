@@ -29,6 +29,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -53,7 +57,7 @@
 }
 
 /**
- * キーボードが出てきたときのデリケードメソッド(自動生成)
+ * キーボードが出てきたときのデリケードメソッド
  */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
@@ -63,7 +67,7 @@
 }
 
 /**
- * キーボードが隠れたときのデリケードメソッド(自動生成)
+ * キーボードが隠れたときのデリケードメソッド
  */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
