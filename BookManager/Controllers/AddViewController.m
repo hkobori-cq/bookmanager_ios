@@ -9,9 +9,9 @@
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
-@property(nonatomic) NSInteger current_year;
-@property(nonatomic) NSInteger current_month;
-@property(nonatomic) NSInteger current_day;
+@property(nonatomic) NSInteger currentYear;
+@property(nonatomic) NSInteger currentMonth;
+@property(nonatomic) NSInteger currentDay;
 
 @property(nonatomic) NSString *receivedName;
 @property(nonatomic) NSString *receivedImage;
@@ -111,7 +111,7 @@
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
     [self changeDateFormatFromDate:picker.date];
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.current_year, (long) self.current_month, (long) self.current_day];
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
 }
 
 
@@ -123,9 +123,9 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
 
-    self.current_year = calendar_components.year;
-    self.current_month = calendar_components.month;
-    self.current_day = calendar_components.day;
+    self.currentYear = calendar_components.year;
+    self.currentMonth = calendar_components.month;
+    self.currentDay = calendar_components.day;
 }
 
 /**
@@ -144,11 +144,11 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:changeDate];
 
-    self.current_year = calendar_components.year;
-    self.current_month = calendar_components.month;
-    self.current_day = calendar_components.day;
+    self.currentYear = calendar_components.year;
+    self.currentMonth = calendar_components.month;
+    self.currentDay = calendar_components.day;
 
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.current_year, (long) self.current_month, (long) self.current_day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
 }
 
 /**
@@ -169,14 +169,14 @@
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.current_year, (long) self.current_month, (long) self.current_day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay]
             };
         } else {
             BookDataParam = @{
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.current_year, (long) self.current_month, (long) self.current_day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay]
             };
         }
 

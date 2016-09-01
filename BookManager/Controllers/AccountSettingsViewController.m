@@ -122,7 +122,7 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([alertMessage isEqual:@"成功しました"]){
-            [self tappedOkButton];
+            [self tappedAlertOkButton];
         }
     }]];
 
@@ -133,7 +133,7 @@
 /**
  * API通信が成功したときのAlertViewでOKボタンをクリックしたときのメソッド
  */
-- (void)tappedOkButton {
+- (void)tappedAlertOkButton {
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
