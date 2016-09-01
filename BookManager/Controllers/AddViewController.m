@@ -140,11 +140,11 @@
     NSInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *components = [calendar components:flags fromDate:changeDate];
 
-    NSInteger year = components.year;
-    NSInteger month = components.month;
-    NSInteger day = components.day;
+    self.year = components.year;
+    self.month = components.month;
+    self.day = components.day;
 
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.year, (long) self.month, (long) self.day];
 }
 
 /**
