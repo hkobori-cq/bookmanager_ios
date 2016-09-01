@@ -43,8 +43,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     //初めに10コのデータを用意しておく
-    NSDictionary *param = @{@"page" : @"0-10"};
-    [self.afNetworkingModel startAPIConnection:param];
+    NSDictionary *pageParam = @{@"page" : @"0-10"};
+    [self.afNetworkingModel startAPIConnection:pageParam];
 }
 
 

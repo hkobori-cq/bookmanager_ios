@@ -24,16 +24,16 @@
 
 - (IBAction)loginButton:(id)sender {
     if ([self.mailTextField.text isEqual:@""]) {
-        [self makeAlert:@"メールアドレスを入力してください"];
+        [self makeAlertView:@"メールアドレスを入力してください"];
     } else if ([self.passwordTextField.text isEqual:@""]) {
-        [self makeAlert:@"パスワードを入力してください"];
+        [self makeAlertView:@"パスワードを入力してください"];
     } else {
-        NSDictionary *param;
-        param = @{
+        NSDictionary *LoginDataParam;
+        LoginDataParam = @{
                 @"mail_address" : self.mailTextField.text,
                 @"password" : self.passwordTextField.text
         };
-        [self.afNetworkingModel startAPIConnection:param];
+        [self.afNetworkingModel startAPIConnection:LoginDataParam];
     }
 }
 
@@ -50,7 +50,7 @@
  * ログインが成功したときのデリケードメソッド
  */
 - (void)didUserLogin {
-    [self makeAlert:@"ログインに成功しました"];
+    [self makeAlertView:@"ログインに成功しました"];
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
@@ -59,7 +59,7 @@
  * ログインが失敗したときのデリケードメソッド
  */
 - (void)failedUserLogin {
-    [self makeAlert:@"ログインに失敗しました"];
+    [self makeAlertView:@"ログインに失敗しました"];
 }
 
 /**
@@ -74,7 +74,7 @@
  * 警告表示のためのメソッド
  * @param NSString alertMessage
  */
-- (void)makeAlert:(NSString *)alertMessage {
+- (void)makeAlertView:(NSString *)alertMessage {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
 }
