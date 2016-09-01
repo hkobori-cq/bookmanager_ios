@@ -165,7 +165,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bCo-gr-dxS" id="r7d-G8-W7u">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -318,7 +318,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="BXC-LF-ABP">
                             <connections>
-                                <action selector="saveDataButton:" destination="6wN-ei-FCb" id="zRm-Bl-2Rd"/>
+                                <action selector="didSaveDataButtonTapped:" destination="6wN-ei-FCb" id="Kh3-pL-9EY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

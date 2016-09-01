@@ -77,14 +77,14 @@
  * ユーザー登録が成功したときのデリケードメソッド
  */
 - (void)succeededUserRegister {
-    [self makeAlertView:@"成功しました"];
+    [self showAlertView:@"成功しました"];
 }
 
 /**
  * ユーザー登録が失敗したときのデリケードメソッド
  */
 - (void)failedUserRegister {
-    [self makeAlertView:@"失敗しました"];
+    [self showAlertView:@"失敗しました"];
 }
 
 /**
@@ -97,13 +97,13 @@
 /**
  * データベースにユーザー情報を保存
  */
-- (IBAction)saveDataButton:(id)sender {
+- (IBAction)didSaveDataButtonTapped:(id)sender {
     if ([self.mailBox.text isEqual:@""]) {
-        [self makeAlertView:@"メールアドレスを入力してください"];
+        [self showAlertView:@"メールアドレスを入力してください"];
     } else if ([self.passwordBox.text isEqual:@""]) {
-        [self makeAlertView:@"パスワードを入力してください"];
+        [self showAlertView:@"パスワードを入力してください"];
     } else if (self.passwordBox.text != self.passwordConfirmBox.text) {
-        [self makeAlertView:@"パスワードが一致しません"];
+        [self showAlertView:@"パスワードが一致しません"];
     } else {
         NSDictionary *UserDataParam;
         UserDataParam = @{
@@ -118,18 +118,22 @@
  * Alert表示のメソッド
  * @param NSString alertMessage
  */
-- (void)makeAlertView:(NSString *)alertMessage {
+- (void)showAlertView:(NSString *)alertMessage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([alertMessage isEqual:@"成功しました"]){
-            [self otherButtonPushed];
+            [self tappedOkButton];
         }
     }]];
 
     [self presentViewController:alertController animated:YES completion:nil];
 
 }
-- (void)otherButtonPushed {
+
+/**
+ * API通信が成功したときのAlertViewでOKボタンをクリックしたときのメソッド
+ */
+- (void)tappedOkButton {
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
