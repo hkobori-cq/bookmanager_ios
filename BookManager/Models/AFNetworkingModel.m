@@ -43,12 +43,12 @@
             [self.tableDelegate didGetBookData];
         }
     } else if ([self.action isEqual:@"addBook"]) {
-        if ([self.addDelegate respondsToSelector:@selector(didAddOrUpdateBookData:)]) {
-            [self.addDelegate didAddOrUpdateBookData:@"書籍登録完了"];
+        if ([self.addDelegate respondsToSelector:@selector(succeededAddOrUpdateBookData:)]) {
+            [self.addDelegate succeededAddOrUpdateBookData:@"書籍登録完了"];
         }
     } else if ([self.action isEqual:@"editBook"]) {
-        if ([self.addDelegate respondsToSelector:@selector(didAddOrUpdateBookData:)]) {
-            [self.addDelegate didAddOrUpdateBookData:@"書籍編集完了"];
+        if ([self.addDelegate respondsToSelector:@selector(succeededAddOrUpdateBookData:)]) {
+            [self.addDelegate succeededAddOrUpdateBookData:@"書籍編集完了"];
         }
     } else if ([self.action isEqual:@"userRegister"]) {
         if ([self.userRegisterDelegate respondsToSelector:@selector(succeededUserRegister)]) {

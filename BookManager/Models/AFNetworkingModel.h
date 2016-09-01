@@ -9,7 +9,7 @@
 @end
 
 @protocol AFNetworkingAddDelegate <NSObject>
-- (void)didAddOrUpdateBookData:(NSString *)message;
+- (void)succeededAddOrUpdateBookData:(NSString *)received_message;
 
 - (void)failedUploadData;
 @end

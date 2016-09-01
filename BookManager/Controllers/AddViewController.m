@@ -9,18 +9,17 @@
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
-@property(nonatomic) NSInteger year;
-@property(nonatomic) NSInteger month;
-@property(nonatomic) NSInteger day;
+@property(nonatomic) NSInteger current_year;
+@property(nonatomic) NSInteger current_month;
+@property(nonatomic) NSInteger current_day;
 
-@property(nonatomic) NSString *name;
-@property(nonatomic) NSString *image;
-@property(nonatomic) NSString *price;
-@property(nonatomic) NSString *date;
-@property(nonatomic) NSString *idStr;
+@property(nonatomic) NSString *received_name;
+@property(nonatomic) NSString *received_image;
+@property(nonatomic) NSString *received_price;
+@property(nonatomic) NSString *received_date;
+@property(nonatomic) NSString *received_idStr;
 
-@property(assign, nonatomic) BOOL flag;
-@property(nonatomic) NSDate *changeDate;
+@property(assign, nonatomic) BOOL isEditPage;
 
 @property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
 
@@ -46,23 +45,24 @@
     pickerToolBar.tintColor = nil;
     [pickerToolBar sizeToFit];
     //閉じるボタン生成
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完了" style:UIBarButtonItemStyleDone target:self action:@selector(pickerDoneClicked)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完了" style:UIBarButtonItemStyleDone target:self action:@selector(clickedPickerDoneButton)];
     UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
     self.dateBox.inputAccessoryView = pickerToolBar;
-    if (self.flag) {
+    //編集画面と追加画面でそれぞれAPI通信の初期化する
+    if (self.isEditPage) {
         self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"editBook"];
     } else {
         self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"addBook"];
     }
     self.afNetworkingModel.addDelegate = self;
     //編集画面の場合は渡ってきたデータをテキストフィールドに表示する
-    if (self.flag) {
-        self.bookNameBox.text = self.name;
-        self.priceBox.text = self.price;
-        self.dateBox.text = [self changeDateFormatFromString:self.date];
+    if (self.isEditPage) {
+        self.bookNameBox.text = self.received_name;
+        self.priceBox.text = self.received_price;
+        self.dateBox.text = [self changeDateFormatFromString:self.received_date];
     }
 }
 
@@ -78,17 +78,17 @@
 }
 
 /**
- * キーボードが出てきたときのデリケードメソッド
+ * キーボードが出てきたときのデリケードメソッド(自動生成)
  */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGSize keyboardSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height / 2);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
 /**
- * キーボードが隠れたときのデリケードメソッド
+ * キーボードが隠れたときのデリケードメソッド(自動生成)
  */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
@@ -99,11 +99,8 @@
  */
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
-    self.changeDate = picker.date;
-    NSLog(@"%@", picker.date);
-    [self changeDateFormat:self.changeDate];
-    NSLog(@"%@", self.changeDate);
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.year, (long) self.month, (long) self.day];
+    [self changeDateFormatFromDate:picker.date];
+    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.current_year, (long) self.current_month, (long) self.current_day];
 }
 
 
@@ -111,16 +108,13 @@
  * pickerの日付の型を変更するメソッド
  * @param NSDate date
  */
-- (void)changeDateFormat:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
+- (void)changeDateFormatFromDate:(NSDate *)date {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
 
-    self.year = components.year;
-    self.month = components.month;
-    self.day = components.day;
+    self.current_year = calendar_components.year;
+    self.current_month = calendar_components.month;
+    self.current_day = calendar_components.day;
 }
 
 /**
@@ -137,14 +131,13 @@
     NSDate *changeDate = [formatter dateFromString:string];
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    NSDateComponents *components = [calendar components:flags fromDate:changeDate];
+    NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:changeDate];
 
-    self.year = components.year;
-    self.month = components.month;
-    self.day = components.day;
+    self.current_year = calendar_components.year;
+    self.current_month = calendar_components.month;
+    self.current_day = calendar_components.day;
 
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.year, (long) self.month, (long) self.day];
+    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.current_year, (long) self.current_month, (long) self.current_day];
 }
 
 /**
@@ -152,31 +145,31 @@
  */
 - (IBAction)saveDataButton:(id)sender {
     if ([self.bookNameBox.text isEqual:@""]) {
-        [self makeAlert:@"本の名前を入力してください"];
+        [self makeAlertView:@"本の名前を入力してください"];
     } else if ([self.priceBox.text isEqual:@""]) {
-        [self makeAlert:@"本の価格を入力してください"];
+        [self makeAlertView:@"本の価格を入力してください"];
     } else if ([self.dateBox.text isEqual:@""]) {
-        [self makeAlert:@"購入日を入力してください"];
+        [self makeAlertView:@"購入日を入力してください"];
     } else {
-        NSDictionary *param;
-        if (self.flag) {
-            param = @{
-                    @"id" : self.idStr,
+        NSDictionary *BookDataParam;
+        if (self.isEditPage) {
+            BookDataParam = @{
+                    @"id" : self.received_idStr,
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.year, (long) self.month, (long) self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.current_year, (long) self.current_month, (long) self.current_day]
             };
         } else {
-            param = @{
+            BookDataParam = @{
                     @"image_url" : @"hoge",
                     @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
                     @"price" : self.priceBox.text,
-                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.year, (long) self.month, (long) self.day]
+                    @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.current_year, (long) self.current_month, (long) self.current_day]
             };
         }
 
-        [self.afNetworkingModel startAPIConnection:param];
+        [self.afNetworkingModel startAPIConnection:BookDataParam];
     }
 }
 
@@ -184,22 +177,22 @@
  * API通信に成功した時のメソッド
  * @param NSString message (Addの時は追加完了しました Editの時は編集完了しました)
  */
-- (void)didAddOrUpdateBookData:(NSString *)message {
-    [self makeAlert:message];
+- (void)succeededAddOrUpdateBookData:(NSString *)received_message {
+    [self makeAlertView:received_message];
     [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)failedUploadData {
-    if (self.flag) {
-        [self makeAlert:@"書籍編集に失敗しました"];
+    if (self.isEditPage) {
+        [self makeAlertView:@"書籍編集に失敗しました"];
     } else {
-        [self makeAlert:@"書籍追加に失敗しました"];
+        [self makeAlertView:@"書籍追加に失敗しました"];
     }
 }
 
 /**
- * keyboard及びpickerが出ている時別の場所をタップした時の動作
+ * 画面をタップしたときの動作
  */
 - (IBAction)onSingleTap:(UITapGestureRecognizer *)sender {
     //keyboardやpickerを隠す
@@ -208,7 +201,7 @@
 
 
 /**
- * textFiledでReTurnボタンを押した時の処理
+ * textFiledでReturnボタンを押した時の処理(自動生成)
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)targetTextField {
     //keyboardを隠す
@@ -220,7 +213,7 @@
 /**
  * pickerの上部に設置した完了ボタンを押した時の動作
  */
-- (void)pickerDoneClicked {
+- (void)clickedPickerDoneButton {
     //pickerを閉じる
     [self.dateBox resignFirstResponder];
 }
@@ -228,7 +221,7 @@
 /**
  * 画像を追加するボタンの処理
  */
-- (IBAction)imageUploadButton:(id)sender {
+- (IBAction)clickedImageUploadButton:(id)sender {
     //ImagePickerが使えるかどうかの判定
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         //ImagePickerを生成
@@ -241,7 +234,7 @@
 }
 
 /**
- * 画像が選択された時に呼ばれるデリケードメソッド
+ * 画像が選択された時に呼ばれるデリケードメソッド(自動生成)
  * 選ばれた画像をimageViewに登録
  * @param NSDictionary info
  */
@@ -254,7 +247,7 @@
 }
 
 /**
- * 選択された画像がキャンセルされた時に呼ばれるデリケードメソッド
+ * 選択された画像がキャンセルされた時に呼ばれるデリケードメソッド(自動生成)
  */
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     //モーダルビューを取り除く
@@ -271,33 +264,33 @@
 
 /**
  * tableViewからデータを受け取るためのデリケードメソッド
- * @param NSString name
- * @param NSString image
- * @param NSString price
- * @param NSString date
- * @param NSInteger idNum
+ * @param NSString received_name
+ * @param NSString received_image
+ * @param NSString received_price
+ * @param NSString received_date
+ * @param NSInteger received_idNum
  */
-- (void)editBookData:(NSString *)name :(NSString *)image :(NSString *)price :(NSString *)date :(NSInteger *)idNum {
-    self.idStr = [NSString stringWithFormat:@"%ld", (long) idNum];
-    self.name = name;
-    self.image = image;
-    self.price = price;
-    self.flag = YES;
-    self.date = date;
+- (void)editBookData:(NSString *)received_name :(NSString *)received_image :(NSString *)received_price :(NSString *)received_date :(NSInteger *)received_idNum {
+    self.received_idStr = [NSString stringWithFormat:@"%ld", (long) received_idNum];
+    self.received_name = received_name;
+    self.received_image = received_image;
+    self.received_price = received_price;
+    self.isEditPage = YES;
+    self.received_date = received_date;
 }
 
 /**
  * 書籍追加のときのメソッド
  */
 - (void)addBookData {
-    self.flag = NO;
+    self.isEditPage = NO;
 }
 
 /**
  * 警告表示のメソッド
  * @param NSString alertMessage
  */
-- (void)makeAlert:(NSString *)alertMessage {
+- (void)makeAlertView:(NSString *)alertMessage {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alertView show];
 }

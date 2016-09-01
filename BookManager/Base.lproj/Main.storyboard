@@ -81,7 +81,7 @@
                                         <rect key="frame" x="210" y="91" width="99" height="57"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="imageUploadButton:" destination="K6Y-4x-bMu" eventType="touchUpInside" id="03N-Bu-7AG"/>
+                                            <action selector="clickedImageUploadButton:" destination="K6Y-4x-bMu" eventType="touchUpInside" id="Ylu-aa-J2F"/>
                                         </connections>
                                     </button>
                                 </subviews>
