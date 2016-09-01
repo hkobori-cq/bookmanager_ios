@@ -49,7 +49,7 @@
 /**
  * ログインが成功したときのデリケードメソッド
  */
-- (void)didUserLogin {
+- (void)succeededUserLogin {
     [self makeAlertView:@"ログインに成功しました"];
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];

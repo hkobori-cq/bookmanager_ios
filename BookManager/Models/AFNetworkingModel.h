@@ -21,7 +21,7 @@
 @end
 
 @protocol AFNetworkingUserLoginDelegate <NSObject>
-- (void)didUserLogin;
+- (void)succeededUserLogin;
 
 - (void)failedUserLogin;
 @end

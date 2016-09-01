@@ -55,8 +55,8 @@
             [self.userRegisterDelegate succeededUserRegister];
         }
     } else if ([self.action isEqual:@"userLogin"]) {
-        if ([self.userLoginDelegate respondsToSelector:@selector(didUserLogin)]) {
-            [self.userLoginDelegate didUserLogin];
+        if ([self.userLoginDelegate respondsToSelector:@selector(succeededUserLogin)]) {
+            [self.userLoginDelegate succeededUserLogin];
         }
     }
 }
