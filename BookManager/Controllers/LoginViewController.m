@@ -30,8 +30,8 @@
     } else {
         NSDictionary *LoginDataParam;
         LoginDataParam = @{
-                @"mail_address" : self.mailTextField.text,
-                @"password" : self.passwordTextField.text
+                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailTextField.text],
+                @"password" : [NSString stringWithFormat:@"%@",self.passwordTextField.text]
         };
         [self.afNetworkingModel startAPIConnection:LoginDataParam];
     }
@@ -51,8 +51,6 @@
  */
 - (void)succeededUserLogin {
     [self makeAlertView:@"ログインに成功しました"];
-    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
-    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
 /**
@@ -75,8 +73,19 @@
  * @param NSString alertMessage
  */
 - (void)makeAlertView:(NSString *)alertMessage {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if ([alertMessage isEqual:@"ログインに成功しました"]){
+            [self otherButtonPushed];
+        }
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+}
+
+- (void)otherButtonPushed {
+    UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
+    [self presentViewController:topPageViewController animated:YES completion:nil];
 }
 
 @end

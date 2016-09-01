@@ -103,8 +103,8 @@
     } else {
         NSDictionary *UserDataParam;
         UserDataParam = @{
-                @"mail_address" : self.mailBox.text,
-                @"password" : self.passwordBox.text
+                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailBox.text],
+                @"password" : [NSString stringWithFormat:@"%@",self.passwordBox.text]
         };
         [self.afNetworkingModel startAPIConnection:UserDataParam];
     }
