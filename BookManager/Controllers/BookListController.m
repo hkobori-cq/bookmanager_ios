@@ -22,6 +22,8 @@
 @property(nonatomic, strong) AFNetworkingModel *afNetworkingModel;
 
 @property(nonatomic) NSInteger currentPage;
+
+@property (nonatomic) UIImageView *cellImageView;
 @end
 
 @implementation BookListController
@@ -65,15 +67,14 @@
     BookListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.BookTitleLabel.text = [NSString stringWithFormat:@"%@", nameContents[(NSUInteger) indexPath.row]];
     cell.BookFeeLabel.text = priceContents[(NSUInteger) indexPath.row];
-    UIImageView *cellImageView = [[UIImageView alloc] init];
-    cellImageView.image = [UIImage imageNamed:imageContents[(NSUInteger) indexPath.row]];
-    if (cellImageView.image.size.height == 0) {
+    self.cellImageView.image = [UIImage imageNamed:imageContents[(NSUInteger) indexPath.row]];
+    if (self.cellImageView.image.size.height == 0) {
         UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
         UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
         sampleImageView.frame = CGRectMake(0, 0, 100, 100);
         [cell.BookImageView addSubview:sampleImageView];
     } else {
-        [cell.BookImageView addSubview:cellImageView];
+        [cell.BookImageView addSubview:self.cellImageView];
     }
     //日付の書式を変更する
     if (dateContents[(NSUInteger) indexPath.row]) {

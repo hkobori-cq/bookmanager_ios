@@ -125,6 +125,10 @@
     self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
 }
 
+- (void)setPurchaseDateTextFiledText {
+    self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
+}
+
 
 /**
  * 日付をセットするメソッド
