@@ -24,9 +24,9 @@
 
 - (IBAction)loginButton:(id)sender {
     if ([self.mailTextField.text isEqual:@""]) {
-        [self makeAlertView:@"メールアドレスを入力してください"];
+        [self showAlertView:@"メールアドレスを入力してください"];
     } else if ([self.passwordTextField.text isEqual:@""]) {
-        [self makeAlertView:@"パスワードを入力してください"];
+        [self showAlertView:@"パスワードを入力してください"];
     } else {
         NSDictionary *LoginDataParam;
         LoginDataParam = @{
@@ -50,14 +50,14 @@
  * ログインが成功したときのデリケードメソッド
  */
 - (void)succeededUserLogin {
-    [self makeAlertView:@"ログインに成功しました"];
+    [self showAlertView:@"ログインに成功しました"];
 }
 
 /**
  * ログインが失敗したときのデリケードメソッド
  */
 - (void)failedUserLogin {
-    [self makeAlertView:@"ログインに失敗しました"];
+    [self showAlertView:@"ログインに失敗しました"];
 }
 
 /**
@@ -72,18 +72,21 @@
  * 警告表示のためのメソッド
  * @param NSString alertMessage
  */
-- (void)makeAlertView:(NSString *)alertMessage {
+- (void)showAlertView:(NSString *)alertMessage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([alertMessage isEqual:@"ログインに成功しました"]){
-            [self otherButtonPushed];
+            [self tappedAlertOkButton];
         }
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
 
 }
 
-- (void)otherButtonPushed {
+/**
+ * API通信が成功したときのAlertViewでOKボタンをクリックしたときのメソッド
+ */
+- (void)tappedAlertOkButton {
     UITabBarController *topPageViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"topPageViewController"];
     [self presentViewController:topPageViewController animated:YES completion:nil];
 }
