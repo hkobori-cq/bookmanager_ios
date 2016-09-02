@@ -324,9 +324,9 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="mailBox" destination="QlW-sP-A4f" id="GW6-ex-F0r"/>
-                        <outlet property="passwordBox" destination="KGz-tS-zdQ" id="RIl-tR-P1Z"/>
-                        <outlet property="passwordConfirmBox" destination="r6r-Ew-noB" id="MeV-2J-7Eo"/>
+                        <outlet property="mailTextField" destination="QlW-sP-A4f" id="40x-xL-P1M"/>
+                        <outlet property="passwordConfirmTextField" destination="r6r-Ew-noB" id="ubn-5O-Xnc"/>
+                        <outlet property="passwordTextField" destination="KGz-tS-zdQ" id="i8S-p6-aIA"/>
                         <outlet property="scrollView" destination="s97-cD-47k" id="XZY-c6-AZ7"/>
                     </connections>
                 </viewController>

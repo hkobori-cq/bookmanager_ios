@@ -142,7 +142,7 @@
 
 
 /**
- * tableViewのセルをクリックしたときのデリケードメソッド(自動生成)
+ * tableViewのセルをクリックしたときのデリケードメソッド
  * データを編集画面に送り、navigation移動する
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,7 +178,7 @@
 }
 
 /**
- * tableViewがスクロールしたときに呼ばれるデリケードメソッド(自動生成)
+ * tableViewがスクロールしたときに呼ばれるデリケードメソッド
  * スクロールするごとにreadMoreDataが呼ばれ、データを非同期に持ってくる
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

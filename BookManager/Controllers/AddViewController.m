@@ -100,7 +100,7 @@
 }
 
 /**
- * キーボードが出てきたときのデリケードメソッド(自動生成)
+ * キーボードが出てきたときのデリケードメソッド
  */
 - (void)keyboardWasShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
@@ -110,7 +110,7 @@
 }
 
 /**
- * キーボードが隠れたときのデリケードメソッド(自動生成)
+ * キーボードが隠れたときのデリケードメソッド
  */
 - (void)keyboardWasHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
@@ -199,7 +199,7 @@
 
 
 /**
- * textFiledでReturnボタンを押した時の処理(自動生成)
+ * textFiledでReturnボタンを押した時の処理
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)targetTextField {
     //keyboardを隠す
@@ -232,7 +232,7 @@
 }
 
 /**
- * 画像が選択された時に呼ばれるデリケードメソッド(自動生成)
+ * 画像が選択された時に呼ばれるデリケードメソッド
  * 選ばれた画像をimageViewに登録
  * @param NSDictionary info
  */
@@ -245,7 +245,7 @@
 }
 
 /**
- * 選択された画像がキャンセルされた時に呼ばれるデリケードメソッド(自動生成)
+ * 選択された画像がキャンセルされた時に呼ばれるデリケードメソッド
  */
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     //モーダルビューを取り除く

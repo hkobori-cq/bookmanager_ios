@@ -2,9 +2,9 @@
 #import "AFNetworkingModel.h"
 
 @interface AccountSettingsViewController () <UITextFieldDelegate, AFNetworkingUserRegisterDelegate>
-@property(weak, nonatomic) IBOutlet UITextField *mailBox;
-@property(weak, nonatomic) IBOutlet UITextField *passwordBox;
-@property(weak, nonatomic) IBOutlet UITextField *passwordConfirmBox;
+@property(weak, nonatomic) IBOutlet UITextField *mailTextField;
+@property(weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property(weak, nonatomic) IBOutlet UITextField *passwordConfirmTextField;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(strong, nonatomic) AFNetworkingModel *afNetworkingModel;
@@ -17,9 +17,9 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.mailBox.delegate = self;
-    self.passwordBox.delegate = self;
-    self.passwordConfirmBox.delegate = self;
+    self.mailTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    self.passwordConfirmTextField.delegate = self;
     self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"userRegister"];
     self.afNetworkingModel.userRegisterDelegate = self;
 }
@@ -50,9 +50,9 @@
  * キーボードのリターンキーを押したときのデリケードメソッド(自動生成)
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.mailBox resignFirstResponder];
-    [self.passwordBox resignFirstResponder];
-    [self.passwordConfirmBox resignFirstResponder];
+    [self.mailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.passwordConfirmTextField resignFirstResponder];
     return YES;
 }
 
@@ -98,17 +98,17 @@
  * データベースにユーザー情報を保存
  */
 - (IBAction)didSaveDataButtonTapped:(id)sender {
-    if ([self.mailBox.text isEqual:@""]) {
+    if ([self.mailTextField.text isEqual:@""]) {
         [self showAlertView:@"メールアドレスを入力してください"];
-    } else if ([self.passwordBox.text isEqual:@""]) {
+    } else if ([self.passwordTextField.text isEqual:@""]) {
         [self showAlertView:@"パスワードを入力してください"];
-    } else if (self.passwordBox.text != self.passwordConfirmBox.text) {
+    } else if (self.passwordTextField.text != self.passwordConfirmTextField.text) {
         [self showAlertView:@"パスワードが一致しません"];
     } else {
         NSDictionary *UserDataParam;
         UserDataParam = @{
-                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailBox.text],
-                @"password" : [NSString stringWithFormat:@"%@",self.passwordBox.text]
+                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailTextField.text],
+                @"password" : [NSString stringWithFormat:@"%@",self.passwordTextField.text]
         };
         [self.afNetworkingModel startAPIConnection:UserDataParam];
     }
