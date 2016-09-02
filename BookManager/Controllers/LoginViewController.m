@@ -30,8 +30,8 @@
     } else {
         NSDictionary *LoginDataParam;
         LoginDataParam = @{
-                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailTextField.text],
-                @"password" : [NSString stringWithFormat:@"%@",self.passwordTextField.text]
+                @"mail_address" : [NSString stringWithFormat:@"%@", self.mailTextField.text],
+                @"password" : [NSString stringWithFormat:@"%@", self.passwordTextField.text]
         };
         [self.afNetworkingModel startAPIConnection:LoginDataParam];
     }
@@ -75,7 +75,7 @@
 - (void)showAlertView:(NSString *)alertMessage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if ([alertMessage isEqual:@"ログインに成功しました"]){
+        if ([alertMessage isEqual:@"ログインに成功しました"]) {
             [self tappedAlertOkButton];
         }
     }]];

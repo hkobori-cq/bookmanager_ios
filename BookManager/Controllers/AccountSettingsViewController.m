@@ -25,8 +25,8 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didKeyboardShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didKeyboardHidden:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,7 +47,7 @@
 }
 
 /**
- * キーボードのリターンキーを押したときのデリケードメソッド(自動生成)
+ * キーボードのリターンキーを押したときのデリケードメソッド
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.mailTextField resignFirstResponder];
@@ -59,7 +59,7 @@
 /**
  * キーボードが出てきたときのデリケードメソッド
  */
-- (void)keyboardWasShown:(NSNotification *)notification {
+- (void)didKeyboardShown:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     CGPoint scrollPoint = CGPointMake(0.0f, keyboardSize.height / 3);
@@ -69,7 +69,7 @@
 /**
  * キーボードが隠れたときのデリケードメソッド
  */
-- (void)keyboardWasHidden:(NSNotification *)notification {
+- (void)didKeyboardHidden:(NSNotification *)notification {
     [self.scrollView setContentOffset:CGPointMake(0.0f, 80.0f) animated:YES];
 }
 
@@ -107,8 +107,8 @@
     } else {
         NSDictionary *UserDataParam;
         UserDataParam = @{
-                @"mail_address" : [NSString stringWithFormat:@"%@",self.mailTextField.text],
-                @"password" : [NSString stringWithFormat:@"%@",self.passwordTextField.text]
+                @"mail_address" : [NSString stringWithFormat:@"%@", self.mailTextField.text],
+                @"password" : [NSString stringWithFormat:@"%@", self.passwordTextField.text]
         };
         [self.afNetworkingModel startAPIConnection:UserDataParam];
     }
@@ -121,7 +121,7 @@
 - (void)showAlertView:(NSString *)alertMessage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if ([alertMessage isEqual:@"成功しました"]){
+        if ([alertMessage isEqual:@"成功しました"]) {
             [self tappedAlertOkButton];
         }
     }]];

@@ -24,7 +24,7 @@
 
 @property(nonatomic) NSInteger currentPage;
 
-@property (nonatomic) UIImageView *cellImageView;
+@property(nonatomic) UIImageView *cellImageView;
 
 @property(nonatomic) NSInteger currentYear;
 @property(nonatomic) NSInteger currentMonth;
@@ -140,7 +140,6 @@
 }
 
 
-
 /**
  * tableViewのセルをクリックしたときのデリケードメソッド
  * データを編集画面に送り、navigation移動する
@@ -172,7 +171,7 @@
  */
 - (void)readMoreData {
     self.currentPage++;
-    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%ld", (long)self.currentPage * 5];
+    NSString *currentPageNumber = [NSString stringWithFormat:@"0-%ld", (long) self.currentPage * 5];
     NSLog(@"%@", currentPageNumber);
     [self.afNetworkingModel startAPIConnection:@{@"page" : currentPageNumber}];
 }

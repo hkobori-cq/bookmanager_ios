@@ -9,7 +9,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *PurchaseDateTextFiled;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (nonatomic) NSDateComponents *calendarComponents;
+@property(nonatomic) NSDateComponents *calendarComponents;
 
 @property(nonatomic) NSInteger currentYear;
 @property(nonatomic) NSInteger currentMonth;
@@ -65,12 +65,12 @@
     if (self.isEditPage) {
         UIImageView *receivedImage = [[UIImageView alloc] init];
         receivedImage.image = [UIImage imageNamed:self.receivedImage];
-        if (receivedImage.image.size.height == 0){
+        if (receivedImage.image.size.height == 0) {
             UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
             UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
-            sampleImageView.frame = CGRectMake(0,0,100,100);
+            sampleImageView.frame = CGRectMake(0, 0, 100, 100);
             [self.bookImageView addSubview:sampleImageView];
-        }else {
+        } else {
             [self.bookImageView addSubview:receivedImage];
         }
         self.navigationItem.title = @"編集画面";
