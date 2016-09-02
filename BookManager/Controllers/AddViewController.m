@@ -1,13 +1,15 @@
 #import "AddViewController.h"
 #import "AFNetworkingModel.h"
+#import "Util.h"
 
 @interface AddViewController () <AFNetworkingAddDelegate, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-@property(weak, nonatomic) IBOutlet UIImageView *imageView;
-@property(weak, nonatomic) IBOutlet UITextField *bookNameBox;
-@property(weak, nonatomic) IBOutlet UITextField *priceBox;
-@property(weak, nonatomic) IBOutlet UITextField *dateBox;
+@property(weak, nonatomic) IBOutlet UIImageView *bookImageView;
+@property(weak, nonatomic) IBOutlet UITextField *bookNameTextField;
+@property(weak, nonatomic) IBOutlet UITextField *bookPriceTextField;
+@property(weak, nonatomic) IBOutlet UITextField *PurchaseDateTextFiled;
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic) NSDateComponents *calendarComponents;
 
 @property(nonatomic) NSInteger currentYear;
 @property(nonatomic) NSInteger currentMonth;
@@ -34,10 +36,10 @@
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
     [datePicker addTarget:self action:@selector(datePickerAction:) forControlEvents:UIControlEventValueChanged];
-    self.dateBox.inputView = datePicker;
-    self.dateBox.delegate = self;
-    self.bookNameBox.delegate = self;
-    self.priceBox.delegate = self;
+    self.PurchaseDateTextFiled.inputView = datePicker;
+    self.PurchaseDateTextFiled.delegate = self;
+    self.bookNameTextField.delegate = self;
+    self.bookPriceTextField.delegate = self;
     //pickerに閉じるボタンをつけるためにtoolバーを設置
     UIToolbar *pickerToolBar = [[UIToolbar alloc] init];
     pickerToolBar.barStyle = UIBarStyleDefault;
@@ -50,7 +52,7 @@
     UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray *array = @[spacer1, spacer2, doneButton];
     [pickerToolBar setItems:array];
-    self.dateBox.inputAccessoryView = pickerToolBar;
+    self.PurchaseDateTextFiled.inputAccessoryView = pickerToolBar;
     //編集画面と追加画面でそれぞれAPI通信の初期化する
     if (self.isEditPage) {
         self.afNetworkingModel = [[AFNetworkingModel alloc] actionName:@"editBook"];
@@ -66,20 +68,28 @@
             UIImage *sampleImage = [UIImage imageNamed:@"sample.jpg"];
             UIImageView *sampleImageView = [[UIImageView alloc] initWithImage:sampleImage];
             sampleImageView.frame = CGRectMake(0,0,100,100);
-            [self.imageView addSubview:sampleImageView];
+            [self.bookImageView addSubview:sampleImageView];
         }else {
-            [self.imageView addSubview:receivedImage];
+            [self.bookImageView addSubview:receivedImage];
         }
         self.navigationItem.title = @"編集画面";
-        self.bookNameBox.text = self.receivedName;
-        self.priceBox.text = self.receivedPrice;
-        self.dateBox.text = [self changeDateFormatFromString:self.receivedDate];
+        self.bookNameTextField.text = self.receivedName;
+        self.bookPriceTextField.text = self.receivedPrice;
+        //Utilクラスのメソッドを使い、String型のdateを変換、表示する
+        NSDate *date = [Util fromStringToDate:self.receivedDate];
+        self.calendarComponents = [Util fromDateToDateComponents:date];
+        [self setCurrentDate:self.calendarComponents];
+        self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -110,56 +120,32 @@
  */
 - (void)datePickerAction:(id)sender {
     UIDatePicker *picker = (UIDatePicker *) sender;
-    [self changeDateFormatFromDate:picker.date];
-    self.dateBox.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
+    self.calendarComponents = [Util fromDateToDateComponents:picker.date];
+    [self setCurrentDate:self.calendarComponents];
+    self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
 }
 
 
 /**
- * pickerの日付の型を変更するメソッド
- * @param NSDate date
+ * 日付をセットするメソッド
+ * @param NSDateComponents dateComponents
  */
-- (void)changeDateFormatFromDate:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-
-    self.currentYear = calendar_components.year;
-    self.currentMonth = calendar_components.month;
-    self.currentDay = calendar_components.day;
+- (void)setCurrentDate:(NSDateComponents *)dateComponents {
+    self.currentYear = dateComponents.year;
+    self.currentMonth = dateComponents.month;
+    self.currentDay = dateComponents.day;
 }
 
-/**
- * tableViewから持ってきた(String型)データを変換するメソッド
- * @param NSString date
- */
-- (id)changeDateFormatFromString:(NSString *)date {
-    NSMutableString *string = [[NSMutableString alloc] initWithString:date];
-    [string deleteCharactersInRange:NSMakeRange(0, 4)];
-    [string deleteCharactersInRange:NSMakeRange(string.length - 3, 3)];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    NSDate *changeDate = [formatter dateFromString:string];
-
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *calendar_components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:changeDate];
-
-    self.currentYear = calendar_components.year;
-    self.currentMonth = calendar_components.month;
-    self.currentDay = calendar_components.day;
-
-    return [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
-}
 
 /**
  * データをデータベースに保存するボタンアクション
  */
 - (IBAction)saveDataButton:(id)sender {
-    if ([self.bookNameBox.text isEqual:@""]) {
+    if ([self.bookNameTextField.text isEqual:@""]) {
         [self makeAlertView:@"本の名前を入力してください"];
-    } else if ([self.priceBox.text isEqual:@""]) {
+    } else if ([self.bookPriceTextField.text isEqual:@""]) {
         [self makeAlertView:@"本の価格を入力してください"];
-    } else if ([self.dateBox.text isEqual:@""]) {
+    } else if ([self.PurchaseDateTextFiled.text isEqual:@""]) {
         [self makeAlertView:@"購入日を入力してください"];
     } else {
         NSDictionary *BookDataParam;
@@ -167,15 +153,15 @@
             BookDataParam = @{
                     @"id" : self.receivedIdStr,
                     @"image_url" : @"hoge",
-                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
-                    @"price" : self.priceBox.text,
+                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameTextField.text],
+                    @"price" : self.bookPriceTextField.text,
                     @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay]
             };
         } else {
             BookDataParam = @{
                     @"image_url" : @"hoge",
-                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameBox.text],
-                    @"price" : self.priceBox.text,
+                    @"name" : [NSString stringWithFormat:@"%@", self.bookNameTextField.text],
+                    @"price" : self.bookPriceTextField.text,
                     @"purchase_date" : [NSString stringWithFormat:@"%ld-%ld-%ld", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay]
             };
         }
@@ -216,8 +202,8 @@
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)targetTextField {
     //keyboardを隠す
-    [self.bookNameBox resignFirstResponder];
-    [self.priceBox resignFirstResponder];
+    [self.bookNameTextField resignFirstResponder];
+    [self.bookPriceTextField resignFirstResponder];
     return YES;
 }
 
@@ -226,7 +212,7 @@
  */
 - (void)clickedPickerDoneButton {
     //pickerを閉じる
-    [self.dateBox resignFirstResponder];
+    [self.PurchaseDateTextFiled resignFirstResponder];
 }
 
 /**
@@ -252,7 +238,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info {
     UIImage *image = (UIImage *) info[@"UIImagePickerControllerOriginalImage"];
     if (image) {
-        [self.imageView setImage:image];
+        [self.bookImageView setImage:image];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

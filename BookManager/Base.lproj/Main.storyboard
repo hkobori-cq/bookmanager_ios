@@ -136,10 +136,10 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="bookNameBox" destination="9Mx-So-wQe" id="u7Y-SG-QZ8"/>
-                        <outlet property="dateBox" destination="vpw-c7-tky" id="d8o-5e-eMg"/>
-                        <outlet property="imageView" destination="BWc-TK-gph" id="L0V-ZY-3AK"/>
-                        <outlet property="priceBox" destination="bAt-qM-vSd" id="qLz-Jo-uMV"/>
+                        <outlet property="PurchaseDateTextFiled" destination="vpw-c7-tky" id="qnp-65-F3C"/>
+                        <outlet property="bookImageView" destination="BWc-TK-gph" id="FiF-wa-wQY"/>
+                        <outlet property="bookNameTextField" destination="9Mx-So-wQe" id="QF0-nv-Xwg"/>
+                        <outlet property="bookPriceTextField" destination="bAt-qM-vSd" id="XdP-bG-EOu"/>
                         <outlet property="scrollView" destination="gM3-xG-NxV" id="Rss-hG-hXo"/>
                     </connections>
                 </viewController>

@@ -24,6 +24,7 @@
 		7E56731F1D6BFCA000EA9987 /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E56731E1D6BFCA000EA9987 /* AccountSettingsViewController.m */; };
 		7E68D7FD1D6E74F1005B8804 /* AFNetworkingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E68D7FC1D6E74F1005B8804 /* AFNetworkingModel.m */; };
 		7E68D7FF1D6EF211005B8804 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E68D7FE1D6EF211005B8804 /* sample.jpg */; };
+		7ED7863E1D7900A300F38605 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED7863D1D7900A300F38605 /* Util.m */; };
 		87C4E59985AB716ED7DCB841 /* libPods-BookManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 762E7E0AF29FA8FA7FFB15BD /* libPods-BookManagerUITests.a */; };
 		943C31949BA7134746680BA3 /* BookListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943C30EDE2C1F42060609BAA /* BookListViewCell.xib */; };
 		943C33DF618D5469BCC1CEC7 /* BookListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 943C3BB1DA1FC8944F3DF9C7 /* BookListViewCell.m */; };
@@ -83,6 +84,8 @@
 		7E68D7FB1D6E74F1005B8804 /* AFNetworkingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkingModel.h; sourceTree = "<group>"; };
 		7E68D7FC1D6E74F1005B8804 /* AFNetworkingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkingModel.m; sourceTree = "<group>"; };
 		7E68D7FE1D6EF211005B8804 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		7ED7863C1D7900A300F38605 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		7ED7863D1D7900A300F38605 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		8EFD9B8FC0E935C66FD8EE42 /* libPods-BookManagerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BookManagerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		943C30EDE2C1F42060609BAA /* BookListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookListViewCell.xib; sourceTree = "<group>"; };
 		943C399C22671A51FB06E932 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 				7E5673071D6B2F0600EA9987 /* BookListController.m */,
 				7E21BB521D75D430005CBA6A /* LoginViewController.m */,
 				943C38FE464912B5AF2C75B6 /* headers */,
+				943C35BBEFAFE0D9DE29047E /* Libraries */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +238,15 @@
 				7E21BB4F1D73CB25005CBA6A /* APIModel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		943C35BBEFAFE0D9DE29047E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				7ED7863C1D7900A300F38605 /* Util.h */,
+				7ED7863D1D7900A300F38605 /* Util.m */,
+			);
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		943C38FE464912B5AF2C75B6 /* headers */ = {
@@ -671,6 +684,7 @@
 				943C33DF618D5469BCC1CEC7 /* BookListViewCell.m in Sources */,
 				7E21BB531D75D430005CBA6A /* LoginViewController.m in Sources */,
 				7E21BB501D73CB25005CBA6A /* APIModel.m in Sources */,
+				7ED7863E1D7900A300F38605 /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
