@@ -7,7 +7,13 @@
 //
 
 #import "Util.h"
+#import "AddViewController.h"
 
+@interface Util()
+
+@property (strong, nonatomic) AddViewController *addViewController;
+
+@end
 @implementation Util
 
 + (id)fromDateToDateComponents:(NSDate *)date {
@@ -26,7 +32,6 @@
     NSDate *changedDate = [formatter dateFromString:dateString];
     return changedDate;
 }
-
 
 @end
 

@@ -4,8 +4,6 @@
 
 @protocol AFNetworkingTableViewDelegate <NSObject>
 - (void)succeededGetBookData;
-
-- (void)failedGetData;
 @end
 
 @protocol AFNetworkingAddDelegate <NSObject>

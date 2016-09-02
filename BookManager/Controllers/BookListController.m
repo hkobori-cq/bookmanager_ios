@@ -2,6 +2,7 @@
 #import "BookListController.h"
 #import "BookListViewCell.h"
 #import "AddViewController.h"
+#import "Util.h"
 
 
 @interface BookListController () <AFNetworkingTableViewDelegate> {
@@ -24,6 +25,11 @@
 @property(nonatomic) NSInteger currentPage;
 
 @property (nonatomic) UIImageView *cellImageView;
+
+@property(nonatomic) NSInteger currentYear;
+@property(nonatomic) NSInteger currentMonth;
+@property(nonatomic) NSInteger currentDay;
+
 @end
 
 @implementation BookListController
@@ -78,31 +84,29 @@
     }
     //日付の書式を変更する
     if (dateContents[(NSUInteger) indexPath.row]) {
-        NSMutableString *dateDataStr = [[NSMutableString alloc] initWithString:dateContents[(NSUInteger) indexPath.row]];
-        [dateDataStr deleteCharactersInRange:NSMakeRange(0, 4)];
-        [dateDataStr deleteCharactersInRange:NSMakeRange(dateDataStr.length - 3, 3)];
+        NSDate *date = [Util fromStringToDate:dateContents[(NSUInteger) indexPath.row]];
+        NSDateComponents *calendarComponents = [Util fromDateToDateComponents:date];
 
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        NSDate *changedDate = [dateFormatter dateFromString:dateDataStr];
+        [self setCurrentDate:calendarComponents];
 
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *calendarComponents;
-
-        calendarComponents = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:changedDate];
-
-        NSInteger year = calendarComponents.year;
-        NSInteger month = calendarComponents.month;
-        NSInteger day = calendarComponents.day;
-
-        cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) year, (long) month, (long) day];
+        cell.DateLabel.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
     }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [BookListViewCell rowHeight];
+}
+
+
+/**
+ * 日付をセットするメソッド
+ * @param NSDateComponents dateComponents
+ */
+- (void)setCurrentDate:(NSDateComponents *)dateComponents {
+    self.currentYear = dateComponents.year;
+    self.currentMonth = dateComponents.month;
+    self.currentDay = dateComponents.day;
 }
 
 /**
@@ -117,12 +121,6 @@
     idNumArray = [self CheckNil:[self.afNetworkingModel.bookDataDictionary valueForKey:@"id"]];
     self.dataParamCount = nameContents.count;
     [self.tableView reloadData];
-}
-
-/**
- * AFNetworkingModelが失敗した時のメソッド
- */
-- (void)failedGetData {
 }
 
 /**

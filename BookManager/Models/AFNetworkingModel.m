@@ -65,11 +65,7 @@
 }
 
 - (void)didFailure {
-    if ([self.action isEqual:@"getBook"]) {
-        if ([self.tableDelegate respondsToSelector:@selector(failedGetData)]) {
-            [self.tableDelegate failedGetData];
-        }
-    } else if ([self.action isEqual:@"addBook"]) {
+    if ([self.action isEqual:@"addBook"]) {
         if ([self.addDelegate respondsToSelector:@selector(failedUploadData)]) {
             [self.addDelegate failedUploadData];
         }

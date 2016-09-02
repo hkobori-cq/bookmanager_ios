@@ -15,6 +15,7 @@
 @property(nonatomic) NSInteger currentMonth;
 @property(nonatomic) NSInteger currentDay;
 
+
 @property(nonatomic) NSString *receivedName;
 @property(nonatomic) NSString *receivedImage;
 @property(nonatomic) NSString *receivedPrice;
@@ -122,10 +123,6 @@
     UIDatePicker *picker = (UIDatePicker *) sender;
     self.calendarComponents = [Util fromDateToDateComponents:picker.date];
     [self setCurrentDate:self.calendarComponents];
-    self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
-}
-
-- (void)setPurchaseDateTextFiledText {
     self.PurchaseDateTextFiled.text = [NSString stringWithFormat:@"%ld年%ld月%ld日", (long) self.currentYear, (long) self.currentMonth, (long) self.currentDay];
 }
 
